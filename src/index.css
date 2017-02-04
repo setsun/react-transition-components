@@ -21,3 +21,21 @@ body {
   opacity: 0.01;
   transition: opacity 0.5s ease-in;
 }
+
+.slide-transition > * {
+  position: relative;
+}
+
+.slide-transition--top-leave,
+.slide-transition--top-appear.slide-transition--top-appear-active,
+.slide-transition--top-enter.slide-transition--top-enter-active {
+  top: 0;
+  transition: top 0.5s ease-in;
+}
+
+.slide-transition--top-enter,
+.slide-transition--top-appear,
+.slide-transition--top-leave.slide-transition--top-leave-active {
+  top: -1000px;
+  transition: top 0.5 ease-in;
+}
