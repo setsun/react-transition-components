@@ -1,18 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FadeTransition from './transitions/FadeTransition';
+import SlideTransition from './transitions/SlideTransition';
 
-const HelloWorld = React.createClass({
-  render: function() {
-    return (
-      <p>Hello, {this.props.greetTarget}!</p>
-    );
-  }
-});
+const FadeExample = () => {
+  return (
+    <FadeTransition>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+    </FadeTransition>
+  );
+}
+
+const SlideExample = () => {
+  return (
+    <SlideTransition direction="top">
+      <p>Hello World!</p>
+    </SlideTransition>
+  );
+}
 
 ReactDOM.render(
-  <FadeTransition>
-    <HelloWorld greetTarget="Batman" />
-  </FadeTransition>,
+  <div style={{padding: '32px'}}>
+    <FadeExample />
+    <SlideExample />
+  </div>,
   document.querySelector('#app')
 );
