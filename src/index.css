@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.fade-transition-leave,
+.fade-transition-appear.fade-transition-appear-active,
+.fade-transition-enter.fade-transition-enter-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+.fade-transition-enter,
+.fade-transition-appear,
+.fade-transition-leave.fade-transition-leave-active {
+  opacity: 0.01;
+  transition: opacity 0.5s ease-in;
+}
