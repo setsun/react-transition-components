@@ -21,7 +21,7 @@ const FadeExample = () => {
 
 const SlideExample = () => {
   return (
-    <SlideTransition direction="top">
+    <SlideTransition direction="right">
       <p>Hello World!</p>
     </SlideTransition>
   );

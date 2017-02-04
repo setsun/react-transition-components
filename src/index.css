@@ -39,3 +39,45 @@ body {
   top: -1000px;
   transition: top 0.5 ease-in;
 }
+
+.slide-transition--bottom-leave,
+.slide-transition--bottom-appear.slide-transition--bottom-appear-active,
+.slide-transition--bottom-enter.slide-transition--bottom-enter-active {
+  bottom: 0;
+  transition: bottom 0.5s ease-in;
+}
+
+.slide-transition--bottom-enter,
+.slide-transition--bottom-appear,
+.slide-transition--bottom-leave.slide-transition--bottom-leave-active {
+  bottom: -1000px;
+  transition: bottom 0.5 ease-in;
+}
+
+.slide-transition--left-leave,
+.slide-transition--left-appear.slide-transition--left-appear-active,
+.slide-transition--left-enter.slide-transition--left-enter-active {
+  left: 0;
+  transition: left 0.5s ease-in;
+}
+
+.slide-transition--left-enter,
+.slide-transition--left-appear,
+.slide-transition--left-leave.slide-transition--left-leave-active {
+  left: -1000px;
+  transition: left 0.5 ease-in;
+}
+
+.slide-transition--right-leave,
+.slide-transition--right-appear.slide-transition--right-appear-active,
+.slide-transition--right-enter.slide-transition--right-enter-active {
+  right: 0;
+  transition: right 0.5s ease-in;
+}
+
+.slide-transition--right-enter,
+.slide-transition--right-appear,
+.slide-transition--right-leave.slide-transition--right-leave-active {
+  right: -1000px;
+  transition: right 0.5 ease-in;
+}
