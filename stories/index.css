@@ -1,0 +1,11 @@
+body {
+  font-family: Helvetica;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.inlineFlex {
+  display: inline-flex;
+}
