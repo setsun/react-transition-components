@@ -21,11 +21,11 @@ const SlideTransition = ({
       {children}
     </CSSTransitionGroup>
   );
-}
+};
 
 SlideTransition.propTypes = {
   children: PropTypes.node,
-  direction: PropTypes.oneOf(DIRECTIONS).isRequired
-}
+  direction: PropTypes.oneOf(DIRECTIONS).isRequired,
+};
 
 export default SlideTransition;

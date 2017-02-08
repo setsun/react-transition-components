@@ -2,35 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FadeTransition from './transitions/FadeTransition';
 import SlideTransition from './transitions/SlideTransition';
+import StaggeredTransition from './transitions/staggered/StaggeredTransition';
 
-const FadeExample = () => {
+const StaggeredExample = () => {
   return (
-    <FadeTransition>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-    </FadeTransition>
-  );
-}
-
-const SlideExample = () => {
-  return (
-    <SlideTransition direction="right">
-      <p>Hello World!</p>
-    </SlideTransition>
+    <StaggeredTransition>
+      <button>Hello World!</button>
+      <button>Hello World!</button>
+      <button>Hello World!</button>
+      <button>Hello World!</button>
+      <button>Hello World!</button>
+    </StaggeredTransition>
   );
 }
 
 ReactDOM.render(
   <div style={{padding: '32px'}}>
-    <FadeExample />
-    <SlideExample />
+    <StaggeredExample />
   </div>,
   document.querySelector('#app')
 );
