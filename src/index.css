@@ -8,10 +8,24 @@ body {
   box-sizing: border-box;
 }
 
+.expand-transition-leave,
+.expand-transition-appear.expand-transition-appear-active,
+.expand-transition-enter.expand-transition-enter-active {
+  max-height: 1000px;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.expand-transition-enter,
+.expand-transition-appear,
+.expand-transition-leave.expand-transition-leave-active {
+  max-height: 0;
+  transition: max-height 0.5s ease-in-out;
+}
+
 .scale-transition-appear,
 .scale-transition-enter,
 .scale-transition-leave {
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 .scale-transition-appear,
@@ -29,7 +43,7 @@ body {
 .flip-transition-appear,
 .flip-transition-enter,
 .flip-transition-leave {
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 .flip-transition-appear,
