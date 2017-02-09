@@ -5,18 +5,28 @@ import SlideTransition from './transitions/SlideTransition';
 import ExpandTransition from './transitions/ExpandTransition';
 import ScaleTransition from './transitions/ScaleTransition';
 import FlipTransition from './transitions/FlipTransition';
-import StaggeredTransition from './transitions/staggered/StaggeredTransition';
+import StaggeredEntranceGroup from './transitions/sequenced/StaggeredEntranceGroup';
 
 const StaggeredExample = () => {
   return (
     <div style={{padding: '16px'}}>
-      <StaggeredTransition>
-        <button>Hello World!</button>
-        <button>Hello World!</button>
-        <button>Hello World!</button>
-        <button>Hello World!</button>
-        <button>Hello World!</button>
-      </StaggeredTransition>
+      <StaggeredEntranceGroup staggerTime={500}>
+        <div style={{padding: '8px'}}>
+          <ScaleExample />
+        </div>
+        <div style={{padding: '8px'}}>
+          <ScaleExample />
+        </div>
+        <div style={{padding: '8px'}}>
+          <ScaleExample />
+        </div>
+        <div style={{padding: '8px'}}>
+          <ScaleExample />
+        </div>
+        <div style={{padding: '8px'}}>
+          <ScaleExample />
+        </div>
+      </StaggeredEntranceGroup>
     </div>
   );
 }
