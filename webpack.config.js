@@ -2,14 +2,17 @@ const webpack = require("webpack");
 const path = require("path");
  
 const DEV = path.resolve(__dirname, "src");
-const OUTPUT = path.resolve(__dirname, "output");
+const OUTPUT = path.resolve(__dirname, "lib");
  
 const config = {
   entry: DEV + "/index.js",
   output: {
     path: OUTPUT,
     filename: "index.js",
-    publicPath: '/output/'
+    publicPath: '/lib/',
+    library: 'react-choreography',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   resolve: {
     modules: [
