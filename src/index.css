@@ -121,3 +121,23 @@
   right: -1000px;
   transition: right 0.5 ease-in;
 }
+
+.slide-fade-transition > * {
+  position: relative;
+}
+
+.slide-fade-transition-leave,
+.slide-fade-transition-appear.slide-fade-transition-appear-active,
+.slide-fade-transition-enter.slide-fade-transition-enter-active {
+  top: 0;
+  opacity: 1;
+  transition: all 0.3s ease-in;
+}
+
+.slide-fade-transition-enter,
+.slide-fade-transition-appear,
+.slide-fade-transition-leave.slide-fade-transition-leave-active {
+  top: -10px;
+  opacity: 0.01;
+  transition: all 0.3s ease-in;
+}
