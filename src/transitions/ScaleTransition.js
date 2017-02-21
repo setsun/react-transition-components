@@ -1,12 +1,14 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import classNames from 'utils/classNames';
 
 const ScaleTransition = ({
-  children
+  children,
+  className
 }) => {
   return (
     <CSSTransitionGroup
-      className="scale-transition"
+      className={classNames('scale-transition', {className})}
       transitionName="scale-transition"
       transitionAppear={true}
       transitionAppearTimeout={500}

@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import classNames from 'utils/classNames';
 import DIRECTIONS from '../constants/directions';
 
 function getTransitionName(direction) {
@@ -8,11 +9,12 @@ function getTransitionName(direction) {
 
 const SlideTransition = ({
   children,
+  className,
   direction
 }) => {
   return (
     <CSSTransitionGroup
-      className="slide-transition"
+      classNames={classNames('slide-transition', {className})}
       transitionName={getTransitionName(direction)}
       transitionAppear={true}
       transitionAppearTimeout={500}

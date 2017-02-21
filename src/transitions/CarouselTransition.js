@@ -1,13 +1,15 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import classNames from 'utils/classNames';
 
 export default ({
   children,
+  className,
   ...rest
 }) => {
   return (
     <CSSTransitionGroup
-      className="carousel-transition"
+      className={classNames('carousel-transition', {className})}
       transitionName="carousel-transition"
       transitionAppear={true}
       transitionAppearTimeout={500}
