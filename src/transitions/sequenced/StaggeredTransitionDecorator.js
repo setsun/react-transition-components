@@ -23,7 +23,7 @@ const StaggeredTransitionDecorator = (TransitionComponent) => {
         staggerTime
       } = this.props;
 
-      staggerInterval = setInterval(() => {
+      this.staggerInterval = setInterval(() => {
         const { childIndex } = this.state;
 
         if (childIndex === children.length) {
@@ -32,6 +32,10 @@ const StaggeredTransitionDecorator = (TransitionComponent) => {
 
         this.setState({ childIndex: childIndex + 1 });
       }, staggerTime);
+    },
+
+    componentWillUnmount() {
+      clearInterval(this.staggerInterval);
     },
 
     render() {
