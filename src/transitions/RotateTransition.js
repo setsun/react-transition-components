@@ -1,13 +1,15 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import classNames from 'utils/classNames';
 
 export default ({
   children,
+  className,
   ...rest
 }) => {
   return (
     <CSSTransitionGroup
-      className="rotate-transition"
+      className={classNames('rotate-transition', {className})}
       transitionName="rotate-transition"
       transitionAppear={true}
       transitionAppearTimeout={500}

@@ -1,5 +1,6 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import classNames from 'utils/classNames';
 
 export default ({
   children,
@@ -8,7 +9,7 @@ export default ({
 }) => {
   return (
     <CSSTransitionGroup
-      className={`slide-fade-transition ${className ? className : ''}`}
+      className={classNames('slide-fade-transition', {className})}
       transitionName="slide-fade-transition"
       transitionAppearTimeout={500}
       transitionEnterTimeout={500}

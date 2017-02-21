@@ -1,12 +1,14 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import classNames from 'utils/classNames';
 
 const ExpandTransition = ({
-  children
+  children,
+  className
 }) => {
   return (
     <CSSTransitionGroup
-      className="expand-transition"
+      className={classNames('expand-transition', {className})}
       transitionName="expand-transition"
       transitionAppear={true}
       transitionAppearTimeout={500}
