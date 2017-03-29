@@ -1,3 +1,5 @@
+`npm install --save react-choreography`
+
 ### Example Usage
 
 ```
