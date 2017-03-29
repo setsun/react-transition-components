@@ -1,6 +1,6 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-import classNames from 'utils/classNames';
+import classNames from '../utils/classNames';
 
 export default ({
   children,
