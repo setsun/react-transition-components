@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-import classNames from 'utils/classNames';
+import classNames from '../utils/classNames';
 
 function getTransitionName(reverse) {
   const modifier = reverse ? 'reverse' : 'standard';

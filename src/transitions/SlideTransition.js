@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-import classNames from 'utils/classNames';
+import classNames from '../utils/classNames';
 import DIRECTIONS from '../constants/directions';
 
 function getTransitionName(direction) {
