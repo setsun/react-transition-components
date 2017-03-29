@@ -42,12 +42,11 @@ const StaggeredTransitionDecorator = (TransitionComponent) => {
       const {
         children,
         staggerTime,
-        ...rest
       } = this.props;
       const { childIndex } = this.state;
 
       return (
-        <TransitionComponent {...rest}>
+        <TransitionComponent {...this.props}>
           {children.length ? children.slice(0, childIndex).map((child) => child) : children}
         </TransitionComponent>
       );

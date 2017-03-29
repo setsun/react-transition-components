@@ -3,11 +3,11 @@ import SlideTransition from 'transitions/SlideTransition';
 import ExpandTransition from 'transitions/ExpandTransition';
 import ScaleTransition from 'transitions/ScaleTransition';
 import FlipTransition from 'transitions/FlipTransition';
-import StaggeredEntranceGroup from 'transitions/sequenced/StaggeredEntranceGroup';
+import StaggeredTransitionDecorator from 'transitions/sequenced/StaggeredTransitionDecorator';
 
 export {FadeTransition};
 export {SlideTransition};
 export {ExpandTransition};
 export {ScaleTransition};
 export {FlipTransition};
-export {StaggeredEntranceGroup};
+export {StaggeredTransitionDecorator};

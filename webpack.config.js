@@ -20,6 +20,12 @@ const config = {
       path.resolve('./node_modules')
     ]
   },
+  externals: {
+    'react': 'commonjs react',
+    'react-dom': 'commonjs react-dom',
+    'react-addons-css-transition-group': 'commonjs react-addons-css-transition-group',
+    'react-addons-transition-group': 'commonjs react-addons-transition-group'
+  },
   module: {
     loaders: [
       {
