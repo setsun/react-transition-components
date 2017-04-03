@@ -10,7 +10,8 @@ function getTransitionName(reverse) {
 const FlipTransition = ({
   children,
   className,
-  reverse
+  reverse,
+  ...rest
 }) => {
   return (
     <CSSTransitionGroup
@@ -19,7 +20,8 @@ const FlipTransition = ({
       transitionAppear={true}
       transitionAppearTimeout={500}
       transitionEnterTimeout={500}
-      transitionLeaveTimeout={500}>
+      transitionLeaveTimeout={500}
+      {...rest}>
       {children}
     </CSSTransitionGroup>
   );

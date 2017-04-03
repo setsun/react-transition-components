@@ -4,7 +4,8 @@ import classNames from '../utils/classNames';
 
 const ScaleTransition = ({
   children,
-  className
+  className,
+  ...rest
 }) => {
   return (
     <CSSTransitionGroup
@@ -13,7 +14,8 @@ const ScaleTransition = ({
       transitionAppear={true}
       transitionAppearTimeout={500}
       transitionEnterTimeout={500}
-      transitionLeaveTimeout={500}>
+      transitionLeaveTimeout={500}
+      {...rest}>
       {children}
     </CSSTransitionGroup>
   );

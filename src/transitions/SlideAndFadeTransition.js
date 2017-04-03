@@ -5,6 +5,7 @@ import classNames from '../utils/classNames';
 export default ({
   children,
   className,
+  ...rest
 }) => {
   return (
     <CSSTransitionGroup
@@ -12,7 +13,8 @@ export default ({
       transitionName="slide-fade-transition"
       transitionAppearTimeout={500}
       transitionEnterTimeout={500}
-      transitionLeaveTimeout={500}>
+      transitionLeaveTimeout={500}
+      {...rest}>
       {children}
     </CSSTransitionGroup>
   );
