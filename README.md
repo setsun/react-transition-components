@@ -1,6 +1,6 @@
 `npm install --save react-choreography`
 
-In addition to the included transition components, you'll need to include the `index.css` file to apply the CSS transitions.
+In addition to the included transition components, you'll need to include the `index.css` file to apply the CSS transitions. Using `webpack` you can require it via `require('react-choreography/dist/index.css')`.
 
 ### Included transitions
 - FadeTransition
