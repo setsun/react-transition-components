@@ -1,8 +1,12 @@
 {
   "name": "react-choreography",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Simple animations / transition components in React",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Setsun/react-choreography"
+  },
   "scripts": {
     "prepublish": ". ./.scripts/prepublish.sh",
     "lint": "eslint src",
