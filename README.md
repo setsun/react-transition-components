@@ -71,3 +71,5 @@ const SlidePurpleSquare = () => {
 - Better docs
 - Support for styled-components?
 - Add more common usage transitions
+- Expand to include animations which are applied while component is still mounted (maybe using GSAP).
+- SVG animations
