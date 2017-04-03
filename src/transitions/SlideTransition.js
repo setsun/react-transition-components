@@ -10,7 +10,8 @@ function getTransitionName(direction) {
 const SlideTransition = ({
   children,
   className,
-  direction
+  direction,
+  ...rest
 }) => {
   return (
     <CSSTransitionGroup
@@ -19,7 +20,8 @@ const SlideTransition = ({
       transitionAppear={true}
       transitionAppearTimeout={500}
       transitionEnterTimeout={500}
-      transitionLeaveTimeout={500}>
+      transitionLeaveTimeout={500}
+      {...rest}>
       {children}
     </CSSTransitionGroup>
   );
