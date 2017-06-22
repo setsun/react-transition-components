@@ -11,7 +11,8 @@ module.exports = {
   output: {
     path: dist,
     filename: 'index.js',
-    publicPath: '/'
+    publicPath: '/',
+    libraryTarget: 'umd'
   },
   resolve: {
     modules: [
@@ -29,9 +30,24 @@ module.exports = {
     ]
   },
   externals: {
-    'react': 'react',
-    'react-dom': 'react-dom',
-    'react-transition-group': 'react-transition-group'
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom',
+    },
+    'react-transition-group': {
+      root: 'ReactTransitionGroup',
+      commonjs2: 'react-transition-group',
+      commonjs: 'react-transition-group',
+      amd: 'react-transition-group',
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
