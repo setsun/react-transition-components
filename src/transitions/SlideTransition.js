@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import CSSTransitionGroup from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 import classNames from '../utils/classNames';
 import DIRECTIONS from '../constants/directions';
 
@@ -14,16 +14,14 @@ const SlideTransition = ({
   ...rest
 }) => {
   return (
-    <CSSTransitionGroup
+    <CSSTransition
       classNames={classNames('slide-transition', {className})}
-      transitionName={getTransitionName(direction)}
-      transitionAppear={true}
-      transitionAppearTimeout={500}
-      transitionEnterTimeout={500}
-      transitionLeaveTimeout={500}
+      classNames={getTransitionName(direction)}
+      appear={true}
+      timeout={500}
       {...rest}>
       {children}
-    </CSSTransitionGroup>
+    </CSSTransition>
   );
 };
 
