@@ -1,6 +1,6 @@
 {
   "name": "react-choreography",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Simple animations / transition components in React",
   "license": "MIT",
   "repository": {
