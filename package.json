@@ -1,6 +1,6 @@
 {
   "name": "react-choreography",
-  "version": "0.4.5",
+  "version": "0.5.1",
   "description": "Simple animations / transition components in React",
   "license": "MIT",
   "repository": {
@@ -18,7 +18,9 @@
     "staggered"
   ],
   "scripts": {
-    "dev:client": "NODE_ENV=production webpack --config webpack.config.js --watch"
+    "dev:client": "NODE_ENV=development webpack --config webpack.config.js --watch",
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

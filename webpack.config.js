@@ -28,6 +28,11 @@ module.exports = {
       }
     ]
   },
+  externals: {
+    'react': 'react',
+    'react-dom': 'react-dom',
+    'react-transition-group': 'react-transition-group'
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
