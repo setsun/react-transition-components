@@ -14,33 +14,50 @@ import FlipTransition from '../src/transitions/FlipTransition';
 import ExpandTransition from '../src/transitions/ExpandTransition';
 import ScaleTransition from '../src/transitions/ScaleTransition';
 import SlideTransition from '../src/transitions/SlideTransition';
+import SlideAndFadeTransition from '../src/transitions/SlideAndFadeTransition';
+import RotateTransition from '../src/transitions/RotateTransition';
 
 import '../src/index.css';
 
-class ButtonContainer extends React.Component {
+const Image = ({ src }) =>
+  <img
+    style={{
+      width: '100px',
+      height: '100px',
+      borderRadius: '50%',
+      borderWidth: '1px',
+      borderColor: 'black',
+      marginRight: '0.5rem',
+    }}
+    src={src}
+  />;
+
+const Doge = () =>
+  <Image src="http://i1.kym-cdn.com/entries/icons/facebook/000/013/564/aP2dv.jpg" />;
+
+const Kat = () =>
+  <Image src="https://s-media-cache-ak0.pinimg.com/736x/bc/ec/7d/bcec7dac3022d86950e0d771b2bb3f96.jpg" />;
+
+class TransitionGroupContainer extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = { active: true };
   }
 
   render() {
-    const range = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    const range = [...new Array(5)];
 
     return (
       <div>
         <Button onClick={() => this.setState({ active: !this.state.active })}>
-          Hello Button
+          Toggle Animation
         </Button>
         <TransitionGroup>
           {this.state.active &&
             range.map((_, i) =>
-              <FlipTransition direction={'top'} key={`item-${i}`}>
-                <Button
-                  onClick={() => this.setState({ active: !this.state.active })}
-                >
-                  Hello Button
-                </Button>
-              </FlipTransition>,
+              React.cloneElement(this.props.children, {
+                key: `item-${i}`,
+              }),
             )}
         </TransitionGroup>
       </div>
@@ -48,4 +65,53 @@ class ButtonContainer extends React.Component {
   }
 }
 
-storiesOf('Transitions', module).add('Fade', () => <ButtonContainer />);
+storiesOf('Transitions', module)
+  .add('Fade', () =>
+    <TransitionGroupContainer>
+      <FadeTransition>
+        <Kat />
+      </FadeTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Flip', () =>
+    <TransitionGroupContainer>
+      <FlipTransition>
+        <Doge />
+      </FlipTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Scale', () =>
+    <TransitionGroupContainer>
+      <ScaleTransition>
+        <Kat />
+      </ScaleTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Expand', () =>
+    <TransitionGroupContainer>
+      <ExpandTransition>
+        <Doge />
+      </ExpandTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Rotate', () =>
+    <TransitionGroupContainer>
+      <RotateTransition>
+        <Kat />
+      </RotateTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Slide', () =>
+    <TransitionGroupContainer>
+      <SlideTransition>
+        <Doge />
+      </SlideTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Slide and Fade', () =>
+    <TransitionGroupContainer>
+      <SlideAndFadeTransition>
+        <Kat />
+      </SlideAndFadeTransition>
+    </TransitionGroupContainer>,
+  );
