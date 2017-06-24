@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import {CSSTransition} from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import classNames from '../utils/classNames';
 
 function getTransitionName(reverse) {
@@ -7,27 +7,18 @@ function getTransitionName(reverse) {
   return `flip-transition--${modifier}`;
 }
 
-const FlipTransition = ({
-  children,
-  className,
-  reverse,
-  ...rest
-}) => {
+const FlipTransition = ({ children, className, reverse, ...rest }) => {
   return (
     <CSSTransition
-      className={classNames('flip-transition', {className})}
-      classNames="flip-transition"
+      className={classNames('flip-transition', { className })}
+      classNames="flip"
       appear={true}
       timeout={500}
-      {...rest}>
+      {...rest}
+    >
       {children}
     </CSSTransition>
   );
-};
-
-FlipTransition.propTypes = {
-  children: PropTypes.node,
-  reverse: PropTypes.bool,
 };
 
 export default FlipTransition;
