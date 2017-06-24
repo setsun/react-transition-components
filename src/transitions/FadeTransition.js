@@ -1,20 +1,17 @@
 import React from 'react';
-import {CSSTransition} from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import classNames from '../utils/classNames';
 
-export default ({
-  children,
-  className,
-  ...rest
-}) => {
+export default ({ children, appear, ...rest }) => {
   return (
     <CSSTransition
-      className={classNames('fade-transition', {className})}
-      classNames="fade-transition"
-      appear={true}
-      timeout={500}
-      {...rest}>
+      className={classNames('fade-transition', { className })}
+      classNames="fade"
+      timeout={300}
+      appear={appear}
+      {...rest}
+    >
       {children}
     </CSSTransition>
   );
-}
+};
