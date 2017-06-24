@@ -9,7 +9,7 @@
   },
   "main": "dist/index.js",
   "engines": {
-    "npm": "^3.0.0"
+    "npm": "^5.0.0"
   },
   "keywords": [
     "react-component",
@@ -21,9 +21,19 @@
   "scripts": {
     "dev:client": "NODE_ENV=development webpack --config webpack.config.js --watch",
     "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "prepublish": "npm run build"
+    "prepare": "npm run build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --trailing-comma all --write",
+      "git add"
+    ]
   },
   "devDependencies": {
+    "@storybook/react": "^3.1.5",
     "babel-cli": "^6.24.1",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
@@ -35,19 +45,22 @@
     "compression-webpack-plugin": "^0.4.0",
     "css-loader": "0.28.1",
     "dotenv": "4.0.0",
-    "eslint": "3.19.0",
-    "eslint-config-react-app": "^1.0.3",
+    "eslint": "^3.19.0",
+    "eslint-config-react-app": "^1.0.4",
     "eslint-loader": "1.7.1",
     "eslint-plugin-flowtype": "2.33.0",
     "eslint-plugin-import": "2.2.0",
-    "eslint-plugin-jsx-a11y": "5.0.1",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
     "eslint-plugin-react": "7.0.1",
     "file-loader": "0.11.1",
     "flow-bin": "^0.46.0",
+    "husky": "^0.14.0",
+    "lint-staged": "^4.0.0",
     "nodemon": "^1.11.0",
-    "react": "next",
-    "react-dom": "next",
-    "react-transition-group": "next",
+    "prettier": "^1.4.4",
+    "react": "^16.0.0-alpha.13",
+    "react-dom": "^16.0.0-alpha.13",
+    "react-transition-group": "^2.0.0-beta.0",
     "source-map-support": "^0.4.15",
     "style-loader": "0.17.0",
     "url-loader": "0.5.8",
@@ -55,9 +68,8 @@
     "webpack-node-externals": "^1.6.0"
   },
   "peerDependencies": {
-    "react": "next",
-    "react-dom": "next",
-    "react-transition-group": "next"
+    "react": "^16.0.0-alpha.13",
+    "react-transition-group": "^2.0.0-beta.0"
   },
   "babel": {
     "presets": [
