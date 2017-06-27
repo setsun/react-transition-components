@@ -2,16 +2,15 @@ import React, { PropTypes } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import classNames from '../utils/classNames';
 
-function getTransitionName(reverse) {
-  const modifier = reverse ? 'reverse' : 'standard';
-  return `flip-transition--${modifier}`;
+function getTransitionName(direction) {
+  return `flip-${direction}`;
 }
 
-const FlipTransition = ({ children, className, reverse, ...rest }) => {
+const FlipTransition = ({ children, className, direction, ...rest }) => {
   return (
     <CSSTransition
       className={classNames('flip-transition', { className })}
-      classNames="flip"
+      classNames={getTransitionName(direction)}
       appear={true}
       timeout={500}
       {...rest}

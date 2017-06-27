@@ -14,7 +14,7 @@ import FlipTransition from '../src/transitions/FlipTransition';
 import ExpandTransition from '../src/transitions/ExpandTransition';
 import ScaleTransition from '../src/transitions/ScaleTransition';
 import SlideTransition from '../src/transitions/SlideTransition';
-import SlideAndFadeTransition from '../src/transitions/SlideAndFadeTransition';
+import SlideFadeTransition from '../src/transitions/SlideFadeTransition';
 import RotateTransition from '../src/transitions/RotateTransition';
 
 import '../src/index.css';
@@ -65,14 +65,15 @@ class TransitionGroupContainer extends React.Component {
   }
 }
 
-storiesOf('Transitions', module)
-  .add('Fade', () =>
-    <TransitionGroupContainer>
-      <FadeTransition>
-        <Kat />
-      </FadeTransition>
-    </TransitionGroupContainer>,
-  )
+storiesOf('Fade Transition', module).add('Fade', () =>
+  <TransitionGroupContainer>
+    <FadeTransition>
+      <Kat />
+    </FadeTransition>
+  </TransitionGroupContainer>,
+);
+
+storiesOf('Flip Transition', module)
   .add('Flip', () =>
     <TransitionGroupContainer>
       <FlipTransition>
@@ -80,38 +81,72 @@ storiesOf('Transitions', module)
       </FlipTransition>
     </TransitionGroupContainer>,
   )
-  .add('Scale', () =>
+  .add('Flip Reverse', () =>
     <TransitionGroupContainer>
-      <ScaleTransition>
-        <Kat />
-      </ScaleTransition>
-    </TransitionGroupContainer>,
-  )
-  .add('Expand', () =>
-    <TransitionGroupContainer>
-      <ExpandTransition>
+      <FlipTransition reverse>
         <Doge />
-      </ExpandTransition>
+      </FlipTransition>
     </TransitionGroupContainer>,
-  )
-  .add('Rotate', () =>
+  );
+
+storiesOf('Scale Transition', module).add('Scale', () =>
+  <TransitionGroupContainer>
+    <ScaleTransition>
+      <Kat />
+    </ScaleTransition>
+  </TransitionGroupContainer>,
+);
+
+storiesOf('Expand Transition').add('Expand', () =>
+  <TransitionGroupContainer>
+    <ExpandTransition>
+      <Doge />
+    </ExpandTransition>
+  </TransitionGroupContainer>,
+);
+
+storiesOf('Rotate Transition').add('Rotate', () =>
+  <TransitionGroupContainer>
+    <RotateTransition>
+      <Kat />
+    </RotateTransition>
+  </TransitionGroupContainer>,
+);
+
+storiesOf('Slide Transition', module)
+  .add('Slide (Top)', () =>
     <TransitionGroupContainer>
-      <RotateTransition>
-        <Kat />
-      </RotateTransition>
-    </TransitionGroupContainer>,
-  )
-  .add('Slide', () =>
-    <TransitionGroupContainer>
-      <SlideTransition>
+      <SlideTransition direction="top">
         <Doge />
       </SlideTransition>
     </TransitionGroupContainer>,
   )
-  .add('Slide and Fade', () =>
+  .add('Slide (Left)', () =>
     <TransitionGroupContainer>
-      <SlideAndFadeTransition>
-        <Kat />
-      </SlideAndFadeTransition>
+      <SlideTransition direction="left">
+        <Doge />
+      </SlideTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Slide (Right)', () =>
+    <TransitionGroupContainer>
+      <SlideTransition direction="right">
+        <Doge />
+      </SlideTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Slide (Bottom)', () =>
+    <TransitionGroupContainer>
+      <SlideTransition direction="right">
+        <Doge />
+      </SlideTransition>
     </TransitionGroupContainer>,
   );
+
+storiesOf('SlideFade Transition').add('SlideFade', () =>
+  <TransitionGroupContainer>
+    <SlideFadeTransition>
+      <Doge />
+    </SlideFadeTransition>
+  </TransitionGroupContainer>,
+);

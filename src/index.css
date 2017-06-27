@@ -49,21 +49,72 @@
   transform: scale(0);
 }
 
-.flip-enter,
-.flip-appear {
+.flip-right-enter,
+.flip-right-appear {
   transition: transform 0.5s ease-in-out;
 	transform: rotate3d(0, 1, 0, -90deg);
 }
-.flip-enter-active,
-.flip-appear-active {
+.flip-right-enter-active,
+.flip-right-appear-active {
   transform: rotate3d(0, 1, 0, 0deg);
 }
-.flip-exit {
+.flip-right-exit {
   transition: transform 0.5s ease-in-out;
   transform: rotate3d(0, 1, 0, 0deg);
 }
-.flip-exit-active {
+.flip-right-exit-active {
   transform: rotate3d(0, 1, 0, -90deg);
+}
+
+.flip-left-enter,
+.flip-left-appear {
+  transition: transform 0.5s ease-in-out;
+	transform: rotate3d(0, 1, 0, 90deg);
+}
+.flip-left-enter-active,
+.flip-left-appear-active {
+  transform: rotate3d(0, 1, 0, 0deg);
+}
+.flip-left-exit {
+  transition: transform 0.5s ease-in-out;
+  transform: rotate3d(0, 1, 0, 0deg);
+}
+.flip-left-exit-active {
+  transform: rotate3d(0, 1, 0, 90deg);
+}
+
+.flip-top-enter,
+.flip-top-appear {
+  transition: transform 0.5s ease-in-out;
+	transform: rotate3d(1, 0, 0, 90deg);
+}
+.flip-top-enter-active,
+.flip-top-appear-active {
+  transform: rotate3d(1, 0, 0, 0deg);
+}
+.flip-top-exit {
+  transition: transform 0.5s ease-in-out;
+  transform: rotate3d(1, 0, 0, 0deg);
+}
+.flip-top-exit-active {
+  transform: rotate3d(1, 0, 0, 90deg);
+}
+
+.flip-bottom-enter,
+.flip-bottom-appear {
+  transition: transform 0.5s ease-in-out;
+	transform: rotate3d(1, 0, 0, -90deg);
+}
+.flip-bottom-enter-active,
+.flip-bottom-appear-active {
+  transform: rotate3d(1, 0, 0, 0deg);
+}
+.flip-bottom-exit {
+  transition: transform 0.5s ease-in-out;
+  transform: rotate3d(1, 0, 0, 0deg);
+}
+.flip-bottom-exit-active {
+  transform: rotate3d(1, 0, 0, -90deg);
 }
 
 .slide-transition {
