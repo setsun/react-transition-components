@@ -96,13 +96,21 @@ storiesOf('Scale Transition', module).add('Scale', () =>
   </TransitionGroupContainer>,
 );
 
-storiesOf('Expand Transition').add('Expand', () =>
-  <TransitionGroupContainer>
-    <ExpandTransition>
-      <Doge />
-    </ExpandTransition>
-  </TransitionGroupContainer>,
-);
+storiesOf('Expand Transition')
+  .add('Expand (Vertical)', () =>
+    <TransitionGroupContainer>
+      <ExpandTransition orientation="vertical">
+        <Doge />
+      </ExpandTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Expand (Horizontal)', () =>
+    <TransitionGroupContainer>
+      <ExpandTransition orientation="horizontal">
+        <Doge />
+      </ExpandTransition>
+    </TransitionGroupContainer>,
+  );
 
 storiesOf('Rotate Transition').add('Rotate', () =>
   <TransitionGroupContainer>

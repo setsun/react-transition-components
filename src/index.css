@@ -15,21 +15,38 @@
   opacity: 0;
 }
 
-.expand-enter,
-.expand-appear {
-  transition: all 300ms ease-in;
-  max-height: 0;
+.expand-vertical-enter,
+.expand-vertical-appear {
+  transition: transform 300ms ease-in;
+  transform: scaleY(0);
 }
-.expand-enter-active,
-.expand-appear-active {
-  max-height: 1000px;
+.expand-vertical-enter-active,
+.expand-vertical-appear-active {
+  transform: scaleY(1);
 }
-.expand-exit {
-  transition: max-height 300ms ease-in;
-  max-height: 1000px;
+.expand-vertical-exit {
+  transition: transform 300ms ease-in;
+  transform: scaleY(1);
 }
-.expand-exit-active {
-  max-height: 0;
+.expand-vertical-exit-active {
+  transform: scaleY(0);
+}
+
+.expand-horizontal-enter,
+.expand-horizontal-appear {
+  transition: transform 300ms ease-in;
+  transform: scaleX(0);
+}
+.expand-horizontal-enter-active,
+.expand-horizontal-appear-active {
+  transform: scaleX(1);
+}
+.expand-horizontal-exit {
+  transition: transform 300ms ease-in;
+  transform: scaleX(1);
+}
+.expand-horizontal-exit-active {
+  transform: scaleX(0);
 }
 
 .scale-enter,
