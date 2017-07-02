@@ -117,64 +117,25 @@
   transform: rotate3d(1, 0, 0, -90deg);
 }
 
-.slide-transition {
-  position: relative;
+.rotate-enter,
+.rotate-appear {
+  transition: all 300ms ease-in;
+  transform: rotate(180deg);
+  opacity: 0;
 }
-
-.slide-top-enter-active,
-.slide-top-appear-active,
-.slide-top-exit {
-  top: 0;
-  transition: top 0.5s ease-in;
+.rotate-enter-active,
+.rotate-appear-active {
+  transform: rotate(360deg);
+  opacity: 1;
 }
-
-.slide-top-enter,
-.slide-top-appear,
-.slide-top-exit-active {
-  top: -1000px;
-  transition: top 0.5 ease-in;
+.rotate-exit {
+  transition: all 300ms ease-in;
+  transform: rotate(360deg);
+  opacity: 1;
 }
-
-.slide-bottom-enter-active,
-.slide-bottom-appear-active,
-.slide-bottom-exit {
-  bottom: 0;
-  transition: bottom 0.5s ease-in;
-}
-
-.slide-bottom-enter,
-.slide-bottom-appear,
-.slide-bottom-exit-active {
-  bottom: -1000px;
-  transition: bottom 0.5 ease-in;
-}
-
-.slide-left-enter-active,
-.slide-left-appear-active,
-.slide-left-exit {
-  left: 0;
-  transition: left 0.5s ease-in;
-}
-
-.slide-left-enter,
-.slide-left-appear,
-.slide-left-exit-active {
-  left: -1000px;
-  transition: left 0.5 ease-in;
-}
-
-.slide-right-enter-active,
-.slide-right-appear-active,
-.slide-right-exit {
-  right: 0;
-  transition: right 0.5s ease-in;
-}
-
-.slide-right-enter,
-.slide-right-appear,
-.slide-right-exit-active {
-  right: -1000px;
-  transition: right 0.5 ease-in;
+.rotate-exit-active {
+  transform: rotate(180deg);
+  opacity: 0;
 }
 
 .slide-fade-transition {

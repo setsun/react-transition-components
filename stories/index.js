@@ -14,7 +14,6 @@ import FlipTransition from '../src/transitions/FlipTransition';
 import ExpandTransition from '../src/transitions/ExpandTransition';
 import ScaleTransition from '../src/transitions/ScaleTransition';
 import SlideTransition from '../src/transitions/SlideTransition';
-import SlideFadeTransition from '../src/transitions/SlideFadeTransition';
 import RotateTransition from '../src/transitions/RotateTransition';
 
 import '../src/index.css';
@@ -142,11 +141,3 @@ storiesOf('Slide Transition', module)
       </SlideTransition>
     </TransitionGroupContainer>,
   );
-
-storiesOf('SlideFade Transition').add('SlideFade', () =>
-  <TransitionGroupContainer>
-    <SlideFadeTransition>
-      <Doge />
-    </SlideFadeTransition>
-  </TransitionGroupContainer>,
-);
