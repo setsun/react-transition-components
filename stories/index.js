@@ -136,7 +136,7 @@ storiesOf('Slide Transition', module)
   )
   .add('Slide (Bottom)', () =>
     <TransitionGroupContainer>
-      <SlideTransition direction="right">
+      <SlideTransition direction="bottom">
         <Doge />
       </SlideTransition>
     </TransitionGroupContainer>,
