@@ -2,13 +2,17 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import classNames from '../utils/classNames';
 
-const ExpandTransition = ({ children, className, ...rest }) => {
+function getTransitionName(orientation) {
+  return `expand-${orientation}`;
+}
+
+const ExpandTransition = ({ children, className, orientation, ...rest }) => {
   return (
     <CSSTransition
       className={classNames('expand-transition', { className })}
-      classNames="expand"
+      classNames={getTransitionName(orientation)}
       appear={true}
-      timeout={500}
+      timeout={50000}
       {...rest}
     >
       {children}
