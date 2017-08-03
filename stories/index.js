@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -17,6 +18,9 @@ import SlideTransition from '../src/transitions/SlideTransition';
 import RotateTransition from '../src/transitions/RotateTransition';
 
 import '../src/index.css';
+import './index.css';
+
+import SideCartExample from './components/SideCartExample';
 
 const Image = ({ src }) =>
   <img
@@ -30,9 +34,6 @@ const Image = ({ src }) =>
     }}
     src={src}
   />;
-
-const Doge = () =>
-  <Image src="http://i1.kym-cdn.com/entries/icons/facebook/000/013/564/aP2dv.jpg" />;
 
 const Kat = () =>
   <Image src="https://s-media-cache-ak0.pinimg.com/736x/bc/ec/7d/bcec7dac3022d86950e0d771b2bb3f96.jpg" />;
@@ -64,88 +65,85 @@ class TransitionGroupContainer extends React.Component {
   }
 }
 
-storiesOf('Fade Transition', module).add('Fade', () =>
-  <TransitionGroupContainer>
-    <FadeTransition>
-      <Kat />
-    </FadeTransition>
-  </TransitionGroupContainer>,
-);
-
-storiesOf('Flip Transition', module)
-  .add('Flip', () =>
+storiesOf('Standard Transitions', module)
+  .add('Fade', () =>
+    <TransitionGroupContainer>
+      <FadeTransition>
+        <Kat />
+      </FadeTransition>
+    </TransitionGroupContainer>,
+  )
+  .add('Flip (Normal)', () =>
     <TransitionGroupContainer>
       <FlipTransition>
-        <Doge />
+        <Kat />
       </FlipTransition>
     </TransitionGroupContainer>,
   )
-  .add('Flip Reverse', () =>
+  .add('Flip (Reverse)', () =>
     <TransitionGroupContainer>
       <FlipTransition reverse>
-        <Doge />
+        <Kat />
       </FlipTransition>
     </TransitionGroupContainer>,
-  );
-
-storiesOf('Scale Transition', module).add('Scale', () =>
-  <TransitionGroupContainer>
-    <ScaleTransition>
-      <Kat />
-    </ScaleTransition>
-  </TransitionGroupContainer>,
-);
-
-storiesOf('Expand Transition')
+  )
+  .add('Scale', () =>
+    <TransitionGroupContainer>
+      <ScaleTransition>
+        <Kat />
+      </ScaleTransition>
+    </TransitionGroupContainer>,
+  )
   .add('Expand (Vertical)', () =>
     <TransitionGroupContainer>
       <ExpandTransition orientation="vertical">
-        <Doge />
+        <Kat />
       </ExpandTransition>
     </TransitionGroupContainer>,
   )
   .add('Expand (Horizontal)', () =>
     <TransitionGroupContainer>
       <ExpandTransition orientation="horizontal">
-        <Doge />
+        <Kat />
       </ExpandTransition>
     </TransitionGroupContainer>,
-  );
-
-storiesOf('Rotate Transition').add('Rotate', () =>
-  <TransitionGroupContainer>
-    <RotateTransition>
-      <Kat />
-    </RotateTransition>
-  </TransitionGroupContainer>,
-);
-
-storiesOf('Slide Transition', module)
+  )
+  .add('Rotate', () =>
+    <TransitionGroupContainer>
+      <RotateTransition>
+        <Kat />
+      </RotateTransition>
+    </TransitionGroupContainer>,
+  )
   .add('Slide (Top)', () =>
     <TransitionGroupContainer>
       <SlideTransition direction="top">
-        <Doge />
+        <Kat />
       </SlideTransition>
     </TransitionGroupContainer>,
   )
   .add('Slide (Left)', () =>
     <TransitionGroupContainer>
       <SlideTransition direction="left">
-        <Doge />
+        <Kat />
       </SlideTransition>
     </TransitionGroupContainer>,
   )
   .add('Slide (Right)', () =>
     <TransitionGroupContainer>
       <SlideTransition direction="right">
-        <Doge />
+        <Kat />
       </SlideTransition>
     </TransitionGroupContainer>,
   )
   .add('Slide (Bottom)', () =>
     <TransitionGroupContainer>
       <SlideTransition direction="bottom">
-        <Doge />
+        <Kat />
       </SlideTransition>
     </TransitionGroupContainer>,
   );
+
+storiesOf('Coordinated Animations', module).add('sequential animations', () =>
+  <SideCartExample />,
+);
