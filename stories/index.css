@@ -1,3 +1,30 @@
+@keyframes slideDown {
+    from {
+      opacity: 0;
+      top: -24px;
+    }
+    to {
+      opacity: 1;
+      top: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+      opacity: 0;
+      bottom: -100px;
+    }
+    to {
+      opacity: 1;
+      bottom: 0;
+    }
+}
+
+@keyframes growWidth {
+    from {width: 0%;}
+    to {width: 100%;}
+}
+
 body {
   font-family: Helvetica;
 }
@@ -31,29 +58,6 @@ body {
   animation-duration: 1s;
 }
 
-@keyframes slideDown {
-    from {
-      opacity: 0;
-      top: -24px;
-    }
-    to {
-      opacity: 1;
-      top: 0;
-    }
-}
-
-@keyframes slideUp {
-    from {
-      opacity: 0;
-      bottom: -100px;
-    }
-    to {
-      opacity: 1;
-      bottom: 0;
-    }
-}
-
-
 .cart-product-tile img {
   height: 42px;
   width: 42px;
@@ -80,18 +84,13 @@ body {
   overflow: hidden;
 }
 
-@keyframes growWidth {
-    from {width: 0%;}
-    to {width: 100%;}
-}
-
 .animated-progress {
   width: 0%;
   height: 100%;
   background-color: #0c9;
-  animation-delay: 1s;
+  animation-delay: 0.5s;
   animation-name: growWidth;
-  animation-duration: 2s;
+  animation-duration: 1.5s;
   animation-fill-mode: forwards;
 }
 
