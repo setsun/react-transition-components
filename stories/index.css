@@ -1,0 +1,138 @@
+body {
+  font-family: Helvetica;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.side-cart {
+  border: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 99.5%;
+  width: 256px;
+}
+
+.free-shipping-bar {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem 0;
+}
+
+.cart-product-tile {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  animation-name: slideDown;
+  animation-duration: 1s;
+}
+
+@keyframes slideDown {
+    from {
+      opacity: 0;
+      top: -24px;
+    }
+    to {
+      opacity: 1;
+      top: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+      opacity: 0;
+      bottom: -100px;
+    }
+    to {
+      opacity: 1;
+      bottom: 0;
+    }
+}
+
+
+.cart-product-tile img {
+  height: 42px;
+  width: 42px;
+  margin: 0 1rem;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.progress-bar {
+  border-radius: 16px;
+  border: 1px solid #ccc;
+  height: 0.75rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+@keyframes growWidth {
+    from {width: 0%;}
+    to {width: 100%;}
+}
+
+.animated-progress {
+  width: 0%;
+  height: 100%;
+  background-color: #0c9;
+  animation-delay: 1s;
+  animation-name: growWidth;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.cart-price-summary {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  padding: 1rem;
+  animation-name: slideUp;
+  animation-duration: 1s;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-row.savings {
+  color: #e91e63;
+}
+
+.price-row.subtotal {
+  font-weight: 600;
+}
+
+.price-row:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.view-cart-button {
+  width: 100%;
+  border: 1px solid #8200AF;
+  background-color: #fff;
+  color: #8200AF;
+  padding: 0.5rem;
+  font-weight: 600;
+}
+
+.view-cart-button:hover {
+  background-color: #8200AF;
+  color: #fff;
+}

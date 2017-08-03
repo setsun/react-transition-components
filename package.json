@@ -60,6 +60,7 @@
     "prettier": "^1.4.4",
     "react": "^16.0.0-alpha.13",
     "react-dom": "^16.0.0-alpha.13",
+    "react-redux": "^5.0.5",
     "react-transition-group": "^2.0.0-beta.0",
     "source-map-support": "^0.4.15",
     "style-loader": "0.17.0",

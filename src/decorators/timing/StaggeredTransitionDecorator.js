@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
-const StaggeredTransitionDecorator = (TransitionComponent) => {
+const StaggeredTransitionDecorator = TransitionComponent => {
   let staggerInterval = null;
 
   return React.createClass({
@@ -18,10 +18,7 @@ const StaggeredTransitionDecorator = (TransitionComponent) => {
     },
 
     componentWillMount() {
-      const {
-        children,
-        staggerTime
-      } = this.props;
+      const { children, staggerTime } = this.props;
 
       this.staggerInterval = setInterval(() => {
         const { childIndex } = this.state;
@@ -39,19 +36,17 @@ const StaggeredTransitionDecorator = (TransitionComponent) => {
     },
 
     render() {
-      const {
-        children,
-        staggerTime,
-        ...rest
-      } = this.props;
+      const { children, staggerTime, ...rest } = this.props;
       const { childIndex } = this.state;
 
       return (
         <TransitionComponent {...rest}>
-          {children.length ? children.slice(0, childIndex).map((child) => child) : children}
+          {children.length
+            ? children.slice(0, childIndex).map(child => child)
+            : children}
         </TransitionComponent>
       );
-    }
+    },
   });
 };
 
