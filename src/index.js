@@ -3,7 +3,7 @@ import SlideTransition from './transitions/SlideTransition';
 import ExpandTransition from './transitions/ExpandTransition';
 import ScaleTransition from './transitions/ScaleTransition';
 import FlipTransition from './transitions/FlipTransition';
-import StaggeredTransitionDecorator from './decorators/sequenced/StaggeredTransitionDecorator';
+import StaggeredTransitionDecorator from './decorators/timing/StaggeredTransitionDecorator';
 
 export { FadeTransition };
 export { SlideTransition };
