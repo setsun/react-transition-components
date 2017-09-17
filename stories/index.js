@@ -65,83 +65,97 @@ class TransitionGroupContainer extends React.Component {
   }
 }
 
-storiesOf('Standard Transitions', module)
-  .add('Fade', () =>
+storiesOf("Standard Transitions", module)
+  .add("Fade", () =>
     <TransitionGroupContainer>
       <FadeTransition>
         <Kat />
       </FadeTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Flip (Normal)', () =>
+  .add("Flip (Top)", () =>
     <TransitionGroupContainer>
-      <FlipTransition>
+      <FlipTransition direction="top">
         <Kat />
       </FlipTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Flip (Reverse)', () =>
+  .add("Flip (Left)", () =>
     <TransitionGroupContainer>
-      <FlipTransition reverse>
+      <FlipTransition direction="left">
         <Kat />
       </FlipTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Scale', () =>
+  .add("Flip (Right)", () =>
+    <TransitionGroupContainer>
+      <FlipTransition direction="right">
+        <Kat />
+      </FlipTransition>
+    </TransitionGroupContainer>
+  )
+  .add("Flip (Bottom)", () =>
+    <TransitionGroupContainer>
+      <FlipTransition direction="bottom">
+        <Kat />
+      </FlipTransition>
+    </TransitionGroupContainer>
+  )
+  .add("Scale", () =>
     <TransitionGroupContainer>
       <ScaleTransition>
         <Kat />
       </ScaleTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Expand (Vertical)', () =>
+  .add("Expand (Vertical)", () =>
     <TransitionGroupContainer>
       <ExpandTransition orientation="vertical">
         <Kat />
       </ExpandTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Expand (Horizontal)', () =>
+  .add("Expand (Horizontal)", () =>
     <TransitionGroupContainer>
       <ExpandTransition orientation="horizontal">
         <Kat />
       </ExpandTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Rotate', () =>
+  .add("Rotate", () =>
     <TransitionGroupContainer>
       <RotateTransition>
         <Kat />
       </RotateTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Slide (Top)', () =>
+  .add("Slide (Top)", () =>
     <TransitionGroupContainer>
       <SlideTransition direction="top">
         <Kat />
       </SlideTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Slide (Left)', () =>
+  .add("Slide (Left)", () =>
     <TransitionGroupContainer>
       <SlideTransition direction="left">
         <Kat />
       </SlideTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Slide (Right)', () =>
+  .add("Slide (Right)", () =>
     <TransitionGroupContainer>
       <SlideTransition direction="right">
         <Kat />
       </SlideTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   )
-  .add('Slide (Bottom)', () =>
+  .add("Slide (Bottom)", () =>
     <TransitionGroupContainer>
       <SlideTransition direction="bottom">
         <Kat />
       </SlideTransition>
-    </TransitionGroupContainer>,
+    </TransitionGroupContainer>
   );
 
 storiesOf('Coordinated Animations', module).add('sequential animations', () =>
