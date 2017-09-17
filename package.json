@@ -24,6 +24,7 @@
     "prepare": "npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "@storybook/react": "^3.1.5",
+    "@storybook/storybook-deployer": "^2.0.0",
     "babel-cli": "^6.24.1",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.0",
