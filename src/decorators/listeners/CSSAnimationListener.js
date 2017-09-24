@@ -16,12 +16,12 @@ const CSSAnimationListener = Component => {
 
       this.animationStartEvent = this.element.addEventListener(
         'animationstart',
-        event => onAnimationStart && onAnimationStart(event, animationId)
+        event => onAnimationStart?.(event, animationId)
       );
 
       this.animationEndEvent = this.element.addEventListener(
         'animationend',
-        event => onAnimationEnd && onAnimationEnd(event, animationId)
+        event => onAnimationEnd?.(event, animationId)
       );
     }
 

@@ -16,12 +16,12 @@ const CSSTransitionListener = Component => {
 
       this.transitionStartEvent = this.element.addEventListener(
         'transitionstart',
-        event => onTransitionStart && onTransitionStart(event, animationId)
+        event => onTransitionStart?.(event, animationId)
       );
 
       this.transitionEndEvent = this.element.addEventListener(
         'transitionend',
-        event => onTransitionEnd && onTransitionEnd(event, animationId)
+        event => onTransitionEnd?.(event, animationId)
       );
     }
 

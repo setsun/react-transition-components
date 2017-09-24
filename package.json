@@ -36,16 +36,14 @@
   "devDependencies": {
     "@storybook/react": "^3.2.10",
     "@storybook/storybook-deployer": "^2.0.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "6.26.0",
-    "babel-eslint": "8.0.0",
+    "babel-cli": "^7.0.0-beta.1",
+    "babel-core": "^7.0.0-beta.1",
+    "babel-eslint": "^8.0.0-alpha.17",
     "babel-loader": "7.1.2",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-optional-chaining": "^7.0.0-alpha.13.1",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-plugin-transform-optional-chaining": "^7.0.0-beta.1",
+    "babel-preset-env": "^2.0.0-beta.1",
+    "babel-preset-react": "^7.0.0-beta.1",
     "babel-preset-stage-0": "^6.24.1",
-    "babel-runtime": "6.26.0",
     "compression-webpack-plugin": "^1.0.0",
     "cross-env": "^5.0.5",
     "css-loader": "0.28.7",
@@ -89,7 +87,7 @@
         }
       ]
     ],
-    "plugins": ["transform-object-rest-spread", "transform-optional-chaining"]
+    "plugins": ["transform-optional-chaining"]
   },
   "prettier": {
     "singleQuote": true,
@@ -99,7 +97,7 @@
     "printWidth": 80
   },
   "eslintConfig": {
-    "extends": ["eslint", "prettier"],
+    "extends": ["babel-eslint", "eslint", "prettier"],
     "plugins": ["import", "react", "prettier"],
     "rules": {
       "prettier/prettier": [
