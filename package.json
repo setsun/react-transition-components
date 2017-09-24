@@ -59,6 +59,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^4.2.2",
     "nodemon": "^1.12.1",
+    "office-ui-fabric-react": "^4.50.0",
     "prettier": "^1.7.0",
     "react": "^16.0.0-rc.3",
     "react-dom": "^16.0.0-rc.3",

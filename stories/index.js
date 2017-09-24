@@ -5,11 +5,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import { Button } from '@storybook/react/demo';
-
-import TransitionGroup from 'react-transition-group/TransitionGroup';
-import CSSTransition from 'react-transition-group/CSSTransition';
-
 import FadeTransition from '../src/transitions/FadeTransition';
 import FlipTransition from '../src/transitions/FlipTransition';
 import ExpandTransition from '../src/transitions/ExpandTransition';
@@ -17,143 +12,77 @@ import ScaleTransition from '../src/transitions/ScaleTransition';
 import SlideTransition from '../src/transitions/SlideTransition';
 import RotateTransition from '../src/transitions/RotateTransition';
 
+import TransitionGroupDecorator from './decorators/TransitionGroupDecorator';
+import KatPersona from './components/KatPersona';
+import WarningMessage from './components/WarningMessage';
+
 import '../src/index.css';
 import './index.css';
 
-const Image = ({ src }) => (
-  <img
-    style={{
-      width: '100px',
-      height: '100px',
-      borderRadius: '50%',
-      borderWidth: '1px',
-      borderColor: 'black',
-      marginRight: '0.5rem',
-    }}
-    src={src}
-  />
-);
-
-const Kat = () => (
-  <Image src="https://s-media-cache-ak0.pinimg.com/736x/bc/ec/7d/bcec7dac3022d86950e0d771b2bb3f96.jpg" />
-);
-
-class TransitionGroupContainer extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = { active: true };
-  }
-
-  render() {
-    const range = [...new Array(5)];
-
-    return (
-      <div>
-        <Button onClick={() => this.setState({ active: !this.state.active })}>
-          Toggle Animation
-        </Button>
-        <TransitionGroup>
-          {this.state.active &&
-            range.map((_, i) =>
-              React.cloneElement(this.props.children, {
-                key: `item-${i}`,
-              })
-            )}
-        </TransitionGroup>
-      </div>
-    );
-  }
-}
-
 storiesOf('Standard Transitions', module)
+  .addDecorator(TransitionGroupDecorator)
   .add('Fade', () => (
-    <TransitionGroupContainer>
-      <FadeTransition>
-        <Kat />
-      </FadeTransition>
-    </TransitionGroupContainer>
+    <FadeTransition>
+      <KatPersona />
+    </FadeTransition>
   ))
   .add('Flip (Top)', () => (
-    <TransitionGroupContainer>
-      <FlipTransition direction="top">
-        <Kat />
-      </FlipTransition>
-    </TransitionGroupContainer>
+    <FlipTransition direction="top">
+      <KatPersona />
+    </FlipTransition>
   ))
   .add('Flip (Left)', () => (
-    <TransitionGroupContainer>
-      <FlipTransition direction="left">
-        <Kat />
-      </FlipTransition>
-    </TransitionGroupContainer>
+    <FlipTransition direction="left">
+      <KatPersona />
+    </FlipTransition>
   ))
   .add('Flip (Right)', () => (
-    <TransitionGroupContainer>
-      <FlipTransition direction="right">
-        <Kat />
-      </FlipTransition>
-    </TransitionGroupContainer>
+    <FlipTransition direction="right">
+      <KatPersona />
+    </FlipTransition>
   ))
   .add('Flip (Bottom)', () => (
-    <TransitionGroupContainer>
-      <FlipTransition direction="bottom">
-        <Kat />
-      </FlipTransition>
-    </TransitionGroupContainer>
+    <FlipTransition direction="bottom">
+      <KatPersona />
+    </FlipTransition>
   ))
   .add('Scale', () => (
-    <TransitionGroupContainer>
-      <ScaleTransition>
-        <Kat />
-      </ScaleTransition>
-    </TransitionGroupContainer>
+    <ScaleTransition>
+      <KatPersona />
+    </ScaleTransition>
   ))
   .add('Expand (Vertical)', () => (
-    <TransitionGroupContainer>
-      <ExpandTransition orientation="vertical">
-        <Kat />
-      </ExpandTransition>
-    </TransitionGroupContainer>
+    <ExpandTransition orientation="vertical">
+      <WarningMessage />
+    </ExpandTransition>
   ))
   .add('Expand (Horizontal)', () => (
-    <TransitionGroupContainer>
-      <ExpandTransition orientation="horizontal">
-        <Kat />
-      </ExpandTransition>
-    </TransitionGroupContainer>
+    <ExpandTransition orientation="horizontal">
+      <WarningMessage />
+    </ExpandTransition>
   ))
   .add('Rotate', () => (
-    <TransitionGroupContainer>
-      <RotateTransition>
-        <Kat />
-      </RotateTransition>
-    </TransitionGroupContainer>
+    <RotateTransition>
+      <KatPersona />
+    </RotateTransition>
   ))
   .add('Slide (Top)', () => (
-    <TransitionGroupContainer>
-      <SlideTransition direction="top">
-        <Kat />
-      </SlideTransition>
-    </TransitionGroupContainer>
+    <SlideTransition direction="top">
+      <KatPersona />
+    </SlideTransition>
   ))
   .add('Slide (Left)', () => (
-    <TransitionGroupContainer>
-      <SlideTransition direction="left">
-        <Kat />
-      </SlideTransition>
-    </TransitionGroupContainer>
+    <SlideTransition direction="left">
+      <KatPersona />
+    </SlideTransition>
   ))
   .add('Slide (Right)', () => (
-    <TransitionGroupContainer>
-      <SlideTransition direction="right">
-        <Kat />
-      </SlideTransition>
-    </TransitionGroupContainer>
+    <SlideTransition direction="right">
+      <KatPersona />
+    </SlideTransition>
   ))
   .add('Slide (Bottom)', () => (
-    <TransitionGroupContainer>
-      <SlideTransition direction="bottom">
-        <Kat />
-      </SlideTransition>
-    </TransitionGroupContainer>
+    <SlideTransition direction="bottom">
+      <KatPersona />
+    </SlideTransition>
   ));
