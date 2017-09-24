@@ -20,8 +20,6 @@ import RotateTransition from '../src/transitions/RotateTransition';
 import '../src/index.css';
 import './index.css';
 
-import SideCartExample from './components/SideCartExample';
-
 const Image = ({ src }) => (
   <img
     style={{
@@ -159,7 +157,3 @@ storiesOf('Standard Transitions', module)
       </SlideTransition>
     </TransitionGroupContainer>
   ));
-
-storiesOf('Coordinated Animations', module).add('sequential animations', () => (
-  <SideCartExample />
-));
