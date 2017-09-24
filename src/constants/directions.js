@@ -1,6 +1,1 @@
-export default [
-  'top',
-  'bottom',
-  'left',
-  'right'
-];
+export default ['top', 'bottom', 'left', 'right'];

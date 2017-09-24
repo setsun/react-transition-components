@@ -1,6 +1,6 @@
 module.exports = config => {
   config.plugins = config.plugins.filter(
-    p => p.constructor.name !== 'CaseSensitivePathsPlugin',
+    p => p.constructor.name !== 'CaseSensitivePathsPlugin'
   );
 
   config.module = {

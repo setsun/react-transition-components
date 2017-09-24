@@ -6,12 +6,7 @@ function getTransitionName(direction = 'left') {
   return `flip-${direction}`;
 }
 
-const FlipTransition = ({
-  children,
-  className,
-  direction,
-  ...rest
-}) => {
+const FlipTransition = ({ children, className, direction, ...rest }) => {
   return (
     <CSSTransition
       className={classNames('flip-transition', { className })}

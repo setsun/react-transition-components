@@ -16,23 +16,23 @@ const CSSTransitionListener = Component => {
 
       this.transitionStartEvent = this.element.addEventListener(
         'transitionstart',
-        event => onTransitionStart && onTransitionStart(event, animationId),
+        event => onTransitionStart && onTransitionStart(event, animationId)
       );
 
       this.transitionEndEvent = this.element.addEventListener(
         'transitionend',
-        event => onTransitionEnd && onTransitionEnd(event, animationId),
+        event => onTransitionEnd && onTransitionEnd(event, animationId)
       );
     }
 
     componentWillUnmount() {
       this.element.removeEventListener(
         'transitionstart',
-        this.transitionStartEvent,
+        this.transitionStartEvent
       );
       this.element.removeEventListener(
         'transitionend',
-        this.transitionEndEvent,
+        this.transitionEndEvent
       );
     }
 

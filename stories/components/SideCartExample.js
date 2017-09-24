@@ -9,7 +9,7 @@ class AnimatedProgressBar extends React.Component {
   }
 }
 const AnimatedProgressBarWithListener = CSSAnimationListener(
-  AnimatedProgressBar,
+  AnimatedProgressBar
 );
 
 class FreeShippingBar extends React.Component {
@@ -26,18 +26,14 @@ class FreeShippingBar extends React.Component {
           className="flex-container align-center space-between"
           style={{ margin: '1rem' }}
         >
-          <div>
-            $0
-          </div>
+          <div>$0</div>
           <div className="progress-bar" style={{ margin: '0 0.5rem' }}>
             <AnimatedProgressBarWithListener
               onAnimationStart={this.props.onAnimationStart}
               onAnimationEnd={this.props.onAnimationEnd}
             />
           </div>
-          <div>
-            $35
-          </div>
+          <div>$35</div>
         </div>
       </div>
     );
@@ -50,9 +46,7 @@ class CartProductTile extends React.Component {
       <div className="cart-product-tile">
         <div>18</div>
         <img src="https://i.imgur.com/tTud1ef.jpg" />
-        <h4 className="price">
-          $39.56
-        </h4>
+        <h4 className="price">$39.56</h4>
       </div>
     );
   }
@@ -71,9 +65,7 @@ class CartPriceSummary extends React.Component {
           <span>Subtotal: </span>
           <span>$9001.32</span>
         </div>
-        <button className="view-cart-button">
-          View Cart
-        </button>
+        <button className="view-cart-button">View Cart</button>
       </div>
     );
   }
@@ -132,13 +124,14 @@ class SideCartExample extends React.Component {
           }}
         />
         {this.state.showCartProductTiles && this.renderCartTiles()}
-        {this.state.showCartPriceSummary &&
+        {this.state.showCartPriceSummary && (
           <CartPriceSummaryWithListener
             onAnimationStart={() =>
               console.log('CartPriceSummary Animation Started')}
             onAnimationEnd={() =>
               console.log('CartPriceSummary Animation Ended')}
-          />}
+          />
+        )}
       </div>
     );
   }
