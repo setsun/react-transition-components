@@ -17,6 +17,7 @@
 
 .expand-vertical-enter,
 .expand-vertical-appear {
+  transform-origin: top;
   transition: transform 300ms ease-in, opacity 300ms ease-in;
   transform: scaleY(0);
   opacity: 0;
@@ -27,6 +28,7 @@
   opacity: 1;
 }
 .expand-vertical-exit {
+  transform-origin: top;
   transition: transform 300ms ease-in, opacity 300ms ease-in;
   transform: scaleY(1);
   opacity: 1;
@@ -38,6 +40,7 @@
 
 .expand-horizontal-enter,
 .expand-horizontal-appear {
+  transform-origin: left;
   transition: transform 300ms ease-in, opacity 300ms ease-in;
   transform: scaleX(0);
   opacity: 0;
@@ -48,6 +51,7 @@
   opacity: 1;
 }
 .expand-horizontal-exit {
+  transform-origin: left;
   transition: transform 300ms ease-in, opacity 300ms ease-in;
   transform: scaleX(1);
   opacity: 1;
