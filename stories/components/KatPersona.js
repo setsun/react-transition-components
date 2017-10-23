@@ -21,6 +21,6 @@ export default () => (
     {...examplePersona}
     size={PersonaSize.large}
     presence={PersonaPresence.blocked}
-    style={{ display: 'inline-block' }}
+    style={{ display: 'inline-flex' }}
   />
 );
