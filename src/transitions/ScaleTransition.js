@@ -1,19 +1,37 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
-import classNames from '../utils/classNames';
+import Transition from 'react-transition-group/Transition';
+import getStyle from '../utils/getStyle';
 
-const ScaleTransition = ({ children, className, ...rest }) => {
+const transitionStyles = {
+  entering: { opacity: 0, transform: 'scale(0)' },
+  entered: { opacity: 1, transform: 'scale(1)' },
+  exiting: { opacity: 0, transform: 'scale(0)' },
+};
+
+const ScaleTransition = ({
+  children,
+  className,
+  duration = 300,
+  easing = 'ease-in',
+  ...rest
+}) => {
+  const defaultStyle = {
+    transition: `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
+    transform: 'scale(0)',
+    opacity: 0,
+  };
+
   return (
-    <CSSTransition
-      className={classNames('scale-transition', { className })}
-      classNames="scale"
-      appear={true}
-      timeout={500}
-      {...rest}
-    >
-      {children}
-    </CSSTransition>
+    <Transition mountOnEnter unmountOnExit {...rest} timeout={duration}>
+      {state => (
+        <span style={getStyle(defaultStyle, transitionStyles, state)}>
+          {children}
+        </span>
+      )}
+    </Transition>
   );
 };
+
+ScaleTransition.displayName = 'ScaleTransition';
 
 export default ScaleTransition;
