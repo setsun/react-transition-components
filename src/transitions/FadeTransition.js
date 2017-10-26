@@ -1,6 +1,8 @@
-import React from 'react';
-import Transition from 'react-transition-group/Transition';
-import getStyle from '../utils/getStyle';
+import transitionFactory from './transitionFactory';
+
+const initialStyle = {
+  opacity: 0,
+};
 
 const transitionStyles = {
   entering: { opacity: 0 },
@@ -8,28 +10,11 @@ const transitionStyles = {
   exiting: { opacity: 0 },
 };
 
-const FadeTransition = ({
-  children,
-  className,
-  duration = 300,
-  easing = 'ease-in',
-  ...rest
-}) => {
-  const defaultStyle = {
-    transition: `opacity ${duration}ms ${easing}`,
-    opacity: 0,
-  };
-
-  return (
-    <Transition mountOnEnter unmountOnExit {...rest} timeout={duration}>
-      {state => (
-        <span style={getStyle(defaultStyle, transitionStyles, state)}>
-          {children}
-        </span>
-      )}
-    </Transition>
-  );
-};
+const FadeTransition = transitionFactory(
+  (duration, easing) => `opacity ${duration}ms ${easing}`,
+  initialStyle,
+  transitionStyles
+);
 
 FadeTransition.displayName = 'FadeTransition';
 
