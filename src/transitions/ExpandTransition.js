@@ -12,7 +12,7 @@ const ExpandTransition = ({ children, className, orientation, ...rest }) => {
       className={classNames('expand-transition', { className })}
       classNames={getTransitionName(orientation)}
       appear={true}
-      timeout={50000}
+      timeout={5000}
       {...rest}
     >
       {children}
