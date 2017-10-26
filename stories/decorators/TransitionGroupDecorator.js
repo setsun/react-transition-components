@@ -9,6 +9,8 @@ class TransitionGroupContainer extends React.Component {
   }
 
   render() {
+    const transitionEl = React.Children.only(this.props.children);
+
     return (
       <div>
         <PrimaryButton
@@ -17,9 +19,7 @@ class TransitionGroupContainer extends React.Component {
         >
           Toggle Animation
         </PrimaryButton>
-        <TransitionGroup>
-          {this.state.active && this.props.children}
-        </TransitionGroup>
+        <div>{React.cloneElement(transitionEl, { in: this.state.active })}</div>
       </div>
     );
   }
