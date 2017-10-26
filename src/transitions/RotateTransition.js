@@ -1,6 +1,9 @@
-import React from 'react';
-import Transition from 'react-transition-group/Transition';
-import getStyle from '../utils/getStyle';
+import transitionFactory from './transitionFactory';
+
+const initialStyle = {
+  transform: 'rotate(180deg)',
+  opacity: 0,
+};
 
 const transitionStyles = {
   entering: { opacity: 0, transform: 'rotate(180deg)' },
@@ -8,29 +11,12 @@ const transitionStyles = {
   exiting: { opacity: 0, transform: 'rotate(180deg)' },
 };
 
-const RotateTransition = ({
-  children,
-  className,
-  duration = 300,
-  easing = 'ease-in',
-  ...rest
-}) => {
-  const defaultStyle = {
-    transition: `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
-    transform: 'rotate(180deg)',
-    opacity: 0,
-  };
-
-  return (
-    <Transition mountOnEnter unmountOnExit {...rest} timeout={duration}>
-      {state => (
-        <span style={getStyle(defaultStyle, transitionStyles, state)}>
-          {children}
-        </span>
-      )}
-    </Transition>
-  );
-};
+const RotateTransition = transitionFactory(
+  (duration, easing) =>
+    `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
+  initialStyle,
+  transitionStyles
+);
 
 RotateTransition.displayName = 'RotateTransition';
 
