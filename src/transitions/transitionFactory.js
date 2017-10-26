@@ -1,5 +1,5 @@
 import React from 'react';
-import Transition from 'react-transition-group/Transition';
+import { Transition } from 'react-transition-group';
 
 const getStyle = (defaultStyle, transitionStyles, state) => {
   return {
@@ -22,7 +22,7 @@ const transitionFactory = (getTransition, initialStyle, transitionStyles) => ({
   };
 
   return (
-    <Transition mountOnEnter unmountOnExit {...rest} timeout={duration}>
+    <Transition appear mountOnEnter unmountOnExit {...rest} timeout={duration}>
       {state => (
         <span style={getStyle(defaultStyle, transitionStyles, state)}>
           {children}

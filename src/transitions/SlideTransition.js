@@ -1,21 +1,25 @@
-import React, { PropTypes } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import transitionFactory from './transitionFactory';
 
-function getTransitionName(direction) {
-  return `slide-${direction}`;
-}
+// TODO: Configure for top, left, right, bottom
 
-const SlideTransition = ({ children, className, direction, ...rest }) => {
-  return (
-    <CSSTransition
-      classNames={getTransitionName(direction)}
-      appear={true}
-      timeout={500}
-      {...rest}
-    >
-      {children}
-    </CSSTransition>
-  );
+const initialStyle = {
+  transform: 'translate(0, -16px)',
+  opacity: 0,
 };
+
+const transitionStyles = {
+  entering: { transform: 'translate(0, -16px)', opacity: 0 },
+  entered: { transform: 'translate(0)', opacity: 1 },
+  exiting: { transform: 'translate(0, -16px)', opacity: 0 },
+};
+
+const SlideTransition = transitionFactory(
+  (duration, easing) =>
+    `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
+  initialStyle,
+  transitionStyles
+);
+
+SlideTransition.displayName = 'SlideTransition';
 
 export default SlideTransition;
