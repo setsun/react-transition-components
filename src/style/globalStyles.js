@@ -1,21 +1,4 @@
 export default `
-.fade-enter,
-.fade-appear {
-  transition: opacity 300ms ease-in;
-  opacity: 0;
-}
-.fade-enter-active,
-.fade-appear-active {
-  opacity: 1;
-}
-.fade-exit {
-  transition: opacity 300ms ease-in;
-  opacity: 1;
-}
-.fade-exit-active {
-  opacity: 0;
-}
-
 .expand-vertical-enter,
 .expand-vertical-appear {
   transform-origin: top;

@@ -1,17 +1,36 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
-import classNames from '../utils/classNames';
+import Transition from 'react-transition-group/Transition';
+import getStyle from '../utils/getStyle';
 
-export default ({ children, appear, className, ...rest }) => {
+const transitionStyles = {
+  entering: { opacity: 0 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+};
+
+const FadeTransition = ({
+  children,
+  className,
+  duration = 300,
+  easing = 'ease-in',
+  ...rest
+}) => {
+  const defaultStyle = {
+    transition: `opacity ${duration}ms ${easing}`,
+    opacity: 0,
+  };
+
   return (
-    <CSSTransition
-      className={classNames('fade-transition', { className })}
-      classNames="fade"
-      timeout={300}
-      appear={appear}
-      {...rest}
-    >
-      {children}
-    </CSSTransition>
+    <Transition mountOnEnter unmountOnExit {...rest} timeout={duration}>
+      {state => (
+        <span style={getStyle(defaultStyle, transitionStyles, state)}>
+          {children}
+        </span>
+      )}
+    </Transition>
   );
 };
+
+FadeTransition.displayName = 'FadeTransition';
+
+export default FadeTransition;
