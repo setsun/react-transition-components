@@ -14,6 +14,9 @@ React Choreography is roughly 3 kB gzipped, and has peer dependencies on `react`
 - FlipTransition
 - RotateTransition
 
+### Included higher-order components
+- transitionFactory
+
 ### Example Usage
 
 ```
