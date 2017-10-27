@@ -6,15 +6,13 @@ React Choreography is roughly 1.84 kB gzipped, and has peer dependencies on `rea
 
 `npm install --save react-choreography`
 
-In addition to the included transition components, you'll need to include the `index.css` file to apply the CSS transitions. Using `webpack` you can require it via `require('react-choreography/dist/index.css')`.
-
 ### Included transitions
 - FadeTransition
 - SlideTransition
-- SlideAndFadeTransition
 - ExpandTransition
 - ScaleTransition
 - FlipTransition
+- RotateTransition
 
 ### Staggered transitions
 To support staggered transitions, use the `StaggeredTransitionDecorator` higher-order component to generate a new staggerable transition. The new transition takes in a property of `staggerTime` to determine when the next element enters.
@@ -73,9 +71,5 @@ const SlidePurpleSquare = () => {
 ```
 
 ### To-do
-- Allow control of transition duration for `appear`, `enter` and `leave`.
 - Better docs
-- Support for styled-components?
 - Add more common usage transitions
-- Expand to include animations which are applied while component is still mounted (maybe using GSAP).
-- SVG animations

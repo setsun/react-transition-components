@@ -12,8 +12,8 @@ const transitionStyles = {
 
 const FadeTransition = transitionFactory(
   (duration, easing) => `opacity ${duration}ms ${easing}`,
-  initialStyle,
-  transitionStyles
+  () => initialStyle,
+  () => transitionStyles
 );
 
 FadeTransition.displayName = 'FadeTransition';

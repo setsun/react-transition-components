@@ -16,7 +16,6 @@ import TransitionGroupDecorator from './decorators/TransitionGroupDecorator';
 import KatPersona from './components/KatPersona';
 import WarningMessage from './components/WarningMessage';
 
-import '../src/index.css';
 import './index.css';
 
 storiesOf('Standard Transitions', module)
