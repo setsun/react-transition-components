@@ -14,8 +14,8 @@ const transitionStyles = {
 const ScaleTransition = transitionFactory(
   (duration, easing) =>
     `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
-  initialStyle,
-  transitionStyles
+  props => initialStyle,
+  props => transitionStyles
 );
 
 ScaleTransition.displayName = 'ScaleTransition';
