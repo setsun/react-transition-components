@@ -46,14 +46,15 @@ module.exports = {
         process.env.NODE_ENV || 'development'
       ),
     }),
-    new webpack.optimize.UglifyJsPlugin(),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
-      test: /\.(js|html)$/,
+      test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8,
     }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
   ],
   devtool: 'source-map',
 };

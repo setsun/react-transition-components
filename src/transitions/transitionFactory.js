@@ -1,13 +1,13 @@
 import React from 'react';
 import { Transition } from 'react-transition-group';
 
-const getFinalStyle = (defaultStyle, transitionStyles, state) => {
+function getFinalStyle(defaultStyle, transitionStyles, state) {
   return {
     display: 'inline-block',
     ...defaultStyle,
     ...transitionStyles[state],
   };
-};
+}
 
 const transitionFactory = (
   getTransition,
