@@ -50,13 +50,23 @@ storiesOf('Standard Transitions', module)
       <KatPersona />
     </ScaleTransition>
   ))
-  .add('Expand (Vertical)', () => (
-    <ExpandTransition orientation="vertical">
+  .add('Expand (Top)', () => (
+    <ExpandTransition direction="top">
       <WarningMessage />
     </ExpandTransition>
   ))
-  .add('Expand (Horizontal)', () => (
-    <ExpandTransition orientation="horizontal">
+  .add('Expand (Left)', () => (
+    <ExpandTransition direction="left">
+      <WarningMessage />
+    </ExpandTransition>
+  ))
+  .add('Expand (Right)', () => (
+    <ExpandTransition direction="right">
+      <WarningMessage />
+    </ExpandTransition>
+  ))
+  .add('Expand (Bottom)', () => (
+    <ExpandTransition direction="bottom">
       <WarningMessage />
     </ExpandTransition>
   ))
