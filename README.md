@@ -2,7 +2,7 @@
 
 A set of common animation components built around `react-transition-group`.
 
-React Choreography is roughly 1.84 kB gzipped, and has peer dependencies on `react` and `react-transition-group`.
+React Choreography is roughly 3 kB gzipped, and has peer dependencies on `react` and `react-transition-group`.
 
 `npm install --save react-choreography`
 
@@ -13,29 +13,6 @@ React Choreography is roughly 1.84 kB gzipped, and has peer dependencies on `rea
 - ScaleTransition
 - FlipTransition
 - RotateTransition
-
-### Staggered transitions
-To support staggered transitions, use the `StaggeredTransitionDecorator` higher-order component to generate a new staggerable transition. The new transition takes in a property of `staggerTime` to determine when the next element enters.
-
-```
-const StaggeredFadeTransition = StaggeredTransitionDecorator(FadeTransition);
-
-function render() {
-  return (
-    <StaggeredFadeTransition staggerTime={300}>
-      {[1,2,3,4,5,6].map((val, index) => {
-          return (
-            <div
-              style={{height: '200px', width: '200px', backgroundColor: '#8200FF'}}
-              key={`${val}-${index}`}>
-              {val}
-            </div>
-          );
-      })}
-    </StaggeredFadeTransition>
-  );
-}
-```
 
 ### Example Usage
 
