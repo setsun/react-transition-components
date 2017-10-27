@@ -1,25 +1,45 @@
 import transitionFactory from './transitionFactory';
 
 const initialStyle = {
-  horizontal: {
+  top: {
     transformOrigin: 'top',
     transform: 'scaleY(0)',
     opacity: 0,
   },
-  vertical: {
+  bottom: {
+    transformOrigin: 'bottom',
+    transform: 'scaleY(0)',
+    opacity: 0,
+  },
+  left: {
     transformOrigin: 'left',
+    transform: 'scaleX(0)',
+    opacity: 0,
+  },
+  right: {
+    transformOrigin: 'right',
     transform: 'scaleX(0)',
     opacity: 0,
   },
 };
 
 const transitionStyles = {
-  horizontal: {
+  top: {
     entering: { transform: 'scaleY(0)', opacity: 0 },
     entered: { transform: 'scaleY(1)', opacity: 1 },
     exiting: { transform: 'scaleY(0)', opacity: 0 },
   },
-  vertical: {
+  bottom: {
+    entering: { transform: 'scaleY(0)', opacity: 0 },
+    entered: { transform: 'scaleY(1)', opacity: 1 },
+    exiting: { transform: 'scaleY(0)', opacity: 0 },
+  },
+  left: {
+    entering: { transform: 'scaleX(0)', opacity: 0 },
+    entered: { transform: 'scaleX(1)', opacity: 1 },
+    exiting: { transform: 'scaleX(0)', opacity: 0 },
+  },
+  right: {
     entering: { transform: 'scaleX(0)', opacity: 0 },
     entered: { transform: 'scaleX(1)', opacity: 1 },
     exiting: { transform: 'scaleX(0)', opacity: 0 },
@@ -29,8 +49,8 @@ const transitionStyles = {
 const ExpandTransition = transitionFactory(
   (duration, easing) =>
     `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
-  ({ orientation = 'horizontal' }) => initialStyle[orientation],
-  ({ orientation = 'horizontal' }) => transitionStyles[orientation]
+  ({ direction }) => initialStyle[direction] || initialStyle.top,
+  ({ direction }) => transitionStyles[direction] || transitionStyles.top
 );
 
 ExpandTransition.displayName = 'ExpandTransition';
