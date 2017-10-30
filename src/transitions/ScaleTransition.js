@@ -1,19 +1,19 @@
 import transitionFactory from './transitionFactory';
 
-const initialStyle = {
-  transform: 'scale(0)',
-};
+const getInitialStyle = ({ startValue = 0 }) => ({
+  transform: `scale(${startValue})`,
+});
 
-const transitionStyles = {
-  entering: { transform: 'scale(0)' },
-  entered: { transform: 'scale(1)' },
-  exiting: { transform: 'scale(0)' },
-};
+const getTransitionStyles = ({ startValue = 0, endValue = 1 }) => ({
+  entering: { transform: `scale(${startValue})` },
+  entered: { transform: `scale(${endValue})` },
+  exiting: { transform: `scale(${startValue})` },
+});
 
 const ScaleTransition = transitionFactory(
   (duration, easing) => `transform ${duration}ms ${easing}`,
-  props => initialStyle,
-  props => transitionStyles
+  getInitialStyle,
+  getTransitionStyles
 );
 
 ScaleTransition.displayName = 'ScaleTransition';

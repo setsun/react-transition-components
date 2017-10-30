@@ -1,47 +1,53 @@
 import transitionFactory from './transitionFactory';
 
-const initialStyle = {
-  left: {
-    transform: 'rotate3d(0, 1, 0, 90deg)',
-  },
-  right: {
-    transform: 'rotate3d(0, 1, 0, -90deg)',
-  },
-  top: {
-    transform: 'rotate3d(1, 0, 0, 90deg)',
-  },
-  bottom: {
-    transform: 'rotate3d(1, 0, 0, -90deg)',
-  },
-};
+const getInitialStyle = ({ startValue = 90, direction = 'left' }) =>
+  ({
+    left: {
+      transform: `rotate3d(0, 1, 0, ${startValue}deg)`,
+    },
+    right: {
+      transform: `rotate3d(0, 1, 0, -${startValue}deg)`,
+    },
+    top: {
+      transform: `rotate3d(1, 0, 0, ${startValue}deg)`,
+    },
+    bottom: {
+      transform: `rotate3d(1, 0, 0, -${startValue}deg)`,
+    },
+  }[direction]);
 
-const transitionStyles = {
-  left: {
-    entering: { transform: 'rotate3d(0, 1, 0, 90deg)' },
-    entered: { transform: 'rotate3d(0, 1, 0, 0deg)' },
-    exiting: { transform: 'rotate3d(0, 1, 0, 90deg)' },
-  },
-  right: {
-    entering: { transform: 'rotate3d(0, 1, 0, -90deg)' },
-    entered: { transform: 'rotate3d(0, 1, 0, 0deg)' },
-    exiting: { transform: 'rotate3d(0, 1, 0, -90deg)' },
-  },
-  top: {
-    entering: { transform: 'rotate3d(1, 0, 0, 90deg)' },
-    entered: { transform: 'rotate3d(1, 0, 0, 0deg)' },
-    exiting: { transform: 'rotate3d(1, 0, 0, 90deg)' },
-  },
-  bottom: {
-    entering: { transform: 'rotate3d(1, 0, 0, -90deg)' },
-    entered: { transform: 'rotate3d(1, 0, 0, 0deg)' },
-    exiting: { transform: 'rotate3d(1, 0, 0, -90deg)' },
-  },
-};
+const getTransitionStyles = ({
+  startValue = 90,
+  endValue = 0,
+  direction = 'left',
+}) =>
+  ({
+    left: {
+      entering: { transform: `rotate3d(0, 1, 0, ${startValue}deg)` },
+      entered: { transform: `rotate3d(0, 1, 0, ${endValue}deg)` },
+      exiting: { transform: `rotate3d(0, 1, 0, ${startValue}deg)` },
+    },
+    right: {
+      entering: { transform: `rotate3d(0, 1, 0, -${startValue}deg)` },
+      entered: { transform: `rotate3d(0, 1, 0, ${endValue}deg)` },
+      exiting: { transform: `rotate3d(0, 1, 0, -${startValue}deg)` },
+    },
+    top: {
+      entering: { transform: `rotate3d(1, 0, 0, ${startValue}deg)` },
+      entered: { transform: `rotate3d(1, 0, 0, ${endValue}deg)` },
+      exiting: { transform: `rotate3d(1, 0, 0, ${startValue}deg)` },
+    },
+    bottom: {
+      entering: { transform: `rotate3d(1, 0, 0, -${startValue}deg)` },
+      entered: { transform: `rotate3d(1, 0, 0, ${endValue}deg)` },
+      exiting: { transform: `rotate3d(1, 0, 0, -${startValue}deg)` },
+    },
+  }[direction]);
 
 const FlipTransition = transitionFactory(
   (duration, easing) => `transform ${duration}ms ${easing}`,
-  ({ direction = 'left' }) => initialStyle[direction],
-  ({ direction = 'left' }) => transitionStyles[direction]
+  getInitialStyle,
+  getTransitionStyles
 );
 
 FlipTransition.displayName = 'FlipTransition';

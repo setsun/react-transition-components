@@ -1,21 +1,21 @@
 import transitionFactory from './transitionFactory';
 
-const initialStyle = {
-  transform: 'rotate(180deg)',
+const getInitialStyle = ({ startValue = 180 }) => ({
+  transform: `rotate(${startValue}deg)`,
   opacity: 0,
-};
+});
 
-const transitionStyles = {
-  entering: { opacity: 0, transform: 'rotate(180deg)' },
-  entered: { opacity: 1, transform: 'rotate(360deg)' },
-  exiting: { opacity: 0, transform: 'rotate(180deg)' },
-};
+const getTransitionStyles = ({ startValue = 180, endValue = 360 }) => ({
+  entering: { opacity: 0, transform: `rotate(${startValue}deg)` },
+  entered: { opacity: 1, transform: `rotate(${endValue}deg)` },
+  exiting: { opacity: 0, transform: `rotate(${startValue}deg)` },
+});
 
 const RotateTransition = transitionFactory(
   (duration, easing) =>
     `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
-  props => initialStyle,
-  props => transitionStyles
+  getInitialStyle,
+  getTransitionStyles
 );
 
 RotateTransition.displayName = 'RotateTransition';

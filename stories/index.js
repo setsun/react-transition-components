@@ -25,30 +25,25 @@ storiesOf('Standard Transitions', module)
       <KatPersona />
     </FadeTransition>
   ))
-  .add('Flip (Top)', () => (
-    <FlipTransition direction="top">
+  .add('Slide (Top)', () => (
+    <SlideTransition direction="top">
       <KatPersona />
-    </FlipTransition>
+    </SlideTransition>
   ))
-  .add('Flip (Left)', () => (
-    <FlipTransition direction="left">
+  .add('Slide (Left)', () => (
+    <SlideTransition direction="left">
       <KatPersona />
-    </FlipTransition>
+    </SlideTransition>
   ))
-  .add('Flip (Right)', () => (
-    <FlipTransition direction="right">
+  .add('Slide (Right)', () => (
+    <SlideTransition direction="right">
       <KatPersona />
-    </FlipTransition>
+    </SlideTransition>
   ))
-  .add('Flip (Bottom)', () => (
-    <FlipTransition direction="bottom">
+  .add('Slide (Bottom)', () => (
+    <SlideTransition direction="bottom">
       <KatPersona />
-    </FlipTransition>
-  ))
-  .add('Scale', () => (
-    <ScaleTransition>
-      <KatPersona />
-    </ScaleTransition>
+    </SlideTransition>
   ))
   .add('Expand (Top)', () => (
     <ExpandTransition direction="top">
@@ -70,28 +65,33 @@ storiesOf('Standard Transitions', module)
       <WarningMessage />
     </ExpandTransition>
   ))
+  .add('Flip (Top)', () => (
+    <FlipTransition direction="top">
+      <KatPersona />
+    </FlipTransition>
+  ))
+  .add('Flip (Left)', () => (
+    <FlipTransition direction="left">
+      <KatPersona />
+    </FlipTransition>
+  ))
+  .add('Flip (Right)', () => (
+    <FlipTransition direction="right">
+      <KatPersona />
+    </FlipTransition>
+  ))
+  .add('Flip (Bottom)', () => (
+    <FlipTransition direction="bottom">
+      <KatPersona />
+    </FlipTransition>
+  ))
   .add('Rotate', () => (
     <RotateTransition>
       <KatPersona />
     </RotateTransition>
   ))
-  .add('Slide (Top)', () => (
-    <SlideTransition direction="top">
+  .add('Scale', () => (
+    <ScaleTransition>
       <KatPersona />
-    </SlideTransition>
-  ))
-  .add('Slide (Left)', () => (
-    <SlideTransition direction="left">
-      <KatPersona />
-    </SlideTransition>
-  ))
-  .add('Slide (Right)', () => (
-    <SlideTransition direction="right">
-      <KatPersona />
-    </SlideTransition>
-  ))
-  .add('Slide (Bottom)', () => (
-    <SlideTransition direction="bottom">
-      <KatPersona />
-    </SlideTransition>
+    </ScaleTransition>
   ));
