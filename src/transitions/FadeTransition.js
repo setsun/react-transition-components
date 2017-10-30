@@ -1,19 +1,19 @@
 import transitionFactory from './transitionFactory';
 
-const initialStyle = {
-  opacity: 0,
-};
+const getInitialStyle = ({ startValue = 0 }) => ({
+  opacity: startValue,
+});
 
-const transitionStyles = {
-  entering: { opacity: 0 },
-  entered: { opacity: 1 },
-  exiting: { opacity: 0 },
-};
+const getTransitionStyles = ({ startValue = 0, endValue = 1 }) => ({
+  entering: { opacity: startValue },
+  entered: { opacity: endValue },
+  exiting: { opacity: startValue },
+});
 
 const FadeTransition = transitionFactory(
   (duration, easing) => `opacity ${duration}ms ${easing}`,
-  () => initialStyle,
-  () => transitionStyles
+  getInitialStyle,
+  getTransitionStyles
 );
 
 FadeTransition.displayName = 'FadeTransition';
