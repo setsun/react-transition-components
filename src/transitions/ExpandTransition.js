@@ -1,56 +1,57 @@
 import transitionFactory from './transitionFactory';
 
-const initialStyle = {
-  top: {
-    transformOrigin: 'top',
-    transform: 'scaleY(0)',
-    opacity: 0,
-  },
-  bottom: {
-    transformOrigin: 'bottom',
-    transform: 'scaleY(0)',
-    opacity: 0,
-  },
-  left: {
-    transformOrigin: 'left',
-    transform: 'scaleX(0)',
-    opacity: 0,
-  },
-  right: {
-    transformOrigin: 'right',
-    transform: 'scaleX(0)',
-    opacity: 0,
-  },
-};
+const getInitialStyle = ({ startValue = 0, direction = 'top' }) =>
+  ({
+    top: {
+      transformOrigin: 'top',
+      transform: `scaleY(${startValue})`,
+    },
+    bottom: {
+      transformOrigin: 'bottom',
+      transform: `scaleY(${startValue})`,
+    },
+    left: {
+      transformOrigin: 'left',
+      transform: `scaleX(${startValue})`,
+    },
+    right: {
+      transformOrigin: 'right',
+      transform: `scaleX(${startValue})`,
+    },
+  }[direction]);
 
-const transitionStyles = {
-  top: {
-    entering: { transform: 'scaleY(0)', opacity: 0 },
-    entered: { transform: 'scaleY(1)', opacity: 1 },
-    exiting: { transform: 'scaleY(0)', opacity: 0 },
-  },
-  bottom: {
-    entering: { transform: 'scaleY(0)', opacity: 0 },
-    entered: { transform: 'scaleY(1)', opacity: 1 },
-    exiting: { transform: 'scaleY(0)', opacity: 0 },
-  },
-  left: {
-    entering: { transform: 'scaleX(0)', opacity: 0 },
-    entered: { transform: 'scaleX(1)', opacity: 1 },
-    exiting: { transform: 'scaleX(0)', opacity: 0 },
-  },
-  right: {
-    entering: { transform: 'scaleX(0)', opacity: 0 },
-    entered: { transform: 'scaleX(1)', opacity: 1 },
-    exiting: { transform: 'scaleX(0)', opacity: 0 },
-  },
-};
+const getTransitionStyles = ({
+  startValue = 0,
+  endValue = 1,
+  direction = 'top',
+}) =>
+  ({
+    top: {
+      entering: { transform: `scaleY(${startValue})` },
+      entered: { transform: `scaleY(${endValue})` },
+      exiting: { transform: `scaleY(${startValue})` },
+    },
+    bottom: {
+      entering: { transform: `scaleY(${startValue})` },
+      entered: { transform: `scaleY(${endValue})` },
+      exiting: { transform: `scaleY(${startValue})` },
+    },
+    left: {
+      entering: { transform: `scaleX(${startValue})` },
+      entered: { transform: `scaleX(${endValue})` },
+      exiting: { transform: `scaleX(${startValue})` },
+    },
+    right: {
+      entering: { transform: `scaleX(${startValue})` },
+      entered: { transform: `scaleX(${endValue})` },
+      exiting: { transform: `scaleX(${startValue})` },
+    },
+  }[direction]);
 
 const ExpandTransition = transitionFactory(
-  (duration, easing) =>
-    `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
-  ({ direction }) => initialStyle[direction] || initialStyle.top,
-  ({ direction }) => transitionStyles[direction] || transitionStyles.top
+  (duration, easing) => `transform ${duration}ms ${easing}`,
+  getInitialStyle,
+  getTransitionStyles
 );
 
 ExpandTransition.displayName = 'ExpandTransition';

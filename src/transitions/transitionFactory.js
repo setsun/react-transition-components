@@ -19,6 +19,9 @@ const transitionFactory = (
     className,
     duration = 300,
     easing = 'ease-in',
+    startValue,
+    endValue,
+    direction,
     ...rest
   } = props;
 
