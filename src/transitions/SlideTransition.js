@@ -1,52 +1,58 @@
 import transitionFactory from './transitionFactory';
 
-const initialStyle = {
-  top: {
-    transform: 'translate(0, -16px)',
-    opacity: 0,
-  },
-  bottom: {
-    transform: 'translate(0, 16px)',
-    opacity: 0,
-  },
-  left: {
-    transform: 'translate(-16px, 0)',
-    opacity: 0,
-  },
-  right: {
-    transform: 'translate(16px, 0)',
-    opacity: 0,
-  },
-};
+const getInitialStyle = ({ startValue = 16, direction = 'top' }) =>
+  ({
+    top: {
+      transform: `translate(0, -${startValue}px)`,
+      opacity: 0,
+    },
+    bottom: {
+      transform: `translate(0, ${startValue}px)`,
+      opacity: 0,
+    },
+    left: {
+      transform: `translate(-${startValue}px, 0)`,
+      opacity: 0,
+    },
+    right: {
+      transform: `translate(${startValue}px, 0)`,
+      opacity: 0,
+    },
+  }[direction]);
 
-const transitionStyles = {
-  top: {
-    entering: { transform: 'translate(0, -16px)', opacity: 0 },
-    entered: { transform: 'translate(0)', opacity: 1 },
-    exiting: { transform: 'translate(0, -16px)', opacity: 0 },
-  },
-  bottom: {
-    entering: { transform: 'translate(0, 16px)', opacity: 0 },
-    entered: { transform: 'translate(0)', opacity: 1 },
-    exiting: { transform: 'translate(0, 16px)', opacity: 0 },
-  },
-  left: {
-    entering: { transform: 'translate(-16px, 0)', opacity: 0 },
-    entered: { transform: 'translate(0)', opacity: 1 },
-    exiting: { transform: 'translate(-16px, 0)', opacity: 0 },
-  },
-  right: {
-    entering: { transform: 'translate(16px, 0)', opacity: 0 },
-    entered: { transform: 'translate(0)', opacity: 1 },
-    exiting: { transform: 'translate(16px, 0)', opacity: 0 },
-  },
-};
+const getTransitionStyles = ({
+  startValue = 16,
+  endValue = 0,
+  direction = 'top',
+}) =>
+  ({
+    top: {
+      entering: { transform: `translate(0, -${startValue}px)`, opacity: 0 },
+      entered: { transform: `translate(0, ${endValue}px)`, opacity: 1 },
+      exiting: { transform: `translate(0, -${startValue}px)`, opacity: 0 },
+    },
+    bottom: {
+      entering: { transform: `translate(0, ${startValue}px)`, opacity: 0 },
+      entered: { transform: `translate(0, ${endValue}px)`, opacity: 1 },
+      exiting: { transform: `translate(0, ${startValue}px)`, opacity: 0 },
+    },
+    left: {
+      entering: { transform: `translate(-${startValue}px, 0)`, opacity: 0 },
+      entered: { transform: `translate(${endValue}px, 0)`, opacity: 1 },
+      exiting: { transform: `translate(-${startValue}px, 0)`, opacity: 0 },
+    },
+    right: {
+      entering: { transform: `translate(${startValue}px, 0)`, opacity: 0 },
+      entered: { transform: `translate(${endValue}px, 0)`, opacity: 1 },
+      exiting: { transform: `translate(${startValue}px, 0)`, opacity: 0 },
+    },
+  }[direction]);
 
 const SlideTransition = transitionFactory(
   (duration, easing) =>
     `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
-  ({ direction }) => initialStyle[direction] || initialStyle.top,
-  ({ direction }) => transitionStyles[direction] || transitionStyles.top
+  getInitialStyle,
+  getTransitionStyles
 );
 
 SlideTransition.displayName = 'SlideTransition';
