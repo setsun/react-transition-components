@@ -1,5 +1,5 @@
 import React from 'react';
-import { Transition } from 'react-transition-group';
+import Transition from 'react-transition-group/Transition';
 
 function getFinalStyle(defaultStyle, transitionStyles, state) {
   return {
