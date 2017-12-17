@@ -1,18 +1,12 @@
 import React from 'react';
 import transitionFactory from './transitionFactory';
 
-const baseTransform = {
-  transitionName: 'transform',
-  start: 0,
-  end: 1,
-};
-
 const ExpandTopTransition = transitionFactory(
   [
     {
-      ...baseTransform,
-      getEnterStyle: start => `scaleY(${start})`,
-      getExitStyle: end => `scaleY(${end})`,
+      transitionName: 'transform',
+      getEnterStyle: (start = 0) => `scaleY(${start})`,
+      getExitStyle: (end = 1) => `scaleY(${end})`,
     },
   ],
   {
@@ -23,9 +17,9 @@ const ExpandTopTransition = transitionFactory(
 const ExpandBottomTransition = transitionFactory(
   [
     {
-      ...baseTransform,
-      getEnterStyle: start => `scaleY(${start})`,
-      getExitStyle: end => `scaleY(${end})`,
+      transitionName: 'transform',
+      getEnterStyle: (start = 0) => `scaleY(${start})`,
+      getExitStyle: (end = 1) => `scaleY(${end})`,
     },
   ],
   {
@@ -36,9 +30,9 @@ const ExpandBottomTransition = transitionFactory(
 const ExpandLeftTransition = transitionFactory(
   [
     {
-      ...baseTransform,
-      getEnterStyle: start => `scaleX(${start})`,
-      getExitStyle: end => `scaleX(${end})`,
+      transitionName: 'transform',
+      getEnterStyle: (start = 0) => `scaleX(${start})`,
+      getExitStyle: (end = 1) => `scaleX(${end})`,
     },
   ],
   {
@@ -49,9 +43,9 @@ const ExpandLeftTransition = transitionFactory(
 const ExpandRightTransition = transitionFactory(
   [
     {
-      ...baseTransform,
-      getEnterStyle: start => `scaleX(${start})`,
-      getExitStyle: end => `scaleX(${end})`,
+      transitionName: 'transform',
+      getEnterStyle: (start = 0) => `scaleX(${start})`,
+      getExitStyle: (end = 1) => `scaleX(${end})`,
     },
   ],
   {

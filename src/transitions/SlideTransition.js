@@ -1,50 +1,42 @@
 import React from 'react';
 import transitionFactory from './transitionFactory';
 
-const baseTransform = {
-  transitionName: 'transform',
-  start: 16,
-  end: 0,
-};
-
 const opacityTransition = {
   transitionName: 'opacity',
-  start: 0,
-  end: 1,
-  getEnterStyle: start => start,
-  getExitStyle: end => end,
+  getEnterStyle: (start = 0) => start,
+  getExitStyle: (end = 1) => end,
 };
 
 const SlideTopTransition = transitionFactory([
   {
-    ...baseTransform,
-    getEnterStyle: start => `translate(0, -${start}px)`,
-    getExitStyle: end => `translate(0, ${end}px)`,
+    transitionName: 'transform',
+    getEnterStyle: (start = 16) => `translate(0, -${start}px)`,
+    getExitStyle: (end = 0) => `translate(0, ${end}px)`,
   },
   opacityTransition,
 ]);
 
 const SlideBottomTransition = transitionFactory([
   {
-    ...baseTransform,
-    getEnterStyle: start => `translate(0, ${start}px)`,
-    getExitStyle: end => `translate(0, ${end}px)`,
+    transitionName: 'transform',
+    getEnterStyle: (start = 16) => `translate(0, ${start}px)`,
+    getExitStyle: (end = 0) => `translate(0, ${end}px)`,
   },
   opacityTransition,
 ]);
 const SlideLeftTransition = transitionFactory([
   {
-    ...baseTransform,
-    getEnterStyle: start => `translate(-${start}px, 0)`,
-    getExitStyle: end => `translate(${end}px, 0)`,
+    transitionName: 'transform',
+    getEnterStyle: (start = 16) => `translate(-${start}px, 0)`,
+    getExitStyle: (end = 0) => `translate(${end}px, 0)`,
   },
   opacityTransition,
 ]);
 const SlideRightTransition = transitionFactory([
   {
-    ...baseTransform,
-    getEnterStyle: start => `translate(${start}px, 0)`,
-    getExitStyle: end => `translate(${end}px, 0)`,
+    transitionName: 'transform',
+    getEnterStyle: (start = 16) => `translate(${start}px, 0)`,
+    getExitStyle: (end = 0) => `translate(${end}px, 0)`,
   },
   opacityTransition,
 ]);
