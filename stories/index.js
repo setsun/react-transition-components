@@ -5,12 +5,12 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import FadeTransition from '../src/transitions/FadeTransition';
-import FlipTransition from '../src/transitions/FlipTransition';
-import ExpandTransition from '../src/transitions/ExpandTransition';
-import ScaleTransition from '../src/transitions/ScaleTransition';
-import SlideTransition from '../src/transitions/SlideTransition';
-import RotateTransition from '../src/transitions/RotateTransition';
+import FadeTransition from '../src/components/FadeTransition';
+import FlipTransition from '../src/components/FlipTransition';
+import ExpandTransition from '../src/components/ExpandTransition';
+import ScaleTransition from '../src/components/ScaleTransition';
+import SlideTransition from '../src/components/SlideTransition';
+import RotateTransition from '../src/components/RotateTransition';
 
 import TransitionGroupDecorator from './decorators/TransitionGroupDecorator';
 import KatPersona from './components/KatPersona';

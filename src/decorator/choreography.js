@@ -19,7 +19,7 @@ function getInitialStyle(transitions, styles, timeout, easing) {
     transition: getTransitionProperty(timeout, easing, transitions),
     ...styles,
     ...transitions.reduce((style, transition) => {
-      style[transition.transitionName] = transition.getEnterStyle();
+      style[transition.transitionName] = transition.getStartStyle();
       return style;
     }, {}),
   };
@@ -28,9 +28,9 @@ function getInitialStyle(transitions, styles, timeout, easing) {
 function getAllTransitionStyles(transitions) {
   return transitions.reduce(
     (styles, transition) => {
-      styles.entering[transition.transitionName] = transition.getEnterStyle();
-      styles.entered[transition.transitionName] = transition.getExitStyle();
-      styles.exiting[transition.transitionName] = transition.getEnterStyle();
+      styles.entering[transition.transitionName] = transition.getStartStyle();
+      styles.entered[transition.transitionName] = transition.getEndStyle();
+      styles.exiting[transition.transitionName] = transition.getStartStyle();
       return styles;
     },
     {
@@ -53,9 +53,11 @@ type TransitionProps = {
   children: Node,
   timeout: number,
   easing: string,
+  start: string | number,
+  end: string | number,
 };
 
-const transitionFactory = (transitions: Array<Object>, styles: Object) => {
+const choreography = (transitions: Array<Object>, styles: Object) => {
   return class extends React.Component<TransitionProps> {
     static defaultProps = {
       timeout: 300,
@@ -90,4 +92,4 @@ const transitionFactory = (transitions: Array<Object>, styles: Object) => {
   };
 };
 
-export default transitionFactory;
+export default choreography;
