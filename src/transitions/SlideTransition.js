@@ -1,5 +1,8 @@
 import transitionFactory from './transitionFactory';
 
+const getTransition = (duration, easing) =>
+  `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`;
+
 const getInitialStyle = ({ startValue = 16, direction = 'top' }) =>
   ({
     top: {
@@ -49,8 +52,7 @@ const getTransitionStyles = ({
   }[direction]);
 
 const SlideTransition = transitionFactory(
-  (duration, easing) =>
-    `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`,
+  getTransition,
   getInitialStyle,
   getTransitionStyles
 );

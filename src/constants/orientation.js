@@ -1,1 +1,4 @@
-export default ['horizontal', 'vertical'];
+export default {
+  horizontal: 'horizontal',
+  vertical: 'vertical',
+};

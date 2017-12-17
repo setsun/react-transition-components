@@ -1,5 +1,7 @@
 import transitionFactory from './transitionFactory';
 
+const getTransition = (duration, easing) => `transform ${duration}ms ${easing}`;
+
 const getInitialStyle = ({ startValue = 0, direction = 'top' }) =>
   ({
     top: {
@@ -49,7 +51,7 @@ const getTransitionStyles = ({
   }[direction]);
 
 const ExpandTransition = transitionFactory(
-  (duration, easing) => `transform ${duration}ms ${easing}`,
+  getTransition,
   getInitialStyle,
   getTransitionStyles
 );
