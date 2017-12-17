@@ -1,7 +1,5 @@
 import transitionFactory from './transitionFactory';
 
-const getTransition = (duration, easing) => `transform ${duration}ms ${easing}`;
-
 const getInitialStyle = ({ startValue = 0.25, direction = 'left' }) =>
   ({
     left: {
@@ -47,7 +45,7 @@ const getTransitionStyles = ({
   }[direction]);
 
 const FlipTransition = transitionFactory(
-  getTransition,
+  ['transform'],
   getInitialStyle,
   getTransitionStyles
 );

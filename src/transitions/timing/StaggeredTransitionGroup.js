@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Node } from 'react';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
+import { TransitionGroup } from 'react-transition-group';
 
 type StaggeredTransitionGroupProps = {
   children: Node,
