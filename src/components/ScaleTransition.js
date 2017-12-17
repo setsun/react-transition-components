@@ -1,12 +1,7 @@
 import choreography from '../decorator/choreography';
+import { scale } from '../presets';
 
-const ScaleTransition = choreography([
-  {
-    transition: 'transform',
-    getStartStyle: (start = 0) => `scale(${start})`,
-    getEndStyle: (end = 1) => `scale(${end})`,
-  },
-]);
+const ScaleTransition = choreography([scale.all]);
 
 ScaleTransition.displayName = 'ScaleTransition';
 

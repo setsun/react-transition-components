@@ -35,3 +35,23 @@ const transitionConfig = {
 ```
 
 It's recommended you pass in default parameters for the functions for `getStartStyle` and `getEndStyle`. This will be the default values, which can be overridden by `this.props.start` and `this.props.end` in your component. In the end, what is returned by the function is up to you, as long as it is valid CSS.
+
+# Presets
+`react-choreography` comes out of the box with some common presets, if you want to compose your own transitions components quickly.
+
+- opacity
+- rotate
+- rotate3d { top, bottom, left, right }
+- translate { top, bottom, left, right }
+- scale { all, vertical, horizontal }
+
+```
+import choreography from 'react-choreography/choreography';
+import { opacity, rotate, scale } from '../presets';
+
+const FadingRotatingScaleTransition = choreography([
+  opacity,
+  rotate,
+  scale.all,
+]);
+```
