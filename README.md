@@ -24,17 +24,13 @@ type TransitionConfig = {
   transitionName: string,
   getEnterStyle: Function,
   getExitStyle: Function,
-  start: number,
-  end: number,
 }
 
 // example
 
 const transitionConfig = {
   transitionName: 'transform',
-  getEnterStyle: start => `scale(${start})`,
-  getExitStyle: end => `scale(${end})`,
-  start: 0,
-  end: 1,
+  getEnterStyle: (start = 0) => `scale(${start})`,
+  getExitStyle: (end = 1) => `scale(${end})`,
 }
 ```

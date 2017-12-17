@@ -19,9 +19,7 @@ function getInitialStyle(transitions, styles, timeout, easing) {
     transition: getTransitionProperty(timeout, easing, transitions),
     ...styles,
     ...transitions.reduce((style, transition) => {
-      style[transition.transitionName] = transition.getEnterStyle(
-        transition.start
-      );
+      style[transition.transitionName] = transition.getEnterStyle();
       return style;
     }, {}),
   };
@@ -30,15 +28,9 @@ function getInitialStyle(transitions, styles, timeout, easing) {
 function getAllTransitionStyles(transitions) {
   return transitions.reduce(
     (styles, transition) => {
-      styles.entering[transition.transitionName] = transition.getEnterStyle(
-        transition.start
-      );
-      styles.entered[transition.transitionName] = transition.getExitStyle(
-        transition.end
-      );
-      styles.exiting[transition.transitionName] = transition.getEnterStyle(
-        transition.start
-      );
+      styles.entering[transition.transitionName] = transition.getEnterStyle();
+      styles.entered[transition.transitionName] = transition.getExitStyle();
+      styles.exiting[transition.transitionName] = transition.getEnterStyle();
       return styles;
     },
     {
