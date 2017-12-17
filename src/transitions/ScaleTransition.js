@@ -1,5 +1,7 @@
 import transitionFactory from './transitionFactory';
 
+const getTransition = (duration, easing) => `transform ${duration}ms ${easing}`;
+
 const getInitialStyle = ({ startValue = 0 }) => ({
   transform: `scale(${startValue})`,
 });
@@ -11,7 +13,7 @@ const getTransitionStyles = ({ startValue = 0, endValue = 1 }) => ({
 });
 
 const ScaleTransition = transitionFactory(
-  (duration, easing) => `transform ${duration}ms ${easing}`,
+  getTransition,
   getInitialStyle,
   getTransitionStyles
 );
