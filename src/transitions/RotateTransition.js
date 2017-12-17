@@ -2,18 +2,18 @@ import transitionFactory from './transitionFactory';
 
 const RotateTransition = transitionFactory([
   {
-    name: 'transform',
+    transitionName: 'transform',
     start: 0.75,
     end: 1,
-    getEnterState: start => `rotate(${start}turn)`,
-    getExitState: end => `rotate(${end}turn)`,
+    getEnterStyle: start => `rotate(${start}turn)`,
+    getExitStyle: end => `rotate(${end}turn)`,
   },
   {
-    name: 'opacity',
+    transitionName: 'opacity',
     start: 0,
     end: 1,
-    getEnterState: start => start,
-    getExitState: end => end,
+    getEnterStyle: start => start,
+    getExitStyle: end => end,
   },
 ]);
 

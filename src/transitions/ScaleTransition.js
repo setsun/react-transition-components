@@ -2,11 +2,11 @@ import transitionFactory from './transitionFactory';
 
 const ScaleTransition = transitionFactory([
   {
-    name: 'transform',
+    transitionName: 'transform',
     start: 0,
     end: 1,
-    getEnterState: start => `scale(${start})`,
-    getExitState: end => `scale(${end})`,
+    getEnterStyle: start => `scale(${start})`,
+    getExitStyle: end => `scale(${end})`,
   },
 ]);
 

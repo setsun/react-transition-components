@@ -1,59 +1,83 @@
+import React from 'react';
 import transitionFactory from './transitionFactory';
 
-const getInitialStyle = ({ startValue = 0, direction = 'top' }) =>
-  ({
-    top: {
-      transformOrigin: 'top',
-      transform: `scaleY(${startValue})`,
-    },
-    bottom: {
-      transformOrigin: 'bottom',
-      transform: `scaleY(${startValue})`,
-    },
-    left: {
-      transformOrigin: 'left',
-      transform: `scaleX(${startValue})`,
-    },
-    right: {
-      transformOrigin: 'right',
-      transform: `scaleX(${startValue})`,
-    },
-  }[direction]);
+const baseTransform = {
+  transitionName: 'transform',
+  start: 0,
+  end: 1,
+};
 
-const getTransitionStyles = ({
-  startValue = 0,
-  endValue = 1,
-  direction = 'top',
-}) =>
-  ({
-    top: {
-      entering: { transform: `scaleY(${startValue})` },
-      entered: { transform: `scaleY(${endValue})` },
-      exiting: { transform: `scaleY(${startValue})` },
+const ExpandTopTransition = transitionFactory(
+  [
+    {
+      ...baseTransform,
+      getEnterStyle: start => `scaleY(${start})`,
+      getExitStyle: end => `scaleY(${end})`,
     },
-    bottom: {
-      entering: { transform: `scaleY(${startValue})` },
-      entered: { transform: `scaleY(${endValue})` },
-      exiting: { transform: `scaleY(${startValue})` },
-    },
-    left: {
-      entering: { transform: `scaleX(${startValue})` },
-      entered: { transform: `scaleX(${endValue})` },
-      exiting: { transform: `scaleX(${startValue})` },
-    },
-    right: {
-      entering: { transform: `scaleX(${startValue})` },
-      entered: { transform: `scaleX(${endValue})` },
-      exiting: { transform: `scaleX(${startValue})` },
-    },
-  }[direction]);
-
-const ExpandTransition = transitionFactory(
-  ['transform'],
-  getInitialStyle,
-  getTransitionStyles
+  ],
+  {
+    transformOrigin: 'top',
+  }
 );
 
-ExpandTransition.displayName = 'ExpandTransition';
+const ExpandBottomTransition = transitionFactory(
+  [
+    {
+      ...baseTransform,
+      getEnterStyle: start => `scaleY(${start})`,
+      getExitStyle: end => `scaleY(${end})`,
+    },
+  ],
+  {
+    transformOrigin: 'bottom',
+  }
+);
+
+const ExpandLeftTransition = transitionFactory(
+  [
+    {
+      ...baseTransform,
+      getEnterStyle: start => `scaleX(${start})`,
+      getExitStyle: end => `scaleX(${end})`,
+    },
+  ],
+  {
+    transformOrigin: 'left',
+  }
+);
+
+const ExpandRightTransition = transitionFactory(
+  [
+    {
+      ...baseTransform,
+      getEnterStyle: start => `scaleX(${start})`,
+      getExitStyle: end => `scaleX(${end})`,
+    },
+  ],
+  {
+    transformOrigin: 'right',
+  }
+);
+
+class ExpandTransition extends React.Component {
+  static defaultProps = {
+    direction: 'left',
+  };
+
+  render() {
+    const { direction, ...rest } = this.props;
+
+    switch (direction) {
+      case 'left':
+        return <ExpandLeftTransition {...rest} />;
+      case 'right':
+        return <ExpandRightTransition {...rest} />;
+      case 'top':
+        return <ExpandTopTransition {...rest} />;
+      case 'bottom':
+        return <ExpandBottomTransition {...rest} />;
+    }
+  }
+}
 
 export default ExpandTransition;

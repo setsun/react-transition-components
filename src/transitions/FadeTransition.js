@@ -8,11 +8,11 @@ const getTransitionStyles = ({ startValue = 0, endValue = 1 }) => ({
 
 const FadeTransition = transitionFactory([
   {
-    name: 'opacity',
+    transitionName: 'opacity',
     start: 0,
     end: 1,
-    getEnterState: value => value,
-    getExitState: value => value,
+    getEnterStyle: value => value,
+    getExitStyle: value => value,
   },
 ]);
 

@@ -1,55 +1,63 @@
+import React from 'react';
 import transitionFactory from './transitionFactory';
 
-const getInitialStyle = ({ startValue = 0.25, direction = 'left' }) =>
-  ({
-    left: {
-      transform: `rotate3d(0, 1, 0, ${startValue}turn)`,
-    },
-    right: {
-      transform: `rotate3d(0, 1, 0, -${startValue}turn)`,
-    },
-    top: {
-      transform: `rotate3d(1, 0, 0, ${startValue}turn)`,
-    },
-    bottom: {
-      transform: `rotate3d(1, 0, 0, -${startValue}turn)`,
-    },
-  }[direction]);
+const baseTransform = {
+  transitionName: 'transform',
+  start: 0.25,
+  end: 0,
+};
 
-const getTransitionStyles = ({
-  startValue = 0.25,
-  endValue = 0,
-  direction = 'left',
-}) =>
-  ({
-    left: {
-      entering: { transform: `rotate3d(0, 1, 0, ${startValue}turn)` },
-      entered: { transform: `rotate3d(0, 1, 0, ${endValue}turn)` },
-      exiting: { transform: `rotate3d(0, 1, 0, ${startValue}turn)` },
-    },
-    right: {
-      entering: { transform: `rotate3d(0, 1, 0, -${startValue}turn)` },
-      entered: { transform: `rotate3d(0, 1, 0, ${endValue}turn)` },
-      exiting: { transform: `rotate3d(0, 1, 0, -${startValue}turn)` },
-    },
-    top: {
-      entering: { transform: `rotate3d(1, 0, 0, ${startValue}turn)` },
-      entered: { transform: `rotate3d(1, 0, 0, ${endValue}turn)` },
-      exiting: { transform: `rotate3d(1, 0, 0, ${startValue}turn)` },
-    },
-    bottom: {
-      entering: { transform: `rotate3d(1, 0, 0, -${startValue}turn)` },
-      entered: { transform: `rotate3d(1, 0, 0, ${endValue}turn)` },
-      exiting: { transform: `rotate3d(1, 0, 0, -${startValue}turn)` },
-    },
-  }[direction]);
+const FlipLeftTransition = transitionFactory([
+  {
+    ...baseTransform,
+    getEnterStyle: start => `rotate3d(0, 1, 0, ${start}turn)`,
+    getExitStyle: end => `rotate3d(0, 1, 0, ${end}turn)`,
+  },
+]);
 
-const FlipTransition = transitionFactory(
-  ['transform'],
-  getInitialStyle,
-  getTransitionStyles
-);
+const FlipRightTransition = transitionFactory([
+  {
+    ...baseTransform,
+    getEnterStyle: start => `rotate3d(0, 1, 0, -${start}turn)`,
+    getExitStyle: end => `rotate3d(0, 1, 0, ${end}turn)`,
+  },
+]);
 
-FlipTransition.displayName = 'FlipTransition';
+const FlipTopTransition = transitionFactory([
+  {
+    ...baseTransform,
+    getEnterStyle: start => `rotate3d(1, 0, 0, ${start}turn)`,
+    getExitStyle: end => `rotate3d(1, 0, 0, ${end}turn)`,
+  },
+]);
+
+const FlipBottomTransition = transitionFactory([
+  {
+    ...baseTransform,
+    getEnterStyle: start => `rotate3d(1, 0, 0, -${start}turn)`,
+    getExitStyle: end => `rotate3d(1, 0, 0, ${end}turn)`,
+  },
+]);
+
+class FlipTransition extends React.Component {
+  static defaultProps = {
+    direction: 'left',
+  };
+
+  render() {
+    const { direction, ...rest } = this.props;
+
+    switch (direction) {
+      case 'left':
+        return <FlipLeftTransition {...rest} />;
+      case 'right':
+        return <FlipRightTransition {...rest} />;
+      case 'top':
+        return <FlipTopTransition {...rest} />;
+      case 'bottom':
+        return <FlipBottomTransition {...rest} />;
+    }
+  }
+}
 
 export default FlipTransition;
