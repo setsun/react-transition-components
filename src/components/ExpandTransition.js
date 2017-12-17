@@ -1,57 +1,22 @@
 import React from 'react';
 import choreography from '../decorator/choreography';
+import { scale } from '../presets';
 
-const ExpandTopTransition = choreography(
-  [
-    {
-      transition: 'transform',
-      getStartStyle: (start = 0) => `scaleY(${start})`,
-      getEndStyle: (end = 1) => `scaleY(${end})`,
-    },
-  ],
-  {
-    transformOrigin: 'top',
-  }
-);
+const ExpandTopTransition = choreography([scale.vertical], {
+  transformOrigin: 'top',
+});
 
-const ExpandBottomTransition = choreography(
-  [
-    {
-      transition: 'transform',
-      getStartStyle: (start = 0) => `scaleY(${start})`,
-      getEndStyle: (end = 1) => `scaleY(${end})`,
-    },
-  ],
-  {
-    transformOrigin: 'bottom',
-  }
-);
+const ExpandBottomTransition = choreography([scale.vertical], {
+  transformOrigin: 'bottom',
+});
 
-const ExpandLeftTransition = choreography(
-  [
-    {
-      transition: 'transform',
-      getStartStyle: (start = 0) => `scaleX(${start})`,
-      getEndStyle: (end = 1) => `scaleX(${end})`,
-    },
-  ],
-  {
-    transformOrigin: 'left',
-  }
-);
+const ExpandLeftTransition = choreography([scale.horizontal], {
+  transformOrigin: 'left',
+});
 
-const ExpandRightTransition = choreography(
-  [
-    {
-      transition: 'transform',
-      getStartStyle: (start = 0) => `scaleX(${start})`,
-      getEndStyle: (end = 1) => `scaleX(${end})`,
-    },
-  ],
-  {
-    transformOrigin: 'right',
-  }
-);
+const ExpandRightTransition = choreography([scale.horizontal], {
+  transformOrigin: 'right',
+});
 
 class ExpandTransition extends React.Component {
   static defaultProps = {

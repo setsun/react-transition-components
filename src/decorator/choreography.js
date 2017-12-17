@@ -4,50 +4,10 @@ import React from 'react';
 import type { Node } from 'react';
 import { Transition } from 'react-transition-group';
 
-function getTransitionProperty(
-  timeout: number,
-  easing: string,
-  transitions: Array<Object>
-): string {
-  return transitions
-    .map(transition => `${transition.transitionName} ${timeout}ms ${easing}`)
-    .join(',');
-}
-
-function getInitialStyle(transitions, styles, timeout, easing) {
-  return {
-    transition: getTransitionProperty(timeout, easing, transitions),
-    ...styles,
-    ...transitions.reduce((style, transition) => {
-      style[transition.transitionName] = transition.getStartStyle();
-      return style;
-    }, {}),
-  };
-}
-
-function getAllTransitionStyles(transitions) {
-  return transitions.reduce(
-    (styles, transition) => {
-      styles.entering[transition.transitionName] = transition.getStartStyle();
-      styles.entered[transition.transitionName] = transition.getEndStyle();
-      styles.exiting[transition.transitionName] = transition.getStartStyle();
-      return styles;
-    },
-    {
-      entering: {},
-      entered: {},
-      exiting: {},
-    }
-  );
-}
-
-function getFinalStyle(defaultStyle, transitionStyles, state) {
-  return {
-    display: 'inline-block',
-    ...defaultStyle,
-    ...transitionStyles[state],
-  };
-}
+const globalStyle = {
+  display: 'inline-block',
+  perspective: '1000px',
+};
 
 type TransitionProps = {
   children: Node,
@@ -64,8 +24,59 @@ const choreography = (transitions: Array<Object>, styles: Object) => {
       easing: 'ease-in',
     };
 
+    getTransitionProperty = (): string => {
+      const { timeout, easing } = this.props;
+
+      return transitions
+        .map(transition => `${transition.transition} ${timeout}ms ${easing}`)
+        .join(',');
+    };
+
+    getDefaultStyle = () => {
+      const { timeout, easing, start } = this.props;
+
+      return {
+        transition: this.getTransitionProperty(),
+        ...globalStyle,
+        ...styles,
+        ...transitions.reduce((style, transition) => {
+          style[transition.transition] = transition.getStartStyle(start);
+          return style;
+        }, {}),
+      };
+    };
+
+    getTransitionStates = () => {
+      const { start, end } = this.props;
+
+      return transitions.reduce(
+        (styles, transition) => {
+          styles.entering[transition.transition] = transition.getStartStyle(
+            start
+          );
+          styles.entered[transition.transition] = transition.getEndStyle(end);
+          styles.exiting[transition.transition] = transition.getStartStyle(
+            start
+          );
+          return styles;
+        },
+        {
+          entering: {},
+          entered: {},
+          exiting: {},
+        }
+      );
+    };
+
+    getFinalStyle = (state: string) => {
+      return {
+        ...this.getDefaultStyle(),
+        ...this.getTransitionStates()[state],
+      };
+    };
+
     render() {
-      const { children, timeout, easing, ...rest } = this.props;
+      const { children, timeout, ...rest } = this.props;
 
       return (
         <Transition
@@ -75,17 +86,7 @@ const choreography = (transitions: Array<Object>, styles: Object) => {
           timeout={timeout}
           {...rest}
         >
-          {state => (
-            <span
-              style={getFinalStyle(
-                getInitialStyle(transitions, styles, timeout, easing),
-                getAllTransitionStyles(transitions),
-                state
-              )}
-            >
-              {children}
-            </span>
-          )}
+          {state => <span style={this.getFinalStyle(state)}>{children}</span>}
         </Transition>
       );
     }

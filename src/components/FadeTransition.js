@@ -1,12 +1,7 @@
 import choreography from '../decorator/choreography';
+import { opacity } from '../presets';
 
-const FadeTransition = choreography([
-  {
-    transition: 'opacity',
-    getStartStyle: (start = 0) => start,
-    getEndStyle: (end = 1) => end,
-  },
-]);
+const FadeTransition = choreography([opacity]);
 
 FadeTransition.displayName = 'FadeTransition';
 

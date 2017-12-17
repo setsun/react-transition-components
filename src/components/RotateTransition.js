@@ -1,17 +1,7 @@
 import choreography from '../decorator/choreography';
+import { opacity, rotate } from '../presets';
 
-const RotateTransition = choreography([
-  {
-    transition: 'transform',
-    getStartStyle: (start = 0.75) => `rotate(${start}turn)`,
-    getEndStyle: (end = 1) => `rotate(${end}turn)`,
-  },
-  {
-    transition: 'opacity',
-    getStartStyle: (start = 0) => start,
-    getEndStyle: (end = 1) => end,
-  },
-]);
+const RotateTransition = choreography([rotate, opacity]);
 
 RotateTransition.displayName = 'RotateTransition';
 

@@ -1,37 +1,22 @@
 import React from 'react';
 import choreography from '../decorator/choreography';
+import { rotate3d } from '../presets';
 
-const FlipLeftTransition = choreography([
-  {
-    transition: 'transform',
-    getStartStyle: (start = 0.25) => `rotate3d(0, 1, 0, ${start}turn)`,
-    getEndStyle: (end = 0) => `rotate3d(0, 1, 0, ${end}turn)`,
-  },
-]);
+const FlipTopTransition = choreography([rotate3d.top], {
+  transformOrigin: 'top',
+});
 
-const FlipRightTransition = choreography([
-  {
-    transition: 'transform',
-    getStartStyle: (start = 0.25) => `rotate3d(0, 1, 0, -${start}turn)`,
-    getEndStyle: (end = 0) => `rotate3d(0, 1, 0, ${end}turn)`,
-  },
-]);
+const FlipBottomTransition = choreography([rotate3d.bottom], {
+  transformOrigin: 'bottom',
+});
 
-const FlipTopTransition = choreography([
-  {
-    transition: 'transform',
-    getStartStyle: (start = 0.25) => `rotate3d(1, 0, 0, ${start}turn)`,
-    getEndStyle: (end = 0) => `rotate3d(1, 0, 0, ${end}turn)`,
-  },
-]);
+const FlipLeftTransition = choreography([rotate3d.left], {
+  transformOrigin: 'left',
+});
 
-const FlipBottomTransition = choreography([
-  {
-    transition: 'transform',
-    getStartStyle: (start = 0.25) => `rotate3d(1, 0, 0, -${start}turn)`,
-    getEndStyle: (end = 0) => `rotate3d(1, 0, 0, ${end}turn)`,
-  },
-]);
+const FlipRightTransition = choreography([rotate3d.right], {
+  transformOrigin: 'right',
+});
 
 class FlipTransition extends React.Component {
   static defaultProps = {
