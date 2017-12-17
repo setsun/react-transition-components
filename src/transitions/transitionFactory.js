@@ -14,11 +14,12 @@ function getTransitionProperty(
     .join(',');
 }
 
-function getInitialStyle(transitions, timeout, easing) {
+function getInitialStyle(transitions, styles, timeout, easing) {
   return {
     transition: getTransitionProperty(timeout, easing, transitions),
+    ...styles,
     ...transitions.reduce((style, transition) => {
-      style[transition.name] = transition.getEnterState(transition.start);
+      style[transition.name] = transition.getEnterStyle(transition.start);
       return style;
     }, {}),
   };
@@ -27,11 +28,11 @@ function getInitialStyle(transitions, timeout, easing) {
 function getAllTransitionStyles(transitions) {
   return transitions.reduce(
     (styles, transition) => {
-      styles.entering[transition.name] = transition.getEnterState(
+      styles.entering[transition.name] = transition.getEnterStyle(
         transition.start
       );
-      styles.entered[transition.name] = transition.getExitState(transition.end);
-      styles.exiting[transition.name] = transition.getEnterState(
+      styles.entered[transition.name] = transition.getExitStyle(transition.end);
+      styles.exiting[transition.name] = transition.getEnterStyle(
         transition.start
       );
       return styles;
@@ -58,7 +59,7 @@ type TransitionProps = {
   easing: string,
 };
 
-const transitionFactory = (transitions: Array<Object>) => {
+const transitionFactory = (transitions: Array<Object>, styles: Object) => {
   return class extends React.Component<TransitionProps> {
     static defaultProps = {
       timeout: 300,
@@ -79,7 +80,7 @@ const transitionFactory = (transitions: Array<Object>) => {
           {state => (
             <span
               style={getFinalStyle(
-                getInitialStyle(transitions, timeout, easing),
+                getInitialStyle(transitions, styles, timeout, easing),
                 getAllTransitionStyles(transitions),
                 state
               )}

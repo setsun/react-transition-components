@@ -1,55 +1,40 @@
 # React Choreography
 
-A set of common animation components built around `react-transition-group`.
+A set of common transition components built around `react-transition-group`.
 
 React Choreography is roughly 3 kB gzipped, and has peer dependencies on `react` and `react-transition-group`.
 
-`npm install --save react-choreography`
+`npm i --save react-choreography`
 
-### Included transitions
-- FadeTransition
-- SlideTransition
-- ExpandTransition
-- ScaleTransition
-- FlipTransition
-- RotateTransition
+# Components
+### `FadeTransition`
+### `SlideTransition`
+### `ExpandTransition`
+### `ScaleTransition`
+### `FlipTransition`
+### `RotateTransition`
 
-### Included higher-order components
-- transitionFactory
+# API
+### `transitionFactory(transitions: Array<TransitionConfig>, styles: Object): React.Component`
+The transitionFactory returns a component that renders a `Transition` component with a given configuration from the `transitions` array.
 
-### Example Usage
-
+A `TransitionConfig` has the following shape:
 ```
-import {
-  FadeTransition,
-  SlideTransition
-} from 'react-choreography';
-
-const PurpleSquare = ({children}) => {
-  return (
-    <div style={{height: '200px', width: '200px', backgroundColor: '#8200FF'}}>
-      {children}
-    </div>
-  );
+type TransitionConfig = {
+  transitionName: string,
+  getEnterStyle: Function,
+  getExitStyle: Function,
+  start: number,
+  end: number,
 }
 
-const FadePurpleSquare = () => {
-  return (
-    <FadeTransition>
-      <PurpleSquare />
-    </FadeTransition>
-  );
-}
+// example
 
-const SlidePurpleSquare = () => {
-  return (
-    <SlideTransition>
-      <PurpleSquare />
-    </SlideTransition>
-  );
+const transitionConfig = {
+  transitionName: 'transform',
+  getEnterStyle: start => `scale(${start})`,
+  getExitStyle: end => `scale(${end})`,
+  start: 0,
+  end: 1,
 }
 ```
-
-### To-do
-- Better docs
-- Add more common usage transitions
