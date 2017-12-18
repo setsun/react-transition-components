@@ -1,3 +1,5 @@
+// @flow
+
 import choreography from '../decorator/choreography';
 import { opacity, rotate } from '../presets';
 

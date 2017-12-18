@@ -1,4 +1,12 @@
-export default {
+// @flow
+
+import type { TransitionConfig } from '../types/index';
+
+const scale: {
+  all: TransitionConfig,
+  vertical: TransitionConfig,
+  horizontal: TransitionConfig,
+} = {
   all: {
     transition: 'transform',
     getStartStyle: (start = 0) => `scale(${start})`,
@@ -15,3 +23,5 @@ export default {
     getEndStyle: (end = 1) => `scaleX(${end})`,
   },
 };
+
+export default scale;
