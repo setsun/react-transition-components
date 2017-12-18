@@ -4,9 +4,21 @@ import React from 'react';
 import type { Node } from 'react';
 import { Transition } from 'react-transition-group';
 
-const globalStyle = {
+const globalStyles = {
   display: 'inline-block',
   perspective: '1000px',
+};
+
+type TransitionStates = {
+  entering: Object,
+  entered: Object,
+  exiting: Object,
+};
+
+type TransitionConfig = {
+  transition: string,
+  getStartStyle: Function,
+  getEndStyle: Function,
 };
 
 type TransitionProps = {
@@ -17,7 +29,10 @@ type TransitionProps = {
   end: string | number,
 };
 
-const choreography = (transitions: Array<Object>, styles: Object) => {
+const choreography = (
+  transitionConfigs: Array<TransitionConfig>,
+  styles: Object
+) => {
   return class extends React.Component<TransitionProps> {
     static defaultProps = {
       timeout: 300,
@@ -27,36 +42,59 @@ const choreography = (transitions: Array<Object>, styles: Object) => {
     getTransitionProperty = (): string => {
       const { timeout, easing } = this.props;
 
-      return transitions
-        .map(transition => `${transition.transition} ${timeout}ms ${easing}`)
+      return transitionConfigs
+        .map(config => `${config.transition} ${timeout}ms ${easing}`)
         .join(',');
     };
 
-    getDefaultStyle = () => {
+    getStyle = (
+      transition: string,
+      currentStyle: string,
+      newStyle: string
+    ): string => {
+      if (transition === 'transform' && !!currentStyle) {
+        return `${currentStyle} ${newStyle}`;
+      }
+      return newStyle;
+    };
+
+    getDefaultStyle = (): Object => {
       const { timeout, easing, start } = this.props;
 
       return {
         transition: this.getTransitionProperty(),
-        ...globalStyle,
+        ...globalStyles,
         ...styles,
-        ...transitions.reduce((style, transition) => {
-          style[transition.transition] = transition.getStartStyle(start);
+        ...transitionConfigs.reduce((style, config) => {
+          style[config.transition] = this.getStyle(
+            config.transition,
+            style[config.transition],
+            config.getStartStyle(start)
+          );
           return style;
         }, {}),
       };
     };
 
-    getTransitionStates = () => {
+    getTransitionStates = (): TransitionStates => {
       const { start, end } = this.props;
 
-      return transitions.reduce(
-        (styles, transition) => {
-          styles.entering[transition.transition] = transition.getStartStyle(
-            start
+      return transitionConfigs.reduce(
+        (styles, config) => {
+          styles.entering[config.transition] = this.getStyle(
+            config.transition,
+            styles.entering[config.transition],
+            config.getStartStyle(start)
           );
-          styles.entered[transition.transition] = transition.getEndStyle(end);
-          styles.exiting[transition.transition] = transition.getStartStyle(
-            start
+          styles.entered[config.transition] = this.getStyle(
+            config.transition,
+            styles.entered[config.transition],
+            config.getEndStyle(end)
+          );
+          styles.exiting[config.transition] = this.getStyle(
+            config.transition,
+            styles.exiting[config.transition],
+            config.getStartStyle(start)
           );
           return styles;
         },
@@ -68,7 +106,7 @@ const choreography = (transitions: Array<Object>, styles: Object) => {
       );
     };
 
-    getFinalStyle = (state: string) => {
+    getFinalStyle = (state: string): Object => {
       return {
         ...this.getDefaultStyle(),
         ...this.getTransitionStates()[state],
