@@ -17,7 +17,7 @@ import KatPersona from './components/KatPersona';
 import WarningMessage from './components/WarningMessage';
 
 import './index.css';
-import choreography from '../src/decorator/choreography';
+import choreography from '../src/factory/choreography';
 import { opacity } from '../src/presets/index';
 import rotate from '../src/presets/rotate';
 import scale from '../src/presets/scale';
@@ -105,7 +105,7 @@ storiesOf('Standard Transitions', module)
 storiesOf('Composable Transitions with presets', module)
   .addDecorator(TransitionGroupDecorator)
   .add('Opacity, Rotate, Scale', () => (
-    <BatmanWipeTransition>
+    <BatmanWipeTransition timeout={[100, 200, 300]}>
       <img
         src="http://1000logos.net/wp-content/uploads/2016/10/Batman-symbol.jpg"
         style={{ width: '500px' }}

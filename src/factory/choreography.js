@@ -110,7 +110,7 @@ const choreography = (
     };
 
     render() {
-      const { children, ...rest } = this.props;
+      const { children, timeout, ...rest } = this.props;
 
       return (
         <Transition

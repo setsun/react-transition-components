@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import choreography from '../decorator/choreography';
+import choreography from '../factory/choreography';
 import { rotate3d } from '../presets';
 import type { TransitionProps } from '../types/index';
 

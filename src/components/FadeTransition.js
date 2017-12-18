@@ -1,6 +1,6 @@
 // @flow
 
-import choreography from '../decorator/choreography';
+import choreography from '../factory/choreography';
 import { opacity } from '../presets';
 
 const FadeTransition = choreography([opacity]);
