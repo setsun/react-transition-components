@@ -1,24 +1,37 @@
 # React Choreography
 
-A set of common transition components built around `react-transition-group`.
+A higher-order component for generating transition components built around `react-transition-group`.
 
 React Choreography is roughly 3 kB gzipped, and has peer dependencies on `react` and `react-transition-group`.
+```
+npm install --save react-choreography
+```
 
-`npm i --save react-choreography`
+## Motivation
+The drive behind `react-choreography` comes from being able to create common transition components for React easily using the tried and true `react-transition-group`.
 
-# Components
-`react-choreography` with components that provide common transitions out of the box. These components pass down their props to the `Transition` component in `react-transition-group` allowing you to use them in the same way.
+Not only that, but these components need to be easily configurable with a simple API, and minimal context switching.
 
-- `FadeTransition`
-- `SlideTransition`
-- `ExpandTransition`
-- `ScaleTransition`
-- `FlipTransition`
-- `RotateTransition`
+One of the easiest and most common ways to add a enter/exit transition is using `CSSTransition` from `react-transition-group`. However the downfalls of that API is having to create a React component and maintaining separate CSS classes to express your enter/exit states. Not only that, but dynamically changing the `duration` and `easing` in your CSS is nearly impossible without additional tooling. This is even harder to manage if you are transitioning on multiple CSS properties at once.
 
-# API
-### `choreography(transitions: Array<TransitionConfig>, styles: Object): React.Component`
-The choreography returns a component that renders a `Transition` component with a given configuration from the `transitions` array. The `styles` object also applies any additional CSS styles you need of which will persist across transitions.
+The other way to add a transition is using the `Transition` component from `react-transition-group`, which allows us to express our transitions using React inline styles. This solves our previous issue since we can dynamically generate all of our styles in JavaScript and not have to maintain a static CSS stylesheet. However there is decent amount of configuration needed, of which you need to know the different transition styles of your component which includes your `default` style, the `entering` style, `entered` style and `exiting` style.
+
+The `choreography` higher-order component aims to solve that by wrapping the `Transition` component in `react-transition-group` and providing a very simple API for allowing you to express a transition in less than 10 lines of code in the simpliest case.
+
+```
+const ScaleTransition = choreography([
+  {
+    transition: 'transform',
+    getStartStyle: (start = 0) => `scale(${start})`,
+    getEndStyle: (end = 1) => `scale(${end})`,
+  }
+]);
+```
+
+And you're done!
+## API
+### `choreography(transitionConfigs: Array<TransitionConfig>, styles: Object): React.Component<TransitionProps>`
+The `choreography` higher-order component returns a component that renders a `Transition` component from all the configurations from the `transitionConfigs` array. The `styles` object also applies any additional CSS styles you need of which will persist across all transition states.
 
 A `TransitionConfig` has the following shape:
 ```
@@ -29,16 +42,16 @@ type TransitionConfig = {
 }
 
 // example
-const transitionConfig = {
+const config: TransitionConfig = {
   transition: 'transform',
   getStartStyle: (start = 0) => `scale(${start})`,
   getEndStyle: (end = 1) => `scale(${end})`,
 }
 ```
 
-It's recommended you pass in default parameters for the functions for `getStartStyle` and `getEndStyle`. This will be the default values, which can be overridden by `this.props.start` and `this.props.end` in your component. In the end, what is returned by the function is up to you, as long as it is valid CSS.
+It's recommended you pass in default parameters for the functions for `getStartStyle` and `getEndStyle`. These will be the default values, which can be overridden by `this.props.start` and `this.props.end` in your component. In the end, what is returned by the function is up to you, as long as it is valid CSS.
 
-Additionally, applying multiple CSS transforms is supported out of the box.
+Additionally, applying multiple CSS transforms is supported out of the box if you want to manage them in separate configurations.
 
 #### Example
 ```
@@ -60,7 +73,7 @@ const RotatingExpandFromTopTransition = choreography([
 });
 ```
 
-# Presets
+## Presets
 `react-choreography` comes out of the box with some common presets, if you want to compose your own transition components quickly.
 
 - opacity
@@ -82,3 +95,17 @@ const BatmanWipeTransition = choreography([
 ```
 
 ![batman_logo](https://user-images.githubusercontent.com/4651424/34085227-29b25146-e35b-11e7-9b44-645e67775330.gif)
+
+## Components
+`react-choreography` also comes with components out of the box that provide common transitions generated by the `choreography` HOC and included `presets` if you want to get up and running quickly.
+
+- `FadeTransition`
+- `SlideTransition`
+- `ExpandTransition`
+- `ScaleTransition`
+- `FlipTransition`
+- `RotateTransition`
+
+
+## Advanced Usage
+TBD

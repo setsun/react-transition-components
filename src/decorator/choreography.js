@@ -6,7 +6,6 @@ import { Transition } from 'react-transition-group';
 
 const globalStyles = {
   display: 'inline-block',
-  perspective: '1000px',
 };
 
 type TransitionStates = {
@@ -19,15 +18,26 @@ type TransitionConfig = {
   transition: string,
   getStartStyle: Function,
   getEndStyle: Function,
+  timeout?: number,
+  easing?: string,
 };
 
 type TransitionProps = {
   children: Node,
   timeout: number,
   easing: string,
-  start: string | number,
-  end: string | number,
+  start?: string | number | Array<string | number>,
+  end?: string | number | Array<string | number>,
 };
+
+const getStyleString = (
+  transition: string,
+  currentStyle: string,
+  style: string
+) =>
+  transition === 'transform' && !!currentStyle
+    ? `${currentStyle} ${style}`
+    : style;
 
 const choreography = (
   transitionConfigs: Array<TransitionConfig>,
@@ -47,26 +57,15 @@ const choreography = (
         .join(',');
     };
 
-    getStyle = (
-      transition: string,
-      currentStyle: string,
-      newStyle: string
-    ): string => {
-      if (transition === 'transform' && !!currentStyle) {
-        return `${currentStyle} ${newStyle}`;
-      }
-      return newStyle;
-    };
-
     getDefaultStyle = (): Object => {
-      const { timeout, easing, start } = this.props;
+      const { start } = this.props;
 
       return {
         transition: this.getTransitionProperty(),
         ...globalStyles,
         ...styles,
         ...transitionConfigs.reduce((style, config) => {
-          style[config.transition] = this.getStyle(
+          style[config.transition] = getStyleString(
             config.transition,
             style[config.transition],
             config.getStartStyle(start)
@@ -81,17 +80,17 @@ const choreography = (
 
       return transitionConfigs.reduce(
         (styles, config) => {
-          styles.entering[config.transition] = this.getStyle(
+          styles.entering[config.transition] = getStyleString(
             config.transition,
             styles.entering[config.transition],
             config.getStartStyle(start)
           );
-          styles.entered[config.transition] = this.getStyle(
+          styles.entered[config.transition] = getStyleString(
             config.transition,
             styles.entered[config.transition],
             config.getEndStyle(end)
           );
-          styles.exiting[config.transition] = this.getStyle(
+          styles.exiting[config.transition] = getStyleString(
             config.transition,
             styles.exiting[config.transition],
             config.getStartStyle(start)
