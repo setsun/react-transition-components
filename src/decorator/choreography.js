@@ -18,14 +18,13 @@ type TransitionConfig = {
   transition: string,
   getStartStyle: Function,
   getEndStyle: Function,
-  timeout?: number,
   easing?: string,
 };
 
 type TransitionProps = {
   children: Node,
   timeout: number,
-  easing: string,
+  easing: string | Array<string>,
   start?: string | number | Array<string | number>,
   end?: string | number | Array<string | number>,
 };
@@ -53,7 +52,11 @@ const choreography = (
       const { timeout, easing } = this.props;
 
       return transitionConfigs
-        .map(config => `${config.transition} ${timeout}ms ${easing}`)
+        .map((config, index) => {
+          const easingVal = Array.isArray(easing) ? easing[index] : easing;
+          return `${config.transition} ${timeout}ms ${config.easing ||
+            easingVal}`;
+        })
         .join(',');
     };
 
