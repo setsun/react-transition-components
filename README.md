@@ -12,11 +12,11 @@ The drive behind `react-choreography` comes from being able to create common tra
 
 Not only that, but these components need to be easily configurable with a simple API, and minimal context switching.
 
-One of the easiest and most common ways to add a enter/exit transition is using `CSSTransition` from `react-transition-group`. However the downfalls of that API is having to create a React component and maintaining separate CSS classes to express your enter/exit states. Not only that, but dynamically changing the `duration` and `easing` in your CSS is nearly impossible without additional tooling. This is even harder to manage if you are transitioning on multiple CSS properties at once.
+One of the easiest and most common ways to add a enter/exit transition is using `<CSSTransition>` from `react-transition-group`. However the downfalls of that API is having to create a React component and maintaining separate CSS classes to express your enter/exit states. Not only that, but dynamically changing the `duration` and `easing` in your CSS is nearly impossible without additional tooling. This is even harder to manage if you are transitioning on multiple CSS properties at once.
 
-The other way to add a transition is using the `Transition` component from `react-transition-group`, which allows us to express our transitions using React inline styles. This solves our previous issue since we can dynamically generate all of our styles in JavaScript and not have to maintain a static CSS stylesheet. However there is decent amount of configuration needed, of which you need to know the different transition styles of your component which includes your `default` style, the `entering` style, `entered` style and `exiting` style.
+The other way to add a transition is using `<Transition>` from `react-transition-group`, which allows us to express our transitions using React inline styles. This solves our previous issue since we can dynamically generate all of our styles in JavaScript and not have to maintain a static CSS stylesheet. However there is decent amount of configuration needed, of which you need to know the different transition styles of your component which includes your `default` style, the `entering` style, `entered` style and `exiting` style.
 
-The `choreography` higher-order component aims to solve that by wrapping the `Transition` component in `react-transition-group` and providing a very simple API for allowing you to express a transition in less than 10 lines of code in the simpliest case.
+The `choreography` higher-order component aims to solve that by wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in less than 10 lines of code in the simpliest case.
 
 ```
 const ScaleTransition = choreography([
@@ -31,7 +31,7 @@ const ScaleTransition = choreography([
 And you're done!
 ## API
 ### `choreography(transitionConfigs: Array<TransitionConfig>, styles: Object): React.Component<TransitionProps>`
-The `choreography` higher-order component returns a component that renders a `Transition` component from all the configurations from the `transitionConfigs` array. The `styles` object also applies any additional CSS styles you need of which will persist across all transition states.
+The `choreography` higher-order component returns a component that renders a `<Transition>` from all the configurations from the `transitionConfigs` array. The `styles` object also applies any additional CSS styles you need of which will persist across all transition states.
 
 A `TransitionConfig` has the following shape:
 ```
@@ -71,6 +71,17 @@ const RotatingExpandFromTopTransition = choreography([
 ], {
   transformOrigin: 'top',
 });
+```
+
+The React component also has the following prop types:
+```
+type TransitionProps = {
+  children: Node,
+  timeout: number,
+  easing: string,
+  start?: string | number | Array<string | number>,
+  end?: string | number | Array<string | number>,
+};
 ```
 
 ## Presets
