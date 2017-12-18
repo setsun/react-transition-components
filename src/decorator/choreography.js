@@ -2,31 +2,15 @@
 
 import React from 'react';
 import type { Node } from 'react';
+import type {
+  TransitionProps,
+  TransitionConfig,
+  TransitionStates,
+} from '../types/index';
 import { Transition } from 'react-transition-group';
 
 const globalStyles = {
   display: 'inline-block',
-};
-
-type TransitionStates = {
-  entering: Object,
-  entered: Object,
-  exiting: Object,
-};
-
-type TransitionConfig = {
-  transition: string,
-  getStartStyle: Function,
-  getEndStyle: Function,
-  easing?: string,
-};
-
-type TransitionProps = {
-  children: Node,
-  timeout: number,
-  easing: string | Array<string>,
-  start?: string | number | Array<string | number>,
-  end?: string | number | Array<string | number>,
 };
 
 const getStyleString = (
@@ -40,7 +24,7 @@ const getStyleString = (
 
 const choreography = (
   transitionConfigs: Array<TransitionConfig>,
-  styles: Object
+  styles?: Object
 ) => {
   return class extends React.Component<TransitionProps> {
     static defaultProps = {

@@ -1,4 +1,13 @@
-export default {
+// @flow
+
+import type { TransitionConfig } from '../types/index';
+
+const translate: {
+  top: TransitionConfig,
+  bottom: TransitionConfig,
+  left: TransitionConfig,
+  right: TransitionConfig,
+} = {
   top: {
     transition: 'transform',
     getStartStyle: (start = 16) => `translate(0, -${start}px)`,
@@ -20,3 +29,5 @@ export default {
     getEndStyle: (end = 0) => `translate(${end}px, 0)`,
   },
 };
+
+export default translate;

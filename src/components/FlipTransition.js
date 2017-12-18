@@ -1,6 +1,13 @@
+// @flow
+
 import React from 'react';
 import choreography from '../decorator/choreography';
 import { rotate3d } from '../presets';
+import type { TransitionProps } from '../types/index';
+
+type FlipTransitionProps = TransitionProps & {
+  direction: string,
+};
 
 const FlipTopTransition = choreography([rotate3d.top], {
   transformOrigin: 'top',
@@ -18,7 +25,7 @@ const FlipRightTransition = choreography([rotate3d.right], {
   transformOrigin: 'right',
 });
 
-class FlipTransition extends React.Component {
+class FlipTransition extends React.Component<FlipTransitionProps> {
   static defaultProps = {
     direction: 'left',
   };

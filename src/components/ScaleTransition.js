@@ -1,3 +1,5 @@
+// @flow
+
 import choreography from '../decorator/choreography';
 import { scale } from '../presets';
 
