@@ -64,11 +64,13 @@ const choreography = (
         transition: this.getTransitionProperty(),
         ...globalStyles,
         ...styles,
-        ...transitionConfigs.reduce((style, config) => {
+        ...transitionConfigs.reduce((style, config, index) => {
+          const startVal = Array.isArray(start) ? start[index] : start;
+
           style[config.transition] = getStyleString(
             config.transition,
             style[config.transition],
-            config.getStartStyle(start)
+            config.getStartStyle(startVal)
           );
           return style;
         }, {}),
@@ -79,21 +81,24 @@ const choreography = (
       const { start, end } = this.props;
 
       return transitionConfigs.reduce(
-        (styles, config) => {
+        (styles, config, index) => {
+          const startVal = Array.isArray(start) ? start[index] : start;
+          const endVal = Array.isArray(end) ? end[index] : end;
+
           styles.entering[config.transition] = getStyleString(
             config.transition,
             styles.entering[config.transition],
-            config.getStartStyle(start)
+            config.getStartStyle(startVal)
           );
           styles.entered[config.transition] = getStyleString(
             config.transition,
             styles.entered[config.transition],
-            config.getEndStyle(end)
+            config.getEndStyle(endVal)
           );
           styles.exiting[config.transition] = getStyleString(
             config.transition,
             styles.exiting[config.transition],
-            config.getStartStyle(start)
+            config.getStartStyle(startVal)
           );
           return styles;
         },
