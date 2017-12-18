@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import type { Node } from 'react';
 import type {
   TransitionProps,
   TransitionConfig,
@@ -9,15 +8,16 @@ import type {
 } from '../types/index';
 import { Transition } from 'react-transition-group';
 
-const globalStyles = {
-  display: 'inline-block',
-};
+const globalStyles = { display: 'inline-block' };
+
+const getIsomorphicValue = (value, index): any =>
+  Array.isArray(value) ? value[index] : value;
 
 const getStyleString = (
   transition: string,
   currentStyle: string,
   style: string
-) =>
+): string =>
   transition === 'transform' && !!currentStyle
     ? `${currentStyle} ${style}`
     : style;
@@ -29,7 +29,12 @@ const choreography = (
   return class extends React.Component<TransitionProps> {
     static defaultProps = {
       timeout: 300,
-      easing: 'ease-in',
+      easing: 'ease-in-out',
+    };
+
+    getGlobalTimeout = (): number => {
+      const { timeout } = this.props;
+      return Array.isArray(timeout) ? Math.max(...timeout) : timeout;
     };
 
     getTransitionProperty = (): string => {
@@ -37,9 +42,9 @@ const choreography = (
 
       return transitionConfigs
         .map((config, index) => {
-          const easingVal = Array.isArray(easing) ? easing[index] : easing;
-          return `${config.transition} ${timeout}ms ${config.easing ||
-            easingVal}`;
+          const timeoutVal = getIsomorphicValue(timeout, index);
+          const easingVal = getIsomorphicValue(easing, index);
+          return `${config.transition} ${timeoutVal}ms ${easingVal}`;
         })
         .join(',');
     };
@@ -52,7 +57,7 @@ const choreography = (
         ...globalStyles,
         ...styles,
         ...transitionConfigs.reduce((style, config, index) => {
-          const startVal = Array.isArray(start) ? start[index] : start;
+          const startVal = getIsomorphicValue(start, index);
 
           style[config.transition] = getStyleString(
             config.transition,
@@ -105,14 +110,14 @@ const choreography = (
     };
 
     render() {
-      const { children, timeout, ...rest } = this.props;
+      const { children, ...rest } = this.props;
 
       return (
         <Transition
           appear
           mountOnEnter
           unmountOnExit
-          timeout={timeout}
+          timeout={this.getGlobalTimeout()}
           {...rest}
         >
           {state => <span style={this.getFinalStyle(state)}>{children}</span>}
