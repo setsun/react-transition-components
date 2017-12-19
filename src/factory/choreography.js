@@ -8,8 +8,6 @@ import type {
 } from '../types/index';
 import { Transition } from 'react-transition-group';
 
-const globalStyles = { display: 'inline-block' };
-
 const getIsomorphicValue = (value, index): any =>
   Array.isArray(value) ? value[index] : value;
 
@@ -54,7 +52,6 @@ const choreography = (
 
       return {
         transition: this.getTransitionProperty(),
-        ...globalStyles,
         ...styles,
         ...transitionConfigs.reduce((style, config, index) => {
           const startVal = getIsomorphicValue(start, index);
@@ -114,7 +111,7 @@ const choreography = (
 
       return (
         <Transition appear timeout={this.getGlobalTimeout()} {...rest}>
-          {state => <span style={this.getFinalStyle(state)}>{children}</span>}
+          {state => <div style={this.getFinalStyle(state)}>{children}</div>}
         </Transition>
       );
     }
