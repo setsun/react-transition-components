@@ -18,9 +18,7 @@ import WarningMessage from './components/WarningMessage';
 
 import './index.css';
 import choreography from '../src/factory/choreography';
-import { opacity } from '../src/presets/index';
-import rotate from '../src/presets/rotate';
-import scale from '../src/presets/scale';
+import { opacity, translate, skew, rotate, scale } from '../src/presets/index';
 
 const BatmanWipeTransition = choreography([opacity, rotate, scale.all]);
 
@@ -105,7 +103,7 @@ storiesOf('Standard Transitions', module)
 storiesOf('Composable Transitions with presets', module)
   .addDecorator(TransitionGroupDecorator)
   .add('Opacity, Rotate, Scale', () => (
-    <BatmanWipeTransition timeout={[100, 200, 300]}>
+    <BatmanWipeTransition>
       <img
         src="http://1000logos.net/wp-content/uploads/2016/10/Batman-symbol.jpg"
         style={{ width: '500px' }}
