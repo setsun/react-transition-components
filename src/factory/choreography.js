@@ -51,6 +51,7 @@ const choreography = (
       const { start } = this.props;
 
       return {
+        display: 'inline-block',
         transition: this.getTransitionProperty(),
         ...styles,
         ...transitionConfigs.reduce((style, config, index) => {
@@ -110,7 +111,13 @@ const choreography = (
       const { children, timeout, ...rest } = this.props;
 
       return (
-        <Transition appear timeout={this.getGlobalTimeout()} {...rest}>
+        <Transition
+          appear
+          mountOnEnter
+          unmountOnExit
+          timeout={this.getGlobalTimeout()}
+          {...rest}
+        >
           {state => <div style={this.getFinalStyle(state)}>{children}</div>}
         </Transition>
       );
