@@ -55,7 +55,7 @@ Additionally, applying multiple CSS transforms is supported out of the box if yo
 
 #### Example
 ```
-import choreography from 'react-choreography/choreography';
+import choreography from 'react-choreography';
 
 const RotatingExpandFromTopTransition = choreography([
   {

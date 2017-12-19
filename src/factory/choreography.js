@@ -113,13 +113,7 @@ const choreography = (
       const { children, timeout, ...rest } = this.props;
 
       return (
-        <Transition
-          appear
-          mountOnEnter
-          unmountOnExit
-          timeout={this.getGlobalTimeout()}
-          {...rest}
-        >
+        <Transition appear timeout={this.getGlobalTimeout()} {...rest}>
           {state => <span style={this.getFinalStyle(state)}>{children}</span>}
         </Transition>
       );
