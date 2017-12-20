@@ -22,12 +22,14 @@ const getStyleString = (
 
 const choreography = (
   transitionConfigs: Array<TransitionConfig>,
-  styles?: Object
+  staticStyles?: Object,
+  defaultProps?: TransitionProps
 ) => {
   return class extends React.Component<TransitionProps> {
     static defaultProps = {
       timeout: 300,
       easing: 'ease-in-out',
+      ...defaultProps,
     };
 
     getGlobalTimeout = (): number => {
@@ -53,7 +55,7 @@ const choreography = (
       return {
         display: 'inline-block',
         transition: this.getTransitionProperty(),
-        ...styles,
+        ...staticStyles,
         ...transitionConfigs.reduce((style, config, index) => {
           const startVal = getIsomorphicValue(start, index);
 
