@@ -1,15 +1,25 @@
 // @flow
 
 import React from 'react';
+import { Transition } from 'react-transition-group';
 import type {
   TransitionProps,
   TransitionConfig,
   TransitionStates,
 } from '../types/index';
-import { Transition } from 'react-transition-group';
 
 const getIsomorphicValue = (value, index): any =>
   Array.isArray(value) ? value[index] : value;
+
+const naiveMemoize = (callback): Function => {
+  const cache = {};
+
+  return (...args: Array<any>): any => {
+    const key = args.join('-');
+    if (!cache.hasOwnProperty(key)) cache[key] = callback.apply(null, args);
+    return cache[key];
+  };
+};
 
 const getStyleString = (
   transition: string,
@@ -32,14 +42,11 @@ const choreography = (
       ...defaultProps,
     };
 
-    getGlobalTimeout = (): number => {
-      const { timeout } = this.props;
+    getGlobalTimeout = naiveMemoize((timeout): number => {
       return Array.isArray(timeout) ? Math.max(...timeout) : timeout;
-    };
+    });
 
-    getTransitionProperty = (): string => {
-      const { timeout, easing } = this.props;
-
+    getTransitionProperty = (timeout, easing): string => {
       return transitionConfigs
         .map((config, index) => {
           const timeoutVal = getIsomorphicValue(timeout, index);
@@ -49,12 +56,10 @@ const choreography = (
         .join(',');
     };
 
-    getDefaultStyle = (): Object => {
-      const { start } = this.props;
-
+    getDefaultStyle = (timeout, easing, start): Object => {
       return {
         display: 'inline-block',
-        transition: this.getTransitionProperty(),
+        transition: this.getTransitionProperty(timeout, easing),
         ...staticStyles,
         ...transitionConfigs.reduce((style, config, index) => {
           const startVal = getIsomorphicValue(start, index);
@@ -69,9 +74,7 @@ const choreography = (
       };
     };
 
-    getTransitionStates = (): TransitionStates => {
-      const { start, end } = this.props;
-
+    getTransitionStates = (timeout, easing, start, end): TransitionStates => {
       return transitionConfigs.reduce(
         (styles, config, index) => {
           const startVal = Array.isArray(start) ? start[index] : start;
@@ -102,25 +105,31 @@ const choreography = (
       );
     };
 
-    getFinalStyle = (state: string): Object => {
-      return {
-        ...this.getDefaultStyle(),
-        ...this.getTransitionStates()[state],
-      };
-    };
+    getFinalStyle = naiveMemoize(
+      (state: string, timeout, easing, start, end) => {
+        return {
+          ...this.getDefaultStyle(timeout, easing, start),
+          ...this.getTransitionStates(timeout, easing, start, end)[state],
+        };
+      }
+    );
 
     render() {
-      const { children, timeout, ...rest } = this.props;
+      const { children, timeout, easing, start, end, ...rest } = this.props;
 
       return (
         <Transition
           appear
           mountOnEnter
           unmountOnExit
-          timeout={this.getGlobalTimeout()}
+          timeout={this.getGlobalTimeout(timeout)}
           {...rest}
         >
-          {state => <div style={this.getFinalStyle(state)}>{children}</div>}
+          {state => (
+            <div style={this.getFinalStyle(state, timeout, easing, start, end)}>
+              {children}
+            </div>
+          )}
         </Transition>
       );
     }
