@@ -8,7 +8,7 @@ import type {
   TransitionStates,
 } from '../types/index';
 
-const getIsomorphicValue = (value, index): any =>
+const getPrimitiveValue = (value, index): any =>
   Array.isArray(value) ? value[index] : value;
 
 const naiveMemoize = (callback): Function => {
@@ -42,6 +42,17 @@ const choreography = (
       ...defaultProps,
     };
 
+    constructor(props: TransitionProps) {
+      super(props);
+      const { timeout, easing, start, end } = props;
+
+      // warm up cache
+      this.getFinalStyle('entering', timeout, easing, start, end);
+      this.getFinalStyle('entered', timeout, easing, start, end);
+      this.getFinalStyle('exiting', timeout, easing, start, end);
+      this.getFinalStyle('exited', timeout, easing, start, end);
+    }
+
     getGlobalTimeout = naiveMemoize((timeout): number => {
       return Array.isArray(timeout) ? Math.max(...timeout) : timeout;
     });
@@ -49,8 +60,8 @@ const choreography = (
     getTransitionProperty = (timeout, easing): string => {
       return transitionConfigs
         .map((config, index) => {
-          const timeoutVal = getIsomorphicValue(timeout, index);
-          const easingVal = getIsomorphicValue(easing, index);
+          const timeoutVal = getPrimitiveValue(timeout, index);
+          const easingVal = getPrimitiveValue(easing, index);
           return `${config.transition} ${timeoutVal}ms ${easingVal}`;
         })
         .join(',');
@@ -62,7 +73,7 @@ const choreography = (
         transition: this.getTransitionProperty(timeout, easing),
         ...staticStyles,
         ...transitionConfigs.reduce((style, config, index) => {
-          const startVal = getIsomorphicValue(start, index);
+          const startVal = getPrimitiveValue(start, index);
 
           style[config.transition] = getStyleString(
             config.transition,
@@ -95,12 +106,14 @@ const choreography = (
             styles.exiting[config.transition],
             config.getStartStyle(startVal)
           );
+          styles.exited[config.transition] = styles.entering;
           return styles;
         },
         {
           entering: {},
           entered: {},
           exiting: {},
+          exited: {},
         }
       );
     };
