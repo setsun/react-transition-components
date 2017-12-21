@@ -25,7 +25,10 @@ const BatmanWipeTransition = choreography([opacity, rotate, scale.all]);
 storiesOf('Standard Transitions', module)
   .addDecorator(TransitionGroupDecorator)
   .add('Fade', () => (
-    <FadeTransition>
+    <FadeTransition
+      onEnter={(...args) => console.log(args)}
+      transitionId="fade-transition"
+    >
       <KatPersona />
     </FadeTransition>
   ))
