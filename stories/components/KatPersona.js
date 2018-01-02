@@ -16,11 +16,13 @@ const examplePersona = {
   showSecondaryText: true,
 };
 
-export default () => (
-  <Persona
-    {...examplePersona}
-    size={PersonaSize.large}
-    presence={PersonaPresence.blocked}
-    className="inlineFlex"
-  />
+export default ({ style }) => (
+  <div style={style}>
+    <Persona
+      {...examplePersona}
+      size={PersonaSize.large}
+      presence={PersonaPresence.blocked}
+      className="inlineFlex"
+    />
+  </div>
 );
