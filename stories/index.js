@@ -34,7 +34,9 @@ storiesOf('Standard Transitions', module)
   ))
   .add('Slide (Top)', () => (
     <SlideTransition direction="top">
-      <KatPersona />
+      {(state, { style }) => (
+        <KatPersona style={style} />
+      )}
     </SlideTransition>
   ))
   .add('Slide (Left)', () => (

@@ -106,7 +106,7 @@ const choreography = (
             styles.exiting[config.transition],
             config.getStartStyle(startVal)
           );
-          styles.exited[config.transition] = styles.entering;
+          styles.exited[config.transition] = styles.entering[config.transition];
           return styles;
         },
         {
@@ -173,11 +173,19 @@ const choreography = (
           })}
           {...rest}
         >
-          {state => (
-            <div style={this.getFinalStyle(state, timeout, easing, start, end)}>
-              {children}
-            </div>
-          )}
+          {(state, childProps) => {
+            const style = this.getFinalStyle(state, timeout, easing, start, end);
+
+            if (typeof children === 'function') {
+              childProps.style = style;
+              return children(state, childProps)
+            }
+
+            const child = React.Children.only(children);
+            return React.cloneElement(child, {
+              style,
+            });
+          }}
         </Transition>
       );
     }
