@@ -173,11 +173,12 @@ const choreography = (
           })}
           {...rest}
         >
-          {state => (
-            <div style={this.getFinalStyle(state, timeout, easing, start, end)}>
-              {children}
-            </div>
-          )}
+          {state => {
+            const child = React.Children.only(children);
+            return React.cloneElement(child, {
+              style: this.getFinalStyle(state, timeout, easing, start, end),
+            });
+          }}
         </Transition>
       );
     }
