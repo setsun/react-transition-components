@@ -106,7 +106,7 @@ const choreography = (
             styles.exiting[config.transition],
             config.getStartStyle(startVal)
           );
-          styles.exited[config.transition] = styles.entering;
+          styles.exited[config.transition] = styles.entering[config.transition];
           return styles;
         },
         {
