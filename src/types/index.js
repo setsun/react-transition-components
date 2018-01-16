@@ -20,11 +20,4 @@ export type TransitionProps = {
   end?: string | number | Array<string | number>,
   timeout: number | Array<number>,
   easing: string | Array<string>,
-  transitionId?: string,
-  onEnter?: Function,
-  onEntering?: Function,
-  onEntered?: Function,
-  onExit?: Function,
-  onExiting?: Function,
-  onExited?: Function,
 };

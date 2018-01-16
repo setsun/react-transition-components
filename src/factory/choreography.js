@@ -127,35 +127,8 @@ const choreography = (
       }
     );
 
-    getCallbacks = naiveMemoize(
-      (transitionId?: string, callbackMap: Object): Object => {
-        if (!transitionId) return callbackMap;
-
-        return Object.keys(callbackMap).reduce((acc, key) => {
-          if (!callbackMap[key]) return acc;
-          acc[key] = (...args: any[]) =>
-            callbackMap[key].apply(null, args.concat([transitionId]));
-          return acc;
-        }, {});
-      }
-    );
-
     render() {
-      const {
-        children,
-        timeout,
-        easing,
-        start,
-        end,
-        transitionId,
-        onEnter,
-        onEntering,
-        onEntered,
-        onExit,
-        onExiting,
-        onExited,
-        ...rest
-      } = this.props;
+      const { children, timeout, easing, start, end, ...rest } = this.props;
 
       return (
         <Transition
@@ -163,22 +136,20 @@ const choreography = (
           mountOnEnter
           unmountOnExit
           timeout={this.getGlobalTimeout(timeout)}
-          {...this.getCallbacks(transitionId, {
-            onEnter,
-            onEntering,
-            onEntered,
-            onExit,
-            onExiting,
-            onExited,
-          })}
           {...rest}
         >
           {(state, childProps) => {
-            const style = this.getFinalStyle(state, timeout, easing, start, end);
+            const style = this.getFinalStyle(
+              state,
+              timeout,
+              easing,
+              start,
+              end
+            );
 
             if (typeof children === 'function') {
               childProps.style = style;
-              return children(state, childProps)
+              return children(state, childProps);
             }
 
             const child = React.Children.only(children);

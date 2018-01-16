@@ -34,9 +34,7 @@ storiesOf('Standard Transitions', module)
   ))
   .add('Slide (Top)', () => (
     <SlideTransition direction="top">
-      {(state, { style }) => (
-        <KatPersona style={style} />
-      )}
+      {(state, { style }) => <KatPersona style={style} />}
     </SlideTransition>
   ))
   .add('Slide (Left)', () => (
@@ -56,22 +54,22 @@ storiesOf('Standard Transitions', module)
   ))
   .add('Expand (Top)', () => (
     <ExpandTransition direction="top">
-      <WarningMessage />
+      <KatPersona />
     </ExpandTransition>
   ))
   .add('Expand (Left)', () => (
     <ExpandTransition direction="left">
-      <WarningMessage />
+      <KatPersona />
     </ExpandTransition>
   ))
   .add('Expand (Right)', () => (
     <ExpandTransition direction="right">
-      <WarningMessage />
+      <KatPersona />
     </ExpandTransition>
   ))
   .add('Expand (Bottom)', () => (
     <ExpandTransition direction="bottom">
-      <WarningMessage />
+      <KatPersona />
     </ExpandTransition>
   ))
   .add('Flip (Top)', () => (
