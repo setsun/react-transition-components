@@ -1,6 +1,6 @@
 import choreography from './factory/choreography';
-import components from './components';
-import presets from './presets';
+import * as components from './components';
+import * as presets from './presets';
 
 export default choreography;
 export { components };
