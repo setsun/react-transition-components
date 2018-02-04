@@ -1,18 +1,18 @@
 import type { TransitionConfig } from '../types/index';
 
-export const opacity: TransitionConfig = {
+const opacity: TransitionConfig = {
   transition: 'opacity',
   getStartStyle: (start = 0) => start,
   getEndStyle: (end = 1) => end,
 };
 
-export const rotate: TransitionConfig = {
+const rotate: TransitionConfig = {
   transition: 'transform',
   getStartStyle: (start = 0) => `rotate(${start}turn)`,
   getEndStyle: (end = 1) => `rotate(${end}turn)`,
 };
 
-export const rotate3d: {
+const rotate3d: {
   top: TransitionConfig,
   bottom: TransitionConfig,
   left: TransitionConfig,
@@ -40,7 +40,7 @@ export const rotate3d: {
   },
 };
 
-export const scale: {
+const scale: {
   all: TransitionConfig,
   vertical: TransitionConfig,
   horizontal: TransitionConfig,
@@ -62,7 +62,7 @@ export const scale: {
   },
 };
 
-export const translate: {
+const translate: {
   top: TransitionConfig,
   bottom: TransitionConfig,
   left: TransitionConfig,
@@ -89,3 +89,5 @@ export const translate: {
     getEndStyle: (end = 0) => `translate(${end}px, 0)`,
   },
 };
+
+export { opacity, rotate, rotate3d, scale, translate };

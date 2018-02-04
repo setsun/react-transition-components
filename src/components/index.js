@@ -5,9 +5,11 @@ import ScaleTransition from './ScaleTransition';
 import FlipTransition from './FlipTransition';
 import RotateTransition from './RotateTransition';
 
-export { FadeTransition };
-export { SlideTransition };
-export { ExpandTransition };
-export { ScaleTransition };
-export { FlipTransition };
-export { RotateTransition };
+export {
+  FadeTransition,
+  SlideTransition,
+  ExpandTransition,
+  ScaleTransition,
+  FlipTransition,
+  RotateTransition,
+};

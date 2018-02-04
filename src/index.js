@@ -1,6 +1,6 @@
 import transitionFactory from './factory';
-import * as components from './components';
-import * as presets from './presets';
+import components from './components';
+import presets from './presets';
 
 export { components, presets };
 
