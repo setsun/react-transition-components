@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import choreography from '../factory/choreography';
+import transitionFactory from '../factory';
 import { opacity, translate } from '../presets';
 import type { TransitionProps } from '../types/index';
 
@@ -9,10 +9,10 @@ type SlideTransitionProps = TransitionProps & {
   direction: string,
 };
 
-const SlideTopTransition = choreography([translate.top, opacity]);
-const SlideBottomTransition = choreography([translate.bottom, opacity]);
-const SlideLeftTransition = choreography([translate.left, opacity]);
-const SlideRightTransition = choreography([translate.right, opacity]);
+const SlideTopTransition = transitionFactory([translate.top, opacity]);
+const SlideBottomTransition = transitionFactory([translate.bottom, opacity]);
+const SlideLeftTransition = transitionFactory([translate.left, opacity]);
+const SlideRightTransition = transitionFactory([translate.right, opacity]);
 
 class SlideTransition extends React.Component<SlideTransitionProps> {
   static defaultProps = {
