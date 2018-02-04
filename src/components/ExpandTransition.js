@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import choreography from '../factory/choreography';
+import transitionFactory from '../factory';
 import { scale } from '../presets';
 import type { TransitionProps } from '../types/index';
 
@@ -9,19 +9,19 @@ type ExpandTransitionProps = TransitionProps & {
   direction: string,
 };
 
-const ExpandTopTransition = choreography([scale.vertical], {
+const ExpandTopTransition = transitionFactory([scale.vertical], {
   transformOrigin: 'top',
 });
 
-const ExpandBottomTransition = choreography([scale.vertical], {
+const ExpandBottomTransition = transitionFactory([scale.vertical], {
   transformOrigin: 'bottom',
 });
 
-const ExpandLeftTransition = choreography([scale.horizontal], {
+const ExpandLeftTransition = transitionFactory([scale.horizontal], {
   transformOrigin: 'left',
 });
 
-const ExpandRightTransition = choreography([scale.horizontal], {
+const ExpandRightTransition = transitionFactory([scale.horizontal], {
   transformOrigin: 'right',
 });
 

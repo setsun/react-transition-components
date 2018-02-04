@@ -1,9 +1,9 @@
 // @flow
 
-import choreography from '../factory/choreography';
+import transitionFactory from '../factory';
 import { scale } from '../presets';
 
-const ScaleTransition = choreography([scale.all]);
+const ScaleTransition = transitionFactory([scale.all]);
 
 ScaleTransition.displayName = 'ScaleTransition';
 
