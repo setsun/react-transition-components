@@ -30,7 +30,7 @@ const getStyleString = (
     ? `${currentStyle} ${style}`
     : style;
 
-const choreography = (
+const transitionFactory = (
   transitionConfigs: Array<TransitionConfig>,
   staticStyles?: Object,
   defaultProps?: TransitionProps
@@ -163,4 +163,4 @@ const choreography = (
   };
 };
 
-export default choreography;
+export default transitionFactory;

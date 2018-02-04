@@ -1,9 +1,9 @@
 // @flow
 
-import choreography from '../factory/choreography';
+import transitionFactory from '../factory';
 import { opacity } from '../presets';
 
-const FadeTransition = choreography([opacity]);
+const FadeTransition = transitionFactory([opacity]);
 
 FadeTransition.displayName = 'FadeTransition';
 

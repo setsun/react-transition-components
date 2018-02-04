@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import choreography from '../factory/choreography';
+import transitionFactory from '../factory';
 import { rotate3d } from '../presets';
 import type { TransitionProps } from '../types/index';
 
@@ -9,19 +9,19 @@ type FlipTransitionProps = TransitionProps & {
   direction: string,
 };
 
-const FlipTopTransition = choreography([rotate3d.top], {
+const FlipTopTransition = transitionFactory([rotate3d.top], {
   transformOrigin: 'top',
 });
 
-const FlipBottomTransition = choreography([rotate3d.bottom], {
+const FlipBottomTransition = transitionFactory([rotate3d.bottom], {
   transformOrigin: 'bottom',
 });
 
-const FlipLeftTransition = choreography([rotate3d.left], {
+const FlipLeftTransition = transitionFactory([rotate3d.left], {
   transformOrigin: 'left',
 });
 
-const FlipRightTransition = choreography([rotate3d.right], {
+const FlipRightTransition = transitionFactory([rotate3d.right], {
   transformOrigin: 'right',
 });
 
