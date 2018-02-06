@@ -17,7 +17,7 @@ import KatPersona from './components/KatPersona';
 import WarningMessage from './components/WarningMessage';
 
 import './index.css';
-import choreography from '../src/factory/choreography';
+import choreography from '../src/factory';
 import { opacity, translate, rotate, scale } from '../src/presets/index';
 
 const BatmanWipeTransition = choreography([opacity, rotate, scale.all]);
