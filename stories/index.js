@@ -22,6 +22,14 @@ import { opacity, translate, rotate, scale } from '../src/presets/index';
 
 const BatmanWipeTransition = choreography([opacity, rotate, scale.all]);
 
+const SwipeInTransition = choreography([{
+  transition: 'max-width',
+  getStartStyle: () => 0,
+  getEndStyle: () => 400,
+}], {
+  overflow: 'hidden',
+});
+
 storiesOf('Standard Transitions', module)
   .addDecorator(TransitionGroupDecorator)
   .add('Fade', () => (
@@ -101,6 +109,11 @@ storiesOf('Standard Transitions', module)
     <ScaleTransition>
       <KatPersona />
     </ScaleTransition>
+  ))
+  .add('Swipe (horizontal)', () => (
+    <SwipeInTransition>
+      <KatPersona />
+    </SwipeInTransition>
   ));
 
 storiesOf('Composable Transitions with presets', module)
