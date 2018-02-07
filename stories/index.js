@@ -17,10 +17,18 @@ import KatPersona from './components/KatPersona';
 import WarningMessage from './components/WarningMessage';
 
 import './index.css';
-import choreography from '../src/factory/choreography';
+import choreography from '../src/factory';
 import { opacity, translate, rotate, scale } from '../src/presets/index';
 
 const BatmanWipeTransition = choreography([opacity, rotate, scale.all]);
+
+const SwipeInTransition = choreography([{
+  transition: 'max-width',
+  getStartStyle: () => 0,
+  getEndStyle: () => 400,
+}], {
+  overflow: 'hidden',
+});
 
 storiesOf('Standard Transitions', module)
   .addDecorator(TransitionGroupDecorator)
@@ -101,6 +109,11 @@ storiesOf('Standard Transitions', module)
     <ScaleTransition>
       <KatPersona />
     </ScaleTransition>
+  ))
+  .add('Swipe (horizontal)', () => (
+    <SwipeInTransition>
+      <KatPersona />
+    </SwipeInTransition>
   ));
 
 storiesOf('Composable Transitions with presets', module)

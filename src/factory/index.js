@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Transition } from 'react-transition-group';
+import camelCase from 'lodash.camelcase';
 import type {
   TransitionProps,
   TransitionConfig,
@@ -74,10 +75,11 @@ const transitionFactory = (
         ...staticStyles,
         ...transitionConfigs.reduce((style, config, index) => {
           const startVal = getPrimitiveValue(start, index);
+          const transitionName = camelCase(config.transition);
 
-          style[config.transition] = getStyleString(
-            config.transition,
-            style[config.transition],
+          style[transitionName] = getStyleString(
+            transitionName,
+            style[transitionName],
             config.getStartStyle(startVal)
           );
           return style;
@@ -88,25 +90,26 @@ const transitionFactory = (
     getTransitionStates = (timeout, easing, start, end): TransitionStates => {
       return transitionConfigs.reduce(
         (styles, config, index) => {
-          const startVal = Array.isArray(start) ? start[index] : start;
-          const endVal = Array.isArray(end) ? end[index] : end;
+          const startVal = getPrimitiveValue(start, index);
+          const endVal = getPrimitiveValue(end, index);
+          const transitionName = camelCase(config.transition);
 
-          styles.entering[config.transition] = getStyleString(
-            config.transition,
-            styles.entering[config.transition],
+          styles.entering[transitionName] = getStyleString(
+            transitionName,
+            styles.entering[transitionName],
             config.getStartStyle(startVal)
           );
-          styles.entered[config.transition] = getStyleString(
-            config.transition,
-            styles.entered[config.transition],
+          styles.entered[transitionName] = getStyleString(
+            transitionName,
+            styles.entered[transitionName],
             config.getEndStyle(endVal)
           );
-          styles.exiting[config.transition] = getStyleString(
-            config.transition,
-            styles.exiting[config.transition],
+          styles.exiting[transitionName] = getStyleString(
+            transitionName,
+            styles.exiting[transitionName],
             config.getStartStyle(startVal)
           );
-          styles.exited[config.transition] = styles.entering[config.transition];
+          styles.exited[transitionName] = styles.entering[transitionName];
           return styles;
         },
         {
