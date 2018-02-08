@@ -58,7 +58,7 @@ const transitionFactory = (
       return Array.isArray(timeout) ? Math.max(...timeout) : timeout;
     });
 
-    getTransitionProperty = (timeout, easing): string => {
+    getTransitionProperty = (timeout: number, easing: string): string => {
       return transitionConfigs
         .map((config, index) => {
           const timeoutVal = getPrimitiveValue(timeout, index);
@@ -68,9 +68,8 @@ const transitionFactory = (
         .join(',');
     };
 
-    getDefaultStyle = (timeout, easing, start): Object => {
+    getDefaultStyle = (timeout: number, easing: string, start): Object => {
       return {
-        display: 'inline-block',
         transition: this.getTransitionProperty(timeout, easing),
         ...staticStyles,
         ...transitionConfigs.reduce((style, config, index) => {
@@ -87,7 +86,12 @@ const transitionFactory = (
       };
     };
 
-    getTransitionStates = (timeout, easing, start, end): TransitionStates => {
+    getTransitionStates = (
+      timeout: number,
+      easing: string,
+      start,
+      end
+    ): TransitionStates => {
       return transitionConfigs.reduce(
         (styles, config, index) => {
           const startVal = getPrimitiveValue(start, index);
