@@ -17,7 +17,7 @@ const examplePersona = {
 };
 
 export default ({ style }) => (
-  <div style={style}>
+  <div style={{ ...style, display: 'inline-block' }}>
     <Persona
       {...examplePersona}
       size={PersonaSize.large}

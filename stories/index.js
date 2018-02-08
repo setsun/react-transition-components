@@ -17,18 +17,23 @@ import KatPersona from './components/KatPersona';
 import WarningMessage from './components/WarningMessage';
 
 import './index.css';
-import choreography from '../src/factory';
+import transitionFactory from '../src/factory';
 import { opacity, translate, rotate, scale } from '../src/presets/index';
 
-const BatmanWipeTransition = choreography([opacity, rotate, scale.all]);
+const BatmanWipeTransition = transitionFactory([opacity, rotate, scale.all]);
 
-const SwipeInTransition = choreography([{
-  transition: 'max-width',
-  getStartStyle: () => 0,
-  getEndStyle: () => 400,
-}], {
-  overflow: 'hidden',
-});
+const SwipeInTransition = transitionFactory(
+  [
+    {
+      transition: 'max-width',
+      getStartStyle: () => 0,
+      getEndStyle: () => 400,
+    },
+  ],
+  {
+    overflow: 'hidden',
+  }
+);
 
 storiesOf('Standard Transitions', module)
   .addDecorator(TransitionGroupDecorator)

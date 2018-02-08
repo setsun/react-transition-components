@@ -2,6 +2,10 @@
 
 import type { Node } from 'react';
 
+export type ArrayOrValue = Array<string | number> | string | number;
+export type ArrayOrNumber = Array<number> | number;
+export type ArrayOrString = Array<string> | string;
+
 export type TransitionStates = {
   entering: Object,
   entered: Object,
@@ -10,14 +14,14 @@ export type TransitionStates = {
 
 export type TransitionConfig = {
   transition: string,
-  getStartStyle: Function,
-  getEndStyle: Function,
+  getStartStyle: any => string,
+  getEndStyle: any => string,
 };
 
 export type TransitionProps = {
-  children: Node,
-  start?: string | number | Array<string | number>,
-  end?: string | number | Array<string | number>,
-  timeout: number | Array<number>,
-  easing: string | Array<string>,
+  children: Function | Node,
+  start?: ArrayOrValue,
+  end?: ArrayOrValue,
+  timeout: ArrayOrNumber,
+  easing: ArrayOrString,
 };
