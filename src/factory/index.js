@@ -7,6 +7,9 @@ import type {
   TransitionProps,
   TransitionConfig,
   TransitionStates,
+  ArrayOrValue,
+  ArrayOrNumber,
+  ArrayOrString,
 } from '../types/index';
 
 const getPrimitiveValue = (value, index): any =>
@@ -54,7 +57,7 @@ const transitionFactory = (
       this.getFinalStyle('exited', timeout, easing, start, end);
     }
 
-    getGlobalTimeout = naiveMemoize((timeout): number => {
+    getGlobalTimeout = naiveMemoize((timeout: number): number => {
       return Array.isArray(timeout) ? Math.max(...timeout) : timeout;
     });
 
@@ -68,7 +71,11 @@ const transitionFactory = (
         .join(',');
     };
 
-    getDefaultStyle = (timeout: number, easing: string, start): Object => {
+    getDefaultStyle = (
+      timeout: number,
+      easing: string,
+      start: ArrayOrValue
+    ): Object => {
       return {
         transition: this.getTransitionProperty(timeout, easing),
         ...staticStyles,
@@ -89,8 +96,8 @@ const transitionFactory = (
     getTransitionStates = (
       timeout: number,
       easing: string,
-      start,
-      end
+      start: ArrayOrValue,
+      end: ArrayOrValue
     ): TransitionStates => {
       return transitionConfigs.reduce(
         (styles, config, index) => {
@@ -126,7 +133,13 @@ const transitionFactory = (
     };
 
     getFinalStyle = naiveMemoize(
-      (state: string, timeout, easing, start, end) => {
+      (
+        state: string,
+        timeout: number,
+        easing: string,
+        start: ArrayOrValue,
+        end: ArrayOrValue
+      ): Object => {
         return {
           ...this.getDefaultStyle(timeout, easing, start),
           ...this.getTransitionStates(timeout, easing, start, end)[state],
