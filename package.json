@@ -1,6 +1,6 @@
 {
   "name": "react-transition-factory",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Simple transition / animation component creation for React",
   "license": "MIT",
   "repository": {
@@ -20,20 +20,19 @@
     "staggered"
   ],
   "scripts": {
-    "dev:client": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
+    "dev:client":
+      "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "prepare": "npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "precommit": "lint-staged",
-    "eslint-prettier-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
+    "eslint-prettier-check":
+      "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
   },
   "lint-staged": {
-    "*.{js,json,css}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.{js,json,css}": ["prettier --write", "git add"]
   },
   "devDependencies": {
     "@storybook/react": "^3.3.12",
