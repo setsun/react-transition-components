@@ -1,7 +1,10 @@
 import transitionFactory from './factory';
-import components from './components';
-import presets from './presets';
+import { opacity, rotate, rotate3d, scale, translate } from './presets';
 
-export { components, presets };
+export { opacity };
+export { rotate };
+export { rotate3d };
+export { scale };
+export { translate };
 
 export default transitionFactory;
