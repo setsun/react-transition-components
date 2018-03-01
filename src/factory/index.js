@@ -176,8 +176,10 @@ const transitionFactory = (
             const childStyle = child.props.style;
 
             return React.cloneElement(child, {
-              ...childStyle,
-              style,
+              style: {
+                ...childStyle,
+                ...style,
+              },
             });
           }}
         </Transition>
