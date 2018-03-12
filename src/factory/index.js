@@ -152,6 +152,7 @@ const transitionFactory = (
 
       return (
         <Transition
+          in
           appear
           mountOnEnter
           unmountOnExit
