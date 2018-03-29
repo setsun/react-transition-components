@@ -78,7 +78,7 @@ const transitionFactory = (
     ): Object => {
       return {
         transition: this.getTransitionProperty(timeout, easing),
-        ...staticStyles,
+        ...(this.props.staticStyles || staticStyles),
         ...transitionConfigs.reduce((style, config, index) => {
           const startVal = getPrimitiveValue(start, index);
           const transitionName = camelCase(config.transition);
