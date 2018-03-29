@@ -34,16 +34,15 @@ const getStyleString = (
     ? `${currentStyle} ${style}`
     : style;
 
-const transitionFactory = (
-  transitionConfigs: Array<TransitionConfig>,
-  staticStyles?: Object,
-  defaultProps?: TransitionProps
-) => {
+const transitionFactory = () => {
+  const transitions: Array<TransitionConfig> = [...arguments];
+
   return class extends React.Component<TransitionProps> {
+    static transitions = transitions;
+
     static defaultProps = {
       timeout: 300,
       easing: 'ease-in-out',
-      ...defaultProps,
     };
 
     constructor(props: TransitionProps) {
@@ -62,7 +61,7 @@ const transitionFactory = (
     });
 
     getTransitionProperty = (timeout: number, easing: string): string => {
-      return transitionConfigs
+      return transitions
         .map((config, index) => {
           const timeoutVal = getPrimitiveValue(timeout, index);
           const easingVal = getPrimitiveValue(easing, index);
@@ -78,8 +77,7 @@ const transitionFactory = (
     ): Object => {
       return {
         transition: this.getTransitionProperty(timeout, easing),
-        ...(this.props.staticStyles || staticStyles),
-        ...transitionConfigs.reduce((style, config, index) => {
+        ...transitions.reduce((style, config, index) => {
           const startVal = getPrimitiveValue(start, index);
           const transitionName = camelCase(config.transition);
 
@@ -99,7 +97,7 @@ const transitionFactory = (
       start: ArrayOrValue,
       end: ArrayOrValue
     ): TransitionStates => {
-      return transitionConfigs.reduce(
+      return transitions.reduce(
         (styles, config, index) => {
           const startVal = getPrimitiveValue(start, index);
           const endVal = getPrimitiveValue(end, index);
