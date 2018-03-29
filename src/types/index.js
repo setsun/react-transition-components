@@ -20,6 +20,7 @@ export type TransitionConfig = {
 
 export type TransitionProps = {
   children: Function | Node,
+  staticStyles?: Object,
   start?: ArrayOrValue,
   end?: ArrayOrValue,
   timeout: ArrayOrNumber,
