@@ -42,41 +42,41 @@ const transitionFactory = () => {
 
     static defaultProps = {
       timeout: 300,
+      delay: 0,
       easing: 'ease-in-out',
     };
 
-    constructor(props: TransitionProps) {
-      super(props);
-      const { timeout, easing, start, end } = props;
+    getGlobalTimeout = naiveMemoize(
+      (timeout: number, delay: number): number =>
+        (Array.isArray(timeout) ? Math.max(...timeout) : timeout) +
+        (Array.isArray(delay) ? Math.max(...delay) : delay)
+    );
 
-      // warm up cache
-      this.getFinalStyle('entering', timeout, easing, start, end);
-      this.getFinalStyle('entered', timeout, easing, start, end);
-      this.getFinalStyle('exiting', timeout, easing, start, end);
-      this.getFinalStyle('exited', timeout, easing, start, end);
-    }
-
-    getGlobalTimeout = naiveMemoize((timeout: number): number => {
-      return Array.isArray(timeout) ? Math.max(...timeout) : timeout;
-    });
-
-    getTransitionProperty = (timeout: number, easing: string): string => {
+    getTransitionProperty = (
+      timeout: number,
+      delay: number,
+      easing: string
+    ): string => {
       return transitions
         .map((config, index) => {
           const timeoutVal = getPrimitiveValue(timeout, index);
+          const delayVal = getPrimitiveValue(delay, index);
           const easingVal = getPrimitiveValue(easing, index);
-          return `${config.transition} ${timeoutVal}ms ${easingVal}`;
+          return `${
+            config.transition
+          } ${timeoutVal}ms ${easingVal} ${delayVal}ms`;
         })
         .join(',');
     };
 
     getDefaultStyle = (
       timeout: number,
+      delay: number,
       easing: string,
       start: ArrayOrValue
     ): Object => {
       return {
-        transition: this.getTransitionProperty(timeout, easing),
+        transition: this.getTransitionProperty(timeout, delay, easing),
         ...transitions.reduce((style, config, index) => {
           const startVal = getPrimitiveValue(start, index);
           const transitionName = camelCase(config.transition);
@@ -92,8 +92,6 @@ const transitionFactory = () => {
     };
 
     getTransitionStates = (
-      timeout: number,
-      easing: string,
       start: ArrayOrValue,
       end: ArrayOrValue
     ): TransitionStates => {
@@ -134,19 +132,28 @@ const transitionFactory = () => {
       (
         state: string,
         timeout: number,
+        delay: number,
         easing: string,
         start: ArrayOrValue,
         end: ArrayOrValue
       ): Object => {
         return {
-          ...this.getDefaultStyle(timeout, easing, start),
-          ...this.getTransitionStates(timeout, easing, start, end)[state],
+          ...this.getDefaultStyle(timeout, delay, easing, start),
+          ...this.getTransitionStates(start, end)[state],
         };
       }
     );
 
     render() {
-      const { children, timeout, easing, start, end, ...rest } = this.props;
+      const {
+        children,
+        timeout,
+        delay,
+        easing,
+        start,
+        end,
+        ...rest
+      } = this.props;
 
       return (
         <Transition
@@ -161,6 +168,7 @@ const transitionFactory = () => {
             const style = this.getFinalStyle(
               state,
               timeout,
+              delay,
               easing,
               start,
               end
