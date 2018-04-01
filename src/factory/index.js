@@ -34,59 +34,57 @@ const getStyleString = (
     ? `${currentStyle} ${style}`
     : style;
 
-const transitionFactory = (
-  transitionConfigs: Array<TransitionConfig>,
-  staticStyles?: Object,
-  defaultProps?: TransitionProps
-) => {
+const transitionFactory = (...args: Array<any>) => {
+  const transitions: Array<TransitionConfig> = [...args];
+
   return class extends React.Component<TransitionProps> {
+    static transitions = transitions;
+
     static defaultProps = {
       timeout: 300,
+      delay: 0,
       easing: 'ease-in-out',
-      ...defaultProps,
     };
 
-    constructor(props: TransitionProps) {
-      super(props);
-      const { timeout, easing, start, end } = props;
+    getGlobalTimeout = naiveMemoize(
+      (timeout: number, delay: number): number =>
+        (Array.isArray(timeout) ? Math.max(...timeout) : timeout) +
+        (Array.isArray(delay) ? Math.max(...delay) : delay)
+    );
 
-      // warm up cache
-      this.getFinalStyle('entering', timeout, easing, start, end);
-      this.getFinalStyle('entered', timeout, easing, start, end);
-      this.getFinalStyle('exiting', timeout, easing, start, end);
-      this.getFinalStyle('exited', timeout, easing, start, end);
-    }
-
-    getGlobalTimeout = naiveMemoize((timeout: number): number => {
-      return Array.isArray(timeout) ? Math.max(...timeout) : timeout;
-    });
-
-    getTransitionProperty = (timeout: number, easing: string): string => {
-      return transitionConfigs
-        .map((config, index) => {
+    getTransitionProperty = (
+      timeout: number,
+      delay: number,
+      easing: string
+    ): string => {
+      return transitions
+        .map((transition, index) => {
           const timeoutVal = getPrimitiveValue(timeout, index);
+          const delayVal = getPrimitiveValue(delay, index);
           const easingVal = getPrimitiveValue(easing, index);
-          return `${config.transition} ${timeoutVal}ms ${easingVal}`;
+          return `${
+            transition.transition
+          } ${timeoutVal}ms ${easingVal} ${delayVal}ms`;
         })
         .join(',');
     };
 
     getDefaultStyle = (
       timeout: number,
+      delay: number,
       easing: string,
       start: ArrayOrValue
     ): Object => {
       return {
-        transition: this.getTransitionProperty(timeout, easing),
-        ...(this.props.staticStyles || staticStyles),
-        ...transitionConfigs.reduce((style, config, index) => {
+        transition: this.getTransitionProperty(timeout, delay, easing),
+        ...transitions.reduce((style, transition, index) => {
           const startVal = getPrimitiveValue(start, index);
-          const transitionName = camelCase(config.transition);
+          const transitionName = camelCase(transition.transition);
 
           style[transitionName] = getStyleString(
             transitionName,
             style[transitionName],
-            config.getStartStyle(startVal)
+            transition.getStartStyle(startVal)
           );
           return style;
         }, {}),
@@ -94,31 +92,29 @@ const transitionFactory = (
     };
 
     getTransitionStates = (
-      timeout: number,
-      easing: string,
       start: ArrayOrValue,
       end: ArrayOrValue
     ): TransitionStates => {
-      return transitionConfigs.reduce(
-        (styles, config, index) => {
+      return transitions.reduce(
+        (styles, transition, index) => {
           const startVal = getPrimitiveValue(start, index);
           const endVal = getPrimitiveValue(end, index);
-          const transitionName = camelCase(config.transition);
+          const transitionName = camelCase(transition.transition);
 
           styles.entering[transitionName] = getStyleString(
             transitionName,
             styles.entering[transitionName],
-            config.getStartStyle(startVal)
+            transition.getStartStyle(startVal)
           );
           styles.entered[transitionName] = getStyleString(
             transitionName,
             styles.entered[transitionName],
-            config.getEndStyle(endVal)
+            transition.getEndStyle(endVal)
           );
           styles.exiting[transitionName] = getStyleString(
             transitionName,
             styles.exiting[transitionName],
-            config.getStartStyle(startVal)
+            transition.getStartStyle(startVal)
           );
           styles.exited[transitionName] = styles.entering[transitionName];
           return styles;
@@ -136,19 +132,28 @@ const transitionFactory = (
       (
         state: string,
         timeout: number,
+        delay: number,
         easing: string,
         start: ArrayOrValue,
         end: ArrayOrValue
       ): Object => {
         return {
-          ...this.getDefaultStyle(timeout, easing, start),
-          ...this.getTransitionStates(timeout, easing, start, end)[state],
+          ...this.getDefaultStyle(timeout, delay, easing, start),
+          ...this.getTransitionStates(start, end)[state],
         };
       }
     );
 
     render() {
-      const { children, timeout, easing, start, end, ...rest } = this.props;
+      const {
+        children,
+        timeout,
+        delay,
+        easing,
+        start,
+        end,
+        ...rest
+      } = this.props;
 
       return (
         <Transition
@@ -156,13 +161,14 @@ const transitionFactory = (
           appear
           mountOnEnter
           unmountOnExit
-          timeout={this.getGlobalTimeout(timeout)}
+          timeout={this.getGlobalTimeout(timeout, delay)}
           {...rest}
         >
           {(state, childProps) => {
             const style = this.getFinalStyle(
               state,
               timeout,
+              delay,
               easing,
               start,
               end
