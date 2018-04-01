@@ -5,43 +5,39 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import FadeTransition from '../src/components/FadeTransition';
-import FlipTransition from '../src/components/FlipTransition';
-import ExpandTransition from '../src/components/ExpandTransition';
-import ScaleTransition from '../src/components/ScaleTransition';
-import SlideTransition from '../src/components/SlideTransition';
-import RotateTransition from '../src/components/RotateTransition';
-
 import TransitionGroupDecorator from './decorators/TransitionGroupDecorator';
 import KatPersona from './components/KatPersona';
 import WarningMessage from './components/WarningMessage';
 
 import './index.css';
 import transitionFactory from '../src/factory';
-import { opacity, translate, rotate, scale } from '../src/presets/index';
+import {
+  opacity,
+  translate,
+  rotate,
+  rotate3d,
+  scale,
+} from '../src/presets/index';
 
-const BatmanWipeTransition = transitionFactory([opacity, rotate, scale.all]);
+const FadeTransition = transitionFactory(opacity);
+const SlideTransition = transitionFactory(translate.top);
+const ExpandTransition = transitionFactory(scale.vertical);
+const FlipTransition = transitionFactory(rotate3d.top);
+const RotateTransition = transitionFactory(rotate);
+const ScaleTransition = transitionFactory(scale.all);
 
-const SwipeInTransition = transitionFactory(
-  [
-    {
-      transition: 'max-width',
-      getStartStyle: () => 0,
-      getEndStyle: () => 400,
-    },
-  ],
-  {
-    overflow: 'hidden',
-  }
-);
+const BatmanWipeTransition = transitionFactory(opacity, rotate, scale.all);
+
+const SwipeInTransition = transitionFactory({
+  transition: 'max-width',
+  getStartStyle: () => 0,
+  getEndStyle: () => 400,
+});
 
 storiesOf('Standard Transitions', module)
   .addDecorator(TransitionGroupDecorator)
   .add('Fade', () => (
-    <FadeTransition
-      onEnter={(...args) => console.log(args)}
-      transitionId="fade-transition"
-    >
+    <FadeTransition onEnter={(...args) => console.log(args)} delay={1000}>
       <KatPersona />
     </FadeTransition>
   ))
