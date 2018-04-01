@@ -34,8 +34,8 @@ const getStyleString = (
     ? `${currentStyle} ${style}`
     : style;
 
-const transitionFactory = () => {
-  const transitions: Array<TransitionConfig> = [...arguments];
+const transitionFactory = (...args: Array<any>) => {
+  const transitions: Array<TransitionConfig> = [...args];
 
   return class extends React.Component<TransitionProps> {
     static transitions = transitions;
@@ -58,12 +58,12 @@ const transitionFactory = () => {
       easing: string
     ): string => {
       return transitions
-        .map((config, index) => {
+        .map((transition, index) => {
           const timeoutVal = getPrimitiveValue(timeout, index);
           const delayVal = getPrimitiveValue(delay, index);
           const easingVal = getPrimitiveValue(easing, index);
           return `${
-            config.transition
+            transition.transition
           } ${timeoutVal}ms ${easingVal} ${delayVal}ms`;
         })
         .join(',');
@@ -77,14 +77,14 @@ const transitionFactory = () => {
     ): Object => {
       return {
         transition: this.getTransitionProperty(timeout, delay, easing),
-        ...transitions.reduce((style, config, index) => {
+        ...transitions.reduce((style, transition, index) => {
           const startVal = getPrimitiveValue(start, index);
-          const transitionName = camelCase(config.transition);
+          const transitionName = camelCase(transition.transition);
 
           style[transitionName] = getStyleString(
             transitionName,
             style[transitionName],
-            config.getStartStyle(startVal)
+            transition.getStartStyle(startVal)
           );
           return style;
         }, {}),
@@ -96,25 +96,25 @@ const transitionFactory = () => {
       end: ArrayOrValue
     ): TransitionStates => {
       return transitions.reduce(
-        (styles, config, index) => {
+        (styles, transition, index) => {
           const startVal = getPrimitiveValue(start, index);
           const endVal = getPrimitiveValue(end, index);
-          const transitionName = camelCase(config.transition);
+          const transitionName = camelCase(transition.transition);
 
           styles.entering[transitionName] = getStyleString(
             transitionName,
             styles.entering[transitionName],
-            config.getStartStyle(startVal)
+            transition.getStartStyle(startVal)
           );
           styles.entered[transitionName] = getStyleString(
             transitionName,
             styles.entered[transitionName],
-            config.getEndStyle(endVal)
+            transition.getEndStyle(endVal)
           );
           styles.exiting[transitionName] = getStyleString(
             transitionName,
             styles.exiting[transitionName],
-            config.getStartStyle(startVal)
+            transition.getStartStyle(startVal)
           );
           styles.exited[transitionName] = styles.entering[transitionName];
           return styles;
@@ -161,7 +161,7 @@ const transitionFactory = () => {
           appear
           mountOnEnter
           unmountOnExit
-          timeout={this.getGlobalTimeout(timeout)}
+          timeout={this.getGlobalTimeout(timeout, delay)}
           {...rest}
         >
           {(state, childProps) => {
