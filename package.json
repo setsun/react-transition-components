@@ -1,6 +1,6 @@
 {
   "name": "react-transition-factory",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "Simple transition / animation component creation for React",
   "license": "MIT",
   "repository": {
