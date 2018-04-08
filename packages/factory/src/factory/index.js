@@ -135,11 +135,13 @@ const transitionFactory = (...args: Array<any>) => {
         delay: number,
         easing: string,
         start: ArrayOrValue,
-        end: ArrayOrValue
+        end: ArrayOrValue,
+        staticStyle: Object
       ): Object => {
         return {
           ...this.getDefaultStyle(timeout, delay, easing, start),
           ...this.getTransitionStates(start, end)[state],
+          ...(staticStyle || {}),
         };
       }
     );
@@ -152,6 +154,7 @@ const transitionFactory = (...args: Array<any>) => {
         easing,
         start,
         end,
+        style: staticStyle,
         ...rest
       } = this.props;
 
@@ -171,7 +174,8 @@ const transitionFactory = (...args: Array<any>) => {
               delay,
               easing,
               start,
-              end
+              end,
+              staticStyle
             );
 
             if (typeof children === 'function') {

@@ -25,4 +25,5 @@ export type TransitionProps = {
   easing: ArrayOrString,
   start?: ArrayOrValue,
   end?: ArrayOrValue,
+  style?: Object,
 };
