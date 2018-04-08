@@ -15,7 +15,13 @@ module.exports = {
     libraryTarget: 'umd',
   },
   resolve: {
-    modules: [path.resolve('./node_modules'), path.resolve('./src')],
+    modules: [
+      path.resolve('./node_modules'),
+      path.resolve('./src'),
+    ],
+    alias: {
+      'react-transition-factory': path.resolve(__dirname, '../factory/src/factory'),
+    },
     extensions: ['*', '.js', '.json'],
   },
   module: {
