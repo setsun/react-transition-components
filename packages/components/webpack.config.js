@@ -45,6 +45,12 @@ module.exports = {
       commonjs: 'react-transition-group',
       amd: 'react-transition-group',
     },
+    'react-transition-factory': {
+      root: 'ReactTransitionFactory',
+      commonjs2: 'react-transition-factory',
+      commonjs: 'react-transition-factory',
+      amd: 'react-transition-factory',
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
