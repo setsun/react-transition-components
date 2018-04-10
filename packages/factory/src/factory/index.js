@@ -101,10 +101,15 @@ const transitionFactory = (...args: Array<any>) => {
           const endVal = getPrimitiveValue(end, index);
           const transitionName = camelCase(transition.transition);
 
+          styles.exited[transitionName] = getStyleString(
+            transitionName,
+            styles.exited[transitionName],
+            transition.getStartStyle(startVal)
+          );
           styles.entering[transitionName] = getStyleString(
             transitionName,
             styles.entering[transitionName],
-            transition.getStartStyle(startVal)
+            transition.getEndStyle(endVal)
           );
           styles.entered[transitionName] = getStyleString(
             transitionName,
@@ -116,7 +121,7 @@ const transitionFactory = (...args: Array<any>) => {
             styles.exiting[transitionName],
             transition.getStartStyle(startVal)
           );
-          styles.exited[transitionName] = styles.entering[transitionName];
+
           return styles;
         },
         {
