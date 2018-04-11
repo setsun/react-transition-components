@@ -1,6 +1,6 @@
 {
   "name": "react-transition-components",
-  "version": "2.0.0-alpha.8",
+  "version": "2.0.0-alpha.9",
   "description": "Simple transition / animation components for React",
   "license": "MIT",
   "repository": {
@@ -26,7 +26,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "react-transition-factory": "^2.0.0-alpha.8"
+    "react-transition-factory": "^2.0.0-alpha.9"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
@@ -48,7 +48,7 @@
     "nodemon": "^1.14.12",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-transition-factory": "^2.0.0-alpha.8",
+    "react-transition-factory": "^2.0.0-alpha.9",
     "react-transition-group": "^2.2.3",
     "source-map-support": "^0.5.3",
     "style-loader": "0.20.3",
