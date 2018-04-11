@@ -1,6 +1,6 @@
 {
   "name": "@react-choreography/showcase",
-  "version": "2.0.0-alpha.6",
+  "version": "2.0.0-alpha.7",
   "private": true,
   "description": "Showcase for react-transition-factory and components",
   "license": "MIT",
@@ -48,8 +48,8 @@
     "office-ui-fabric-react": "^5.45.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-transition-components": "^2.0.0-alpha.6",
-    "react-transition-factory": "^2.0.0-alpha.6",
+    "react-transition-components": "^2.0.0-alpha.7",
+    "react-transition-factory": "^2.0.0-alpha.7",
     "react-transition-group": "^2.2.3",
     "source-map-support": "^0.5.3",
     "style-loader": "0.20.1",
