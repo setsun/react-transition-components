@@ -8,13 +8,13 @@ module.exports = config => {
   config.resolve = {
     extensions: ['.js', '.jsx'],
     alias: {
-      'react-transition-factory': path.resolve(__dirname, '../../factory/src/index.js'),
-      'react-transition-components': path.resolve(__dirname, '../../components/src/index.js'),
+      'react-transition-factory': path.resolve(__dirname, '../../core/dist/index.js'),
+      'react-transition-components': path.resolve(__dirname, '../../components/dist/index.js'),
     },
   };
 
   config.module = {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
