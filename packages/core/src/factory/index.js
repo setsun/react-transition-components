@@ -12,6 +12,8 @@ import type {
   ArrayOrString,
 } from '../types/index';
 
+const triggerReflow = (node) => { node && node.scrollTop };
+
 const getPrimitiveValue = (value, index): any =>
   Array.isArray(value) ? value[index] : value;
 
@@ -105,10 +107,15 @@ const transitionFactory = (...args: Array<any>) => {
           const endVal = getPrimitiveValue(end, index);
           const transitionName = camelCase(transition.transition);
 
+          styles.exited[transitionName] = getStyleString(
+            transitionName,
+            styles.exited[transitionName],
+            transition.getStartStyle(startVal)
+          );
           styles.entering[transitionName] = getStyleString(
             transitionName,
             styles.entering[transitionName],
-            transition.getStartStyle(endVal)
+            transition.getEndStyle(endVal)
           );
           styles.entered[transitionName] = getStyleString(
             transitionName,
@@ -118,11 +125,6 @@ const transitionFactory = (...args: Array<any>) => {
           styles.exiting[transitionName] = getStyleString(
             transitionName,
             styles.exiting[transitionName],
-            transition.getStartStyle(startVal)
-          );
-          styles.exited[transitionName] = getStyleString(
-            transitionName,
-            styles.exited[transitionName],
             transition.getStartStyle(startVal)
           );
 
@@ -155,6 +157,36 @@ const transitionFactory = (...args: Array<any>) => {
       }
     );
 
+    onEnter = (node, appearing) => {
+      triggerReflow(node);
+      this.props.onEnter && this.props.onEnter(node, appearing);
+    }
+
+    onEntering = (node, appearing) => {
+      triggerReflow(node);
+      this.props.onEntering && this.props.onEntering(node, appearing);
+    }
+
+    onEntered = (node, appearing) => {
+      triggerReflow(node);
+      this.props.onEntered && this.props.onEntered(node, appearing);
+    }
+
+    onExit = (node) => {
+      triggerReflow(node);
+      this.props.onExit && this.props.onExit(node);
+    }
+
+    onExiting = (node) => {
+      triggerReflow(node);
+      this.props.onExiting && this.props.onExiting(node);
+    }
+
+    onExited = (node) => {
+      triggerReflow(node);
+      this.props.onExited && this.props.onExited(node);
+    }
+
     render() {
       const {
         children,
@@ -164,6 +196,12 @@ const transitionFactory = (...args: Array<any>) => {
         start,
         end,
         style: staticStyle,
+        onEnter,
+        onEntering,
+        onEntered,
+        onExit,
+        onExiting,
+        onExited,
         ...rest
       } = this.props;
 
@@ -174,6 +212,12 @@ const transitionFactory = (...args: Array<any>) => {
           mountOnEnter
           unmountOnExit
           timeout={this.getGlobalTimeout(timeout, delay)}
+          onEnter={this.onEnter}
+          onEntering={this.onEntering}
+          onEntered={this.onEntered}
+          onExit={this.onExit}
+          onExiting={this.onExiting}
+          onExited={this.onExited}
           {...rest}
         >
           {(state, childProps) => {
