@@ -6,7 +6,7 @@
     ]
   },
   "scripts": {
-    "start": "lerna run --scope react-transition-stories start",
+    "start": "lerna run --scope @react-choreography/showcase start",
     "precommit": "lint-staged",
     "eslint-prettier-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
   },

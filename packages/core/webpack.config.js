@@ -5,6 +5,7 @@ const src = path.resolve(__dirname, 'src');
 const dist = path.resolve(__dirname, 'dist');
 
 module.exports = {
+  mode: 'production',
   target: 'web',
   context: src,
   entry: 'index.js',
@@ -53,7 +54,6 @@ module.exports = {
       threshold: 10240,
       minRatio: 0.8,
     }),
-    new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
   ],
   devtool: 'source-map',
