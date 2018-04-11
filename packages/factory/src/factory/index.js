@@ -46,6 +46,10 @@ const transitionFactory = (...args: Array<any>) => {
       easing: 'ease-in-out',
     };
 
+    constructor(props: TransitionProps) {
+      super(props);
+    }
+
     getGlobalTimeout = naiveMemoize(
       (timeout: number, delay: number): number =>
         (Array.isArray(timeout) ? Math.max(...timeout) : timeout) +
@@ -101,15 +105,10 @@ const transitionFactory = (...args: Array<any>) => {
           const endVal = getPrimitiveValue(end, index);
           const transitionName = camelCase(transition.transition);
 
-          styles.exited[transitionName] = getStyleString(
-            transitionName,
-            styles.exited[transitionName],
-            transition.getStartStyle(startVal)
-          );
           styles.entering[transitionName] = getStyleString(
             transitionName,
             styles.entering[transitionName],
-            transition.getEndStyle(endVal)
+            transition.getStartStyle(endVal)
           );
           styles.entered[transitionName] = getStyleString(
             transitionName,
@@ -119,6 +118,11 @@ const transitionFactory = (...args: Array<any>) => {
           styles.exiting[transitionName] = getStyleString(
             transitionName,
             styles.exiting[transitionName],
+            transition.getStartStyle(startVal)
+          );
+          styles.exited[transitionName] = getStyleString(
+            transitionName,
+            styles.exited[transitionName],
             transition.getStartStyle(startVal)
           );
 
@@ -141,7 +145,7 @@ const transitionFactory = (...args: Array<any>) => {
         easing: string,
         start: ArrayOrValue,
         end: ArrayOrValue,
-        staticStyle: Object,
+        staticStyle: Object
       ): Object => {
         return {
           ...this.getDefaultStyle(timeout, delay, easing, start),
@@ -180,7 +184,7 @@ const transitionFactory = (...args: Array<any>) => {
               easing,
               start,
               end,
-              staticStyle,
+              staticStyle
             );
 
             if (typeof children === 'function') {

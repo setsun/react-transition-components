@@ -9,35 +9,36 @@ import TransitionGroupDecorator from './decorators/TransitionGroupDecorator';
 import KatPersona from './components/KatPersona';
 import WarningMessage from './components/WarningMessage';
 
-import './index.css';
-import transitionFactory from '../src/factory';
-import {
+import transitionFactory, {
   opacity,
   translate,
   rotate,
   rotate3d,
   scale,
-} from '../src/presets/index';
+} from 'react-transition-factory';
+import {
+  FadeTransition,
+  SlideTransition,
+  ExpandTransition,
+  FlipTransition,
+  RotateTransition,
+  ScaleTransition,
+} from 'react-transition-components';
 
-const FadeTransition = transitionFactory(opacity);
-const SlideTransition = transitionFactory(translate.top);
-const ExpandTransition = transitionFactory(scale.vertical);
-const FlipTransition = transitionFactory(rotate3d.top);
-const RotateTransition = transitionFactory(rotate);
-const ScaleTransition = transitionFactory(scale.all);
+import './index.css';
 
 const BatmanWipeTransition = transitionFactory(opacity, rotate, scale.all);
 
 const SwipeInTransition = transitionFactory({
   transition: 'max-width',
-  getStartStyle: () => 0,
-  getEndStyle: () => 400,
+  getStartStyle: () => `0px`,
+  getEndStyle: () => `400px`,
 });
 
 storiesOf('Standard Transitions', module)
   .addDecorator(TransitionGroupDecorator)
   .add('Fade', () => (
-    <FadeTransition onEnter={(...args) => console.log(args)} delay={1000}>
+    <FadeTransition>
       <KatPersona />
     </FadeTransition>
   ))
@@ -113,7 +114,9 @@ storiesOf('Standard Transitions', module)
   ))
   .add('Swipe (horizontal)', () => (
     <SwipeInTransition>
-      <KatPersona />
+      <div style={{ overflow: 'hidden' }}>
+        <KatPersona />
+      </div>
     </SwipeInTransition>
   ));
 
