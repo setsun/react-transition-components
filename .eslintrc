@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "babel-eslint",
+    "eslint",
+    "prettier"
+  ],
+  "plugins": [
+    "import",
+    "react",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "bracketSpacing": true,
+        "tabWidth": 2,
+        "trailingComma": "es5",
+        "printWidth": 80
+      }
+    ]
+  }
+}

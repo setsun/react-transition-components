@@ -1,6 +1,6 @@
 {
   "name": "react-transition-stories",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.5",
   "private": true,
   "description": "Storybook for react-transition-factory and components",
   "license": "MIT",
@@ -22,17 +22,8 @@
   ],
   "scripts": {
     "start": "start-storybook -p 6006",
-    "prepare": "npm run build",
     "build-storybook": "build-storybook",
-    "deploy-storybook": "storybook-to-ghpages",
-    "precommit": "lint-staged",
-    "eslint-prettier-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
-  },
-  "lint-staged": {
-    "*.{js,json,css}": [
-      "prettier --write",
-      "git add"
-    ]
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "devDependencies": {
     "@storybook/react": "^3.3.12",
@@ -50,24 +41,15 @@
     "cross-env": "^5.1.3",
     "css-loader": "0.28.9",
     "dotenv": "5.0.0",
-    "eslint": "^4.17.0",
-    "eslint-config-eslint": "^4.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-loader": "1.9.0",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react": "7.6.1",
     "file-loader": "1.1.6",
     "flow-bin": "^0.64.0",
     "husky": "^0.14.3",
-    "lint-staged": "^6.1.0",
     "nodemon": "^1.14.12",
     "office-ui-fabric-react": "^5.45.3",
-    "prettier": "^1.10.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-transition-components": "^2.0.0-alpha.4",
-    "react-transition-factory": "^2.0.0-alpha.4",
+    "react-transition-components": "^2.0.0-alpha.5",
+    "react-transition-factory": "^2.0.0-alpha.5",
     "react-transition-group": "^2.2.3",
     "source-map-support": "^0.5.3",
     "style-loader": "0.20.1",

@@ -1,5 +1,25 @@
 {
-	"devDependencies": {
-		"lerna": "^2.5.1"
-	}
+  "lint-staged": {
+    "*.{js,json,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "start": "lerna run --scope react-transition-stories start",
+    "precommit": "lint-staged",
+    "eslint-prettier-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
+  },
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-eslint": "^4.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-loader": "1.9.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "7.6.1",
+    "lerna": "^2.5.1",
+    "lint-staged": "^6.1.0",
+    "prettier": "^1.10.2"
+  }
 }
