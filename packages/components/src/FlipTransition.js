@@ -2,30 +2,34 @@
 
 import React from 'react';
 import transitionFactory, { rotate3d } from 'react-transition-factory';
-import type { TransitionProps } from '../../factory/src/types/index';
+import type { TransitionProps } from 'react-transition-factory';
 
 type FlipTransitionProps = TransitionProps & {
   direction: string,
 };
 
 const FlipTopTransition = transitionFactory(rotate3d.top);
-FlipTopTransition.staticStyles = {
-  transformOrigin: 'top',
+FlipTopTransition.defaultProps = {
+  ...FlipTopTransition.defaultProps,
+  style: { transformOrigin: 'top' },
 };
 
 const FlipBottomTransition = transitionFactory(rotate3d.bottom);
-FlipBottomTransition.staticStyles = {
-  transformOrigin: 'bottom',
+FlipBottomTransition.defaultProps = {
+  ...FlipBottomTransition.defaultProps,
+  style: { transformOrigin: 'bottom' },
 };
 
 const FlipLeftTransition = transitionFactory(rotate3d.left);
-FlipLeftTransition.staticStyles = {
-  transformOrigin: 'left',
+FlipLeftTransition.defaultProps = {
+  ...FlipLeftTransition.defaultProps,
+  style: { transformOrigin: 'left' },
 };
 
 const FlipRightTransition = transitionFactory(rotate3d.right);
-FlipRightTransition.staticStyles = {
-  transformOrigin: 'right',
+FlipRightTransition.defaultProps = {
+  ...FlipRightTransition.defaultProps,
+  style: { transformOrigin: 'right' },
 };
 
 class FlipTransition extends React.Component<FlipTransitionProps> {

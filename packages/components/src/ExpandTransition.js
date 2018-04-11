@@ -2,31 +2,34 @@
 
 import React from 'react';
 import transitionFactory, { scale } from 'react-transition-factory';
-import type { TransitionProps } from '../../factory/src/types/index';
+import type { TransitionProps } from 'react-transition-factory';
 
 type ExpandTransitionProps = TransitionProps & {
   direction: string,
 };
 
 const ExpandTopTransition = transitionFactory(scale.vertical);
-ExpandTopTransition.staticStyles = {
-  transformOrigin: 'top',
+ExpandTopTransition.defaultProps = {
+  ...ExpandTopTransition.defaultProps,
+  style: { transformOrigin: 'top' },
 };
 
 const ExpandBottomTransition = transitionFactory(scale.vertical);
-ExpandBottomTransition.staticStyles = {
-  transformOrigin: 'bottom',
-}
-
-const ExpandLeftTransition = transitionFactory(scale.horizontal);
-ExpandLeftTransition.staticStyles = {
-  transformOrigin: 'left',
+ExpandBottomTransition.defaultProps = {
+  ...ExpandBottomTransition.defaultProps,
+  style: { transformOrigin: 'bottom' },
 };
 
+const ExpandLeftTransition = transitionFactory(scale.horizontal);
+ExpandLeftTransition.defaultProps = {
+  ...ExpandLeftTransition.defaultProps,
+  style: { transformOrigin: 'left' },
+};
 
 const ExpandRightTransition = transitionFactory(scale.horizontal);
-ExpandRightTransition.staticStyles = {
-  transformOrigin: 'right',
+ExpandRightTransition.defaultProps = {
+  ...ExpandRightTransition.defaultProps,
+  style: { transformOrigin: 'right' },
 };
 
 class ExpandTransition extends React.Component<ExpandTransitionProps> {

@@ -1,8 +1,11 @@
 // @flow
 
 import React from 'react';
-import transitionFactory, { opacity, translate } from 'react-transition-factory';
-import type { TransitionProps } from '../../factory/src/types/index';
+import transitionFactory, {
+  opacity,
+  translate,
+} from 'react-transition-factory';
+import type { TransitionProps } from 'react-transition-factory';
 
 type SlideTransitionProps = TransitionProps & {
   direction: string,
