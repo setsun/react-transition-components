@@ -1,11 +1,11 @@
 {
-  "name": "react-transition-components",
+  "name": "react-transition-factory",
   "version": "2.0.0-alpha.6",
-  "description": "Simple transition / animation components for React",
+  "description": "Simple transition / animation component creation for React",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Setsun/react-transition-components"
+    "url": "https://github.com/Setsun/react-transition-factory"
   },
   "main": "dist/index.js",
   "engines": {
@@ -26,26 +26,24 @@
     "prepublish": "npm run build"
   },
   "devDependencies": {
-    "babel-cli": "7.0.0-beta.1",
-    "babel-core": "7.0.0-beta.1",
-    "babel-eslint": "8.2.1",
+    "babel-cli": "^7.0.0-beta.1",
+    "babel-core": "^7.0.0-beta.1",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "7.1.2",
-    "babel-plugin-transform-class-properties": "6.24.1",
-    "babel-preset-env": "2.0.0-beta.1",
-    "babel-preset-flow": "6.23.0",
-    "babel-preset-react": "7.0.0-beta.1",
-    "babel-preset-stage-0": "6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^2.0.0-beta.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^7.0.0-beta.1",
+    "babel-preset-stage-0": "^6.24.1",
     "compression-webpack-plugin": "^1.1.6",
     "cross-env": "^5.1.3",
     "css-loader": "0.28.9",
     "dotenv": "5.0.0",
     "file-loader": "1.1.6",
     "flow-bin": "^0.64.0",
-    "lint-staged": "^6.1.0",
     "nodemon": "^1.14.12",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-transition-factory": "^2.0.0-alpha.6",
     "react-transition-group": "^2.2.3",
     "source-map-support": "^0.5.3",
     "style-loader": "0.20.1",
@@ -55,7 +53,9 @@
   },
   "peerDependencies": {
     "react": "^16.2.0",
-    "react-transition-factory": "^2.0.0-alpha.6",
     "react-transition-group": "^2.2.3"
+  },
+  "dependencies": {
+    "lodash.camelcase": "^4.3.0"
   }
 }
