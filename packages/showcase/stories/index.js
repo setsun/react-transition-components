@@ -29,12 +29,6 @@ import './index.css';
 
 const BatmanWipeTransition = transitionFactory(opacity, rotate, scale.all);
 
-const SwipeInTransition = transitionFactory({
-  transition: 'max-width',
-  getStartStyle: () => `0px`,
-  getEndStyle: () => `400px`,
-});
-
 storiesOf('Standard Transitions', module)
   .addDecorator(TransitionGroupDecorator)
   .add('Fade', () => (
@@ -72,16 +66,6 @@ storiesOf('Standard Transitions', module)
       <KatPersona />
     </ExpandTransition>
   ))
-  .add('Expand (Right)', () => (
-    <ExpandTransition direction="right">
-      <KatPersona />
-    </ExpandTransition>
-  ))
-  .add('Expand (Bottom)', () => (
-    <ExpandTransition direction="bottom">
-      <KatPersona />
-    </ExpandTransition>
-  ))
   .add('Flip (Top)', () => (
     <FlipTransition direction="top">
       <KatPersona />
@@ -112,13 +96,6 @@ storiesOf('Standard Transitions', module)
       <KatPersona />
     </ScaleTransition>
   ))
-  .add('Swipe (horizontal)', () => (
-    <SwipeInTransition>
-      <div style={{ overflow: 'hidden' }}>
-        <KatPersona />
-      </div>
-    </SwipeInTransition>
-  ));
 
 storiesOf('Composable Transitions with presets', module)
   .addDecorator(TransitionGroupDecorator)
