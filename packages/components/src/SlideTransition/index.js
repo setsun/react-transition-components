@@ -6,9 +6,10 @@ import transitionFactory, {
   translate,
 } from 'react-transition-factory';
 import type { TransitionProps } from 'react-transition-factory';
+import { directions } from '../constants';
 
 type SlideTransitionProps = TransitionProps & {
-  direction: string,
+  direction: directions.left | directions.right | directions.top | directions.bottom,
 };
 
 const SlideTopTransition = transitionFactory(translate.top, opacity);
@@ -18,20 +19,20 @@ const SlideRightTransition = transitionFactory(translate.right, opacity);
 
 class SlideTransition extends React.Component<SlideTransitionProps> {
   static defaultProps = {
-    direction: 'left',
+    direction: directions.left,
   };
 
   render() {
     const { direction, ...rest } = this.props;
 
     switch (direction) {
-      case 'left':
+      case directions.left:
         return <SlideLeftTransition {...rest} />;
-      case 'right':
+      case directions.right:
         return <SlideRightTransition {...rest} />;
-      case 'top':
+      case directions.top:
         return <SlideTopTransition {...rest} />;
-      case 'bottom':
+      case directions.bottom:
         return <SlideBottomTransition {...rest} />;
     }
   }

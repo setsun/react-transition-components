@@ -1,12 +1,8 @@
 {
-  "name": "react-transition-components",
+  "name": "@react-choreography/components",
   "version": "2.0.0-alpha.9",
   "description": "Simple transition / animation components for React",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Setsun/react-transition-components"
-  },
   "main": "dist/index.js",
   "engines": {
     "npm": "^5.0.0"
@@ -46,8 +42,8 @@
     "flow-bin": "^0.64.0",
     "lint-staged": "^6.1.0",
     "nodemon": "^1.14.12",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
     "react-transition-factory": "^2.0.0-alpha.9",
     "react-transition-group": "^2.2.3",
     "source-map-support": "^0.5.3",
@@ -58,7 +54,7 @@
     "webpack-node-externals": "1.7.2"
   },
   "peerDependencies": {
-    "react": "^16.2.0",
+    "react": "^16.3.0",
     "react-transition-group": "^2.2.3"
   }
 }
