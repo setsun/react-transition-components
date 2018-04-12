@@ -1,55 +1,92 @@
 // @flow
 
 import React from 'react';
-import transitionFactory, { scale } from 'react-transition-factory';
+import transitionFactory, { translate } from 'react-transition-factory';
 import type { TransitionProps } from 'react-transition-factory';
+import { directions } from '../constants';
 
 type ExpandTransitionProps = TransitionProps & {
-  direction: string,
+  direction: directions.left | directions.top,
 };
 
-const ExpandTopTransition = transitionFactory(scale.vertical);
-ExpandTopTransition.defaultProps = {
-  ...ExpandTopTransition.defaultProps,
-  style: { transformOrigin: 'top' },
-};
+const ExpandLeftTransition = transitionFactory({
+  transition: 'max-width',
+  getStartStyle: (start = 0) => `${start}px`,
+  getEndStyle: (end = 999) => `${end}px`,
+});
 
-const ExpandBottomTransition = transitionFactory(scale.vertical);
-ExpandBottomTransition.defaultProps = {
-  ...ExpandBottomTransition.defaultProps,
-  style: { transformOrigin: 'bottom' },
-};
-
-const ExpandLeftTransition = transitionFactory(scale.horizontal);
-ExpandLeftTransition.defaultProps = {
-  ...ExpandLeftTransition.defaultProps,
-  style: { transformOrigin: 'left' },
-};
-
-const ExpandRightTransition = transitionFactory(scale.horizontal);
-ExpandRightTransition.defaultProps = {
-  ...ExpandRightTransition.defaultProps,
-  style: { transformOrigin: 'right' },
-};
+const ExpandTopTransition = transitionFactory({
+  transition: 'max-height',
+  getStartStyle: (start = 0) => `${start}px`,
+  getEndStyle: (end = 999) => `${end}px`,
+});
 
 class ExpandTransition extends React.Component<ExpandTransitionProps> {
   static defaultProps = {
-    direction: 'left',
+    direction: directions.left,
   };
 
-  render() {
-    const { direction, ...rest } = this.props;
+  constructor(props) {
+    super(props);
+    this.component = this.getTransitionComponent(props.direction);
+    this.container = React.createRef();
+    this.dimensions = {};
+    this.state = {
+      measured: false,
+    };
+  }
 
-    switch (direction) {
-      case 'left':
-        return <ExpandLeftTransition {...rest} />;
-      case 'right':
-        return <ExpandRightTransition {...rest} />;
-      case 'top':
-        return <ExpandTopTransition {...rest} />;
-      case 'bottom':
-        return <ExpandBottomTransition {...rest} />;
+  componentWillUpdate(nextProps) {
+    if (this.props.direction !== nextProps.direction) {
+      this.component = this.getTransitionComponent(nextProps.direction);
     }
+  }
+
+  componentDidMount() {
+    const node = this.container.current;
+    const clientRect = node.getBoundingClientRect();
+    this.dimensions = {
+      height: clientRect.height,
+      width: clientRect.width,
+    };
+    this.setState({ measured: true});
+  }
+
+  getTransitionComponent = (direction) => {
+    switch (direction) {
+      case directions.left:
+        return ExpandLeftTransition;
+      case directions.top:
+        return ExpandTopTransition;
+    }
+  }
+
+  getEndValue = (direction) => {
+    switch (direction) {
+      case directions.left:
+        return this.dimensions.width;
+      case directions.top:
+        return this.dimensions.height;
+    }
+  }
+
+  render() {
+    const { direction, children, ...rest } = this.props;
+    const { measured } = this.state;
+    const end = this.getEndValue(direction);
+    const TransitionComponent = this.component;
+
+    return measured ? (
+        <TransitionComponent {...rest} end={end} style={{ overflow: 'hidden' }}>
+          <div>
+            {children}
+          </div>
+        </TransitionComponent>
+    ) : (
+      <div ref={this.container} style={{ position: 'absolute', opacity: '0', zIndex: '-1' }}>
+        {children}
+      </div>
+    )
   }
 }
 

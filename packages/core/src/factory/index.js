@@ -12,7 +12,7 @@ import type {
   ArrayOrString,
 } from '../types/index';
 
-const triggerReflow = (node) => { node && node.scrollTop };
+const triggerReflow = (node: HTMLElement) => { node && node.scrollTop };
 
 const getPrimitiveValue = (value, index): any =>
   Array.isArray(value) ? value[index] : value;
@@ -157,32 +157,32 @@ const transitionFactory = (...args: Array<any>) => {
       }
     );
 
-    onEnter = (node, appearing) => {
+    onEnter = (node: HTMLElement, appearing: boolean) => {
       triggerReflow(node);
       this.props.onEnter && this.props.onEnter(node, appearing);
     }
 
-    onEntering = (node, appearing) => {
+    onEntering = (node: HTMLElement, appearing: boolean) => {
       triggerReflow(node);
       this.props.onEntering && this.props.onEntering(node, appearing);
     }
 
-    onEntered = (node, appearing) => {
+    onEntered = (node: HTMLElement, appearing: boolean) => {
       triggerReflow(node);
       this.props.onEntered && this.props.onEntered(node, appearing);
     }
 
-    onExit = (node) => {
+    onExit = (node: HTMLElement) => {
       triggerReflow(node);
       this.props.onExit && this.props.onExit(node);
     }
 
-    onExiting = (node) => {
+    onExiting = (node: HTMLElement) => {
       triggerReflow(node);
       this.props.onExiting && this.props.onExiting(node);
     }
 
-    onExited = (node) => {
+    onExited = (node: HTMLElement) => {
       triggerReflow(node);
       this.props.onExited && this.props.onExited(node);
     }

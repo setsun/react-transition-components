@@ -26,4 +26,10 @@ export type TransitionProps = {
   start?: ArrayOrValue,
   end?: ArrayOrValue,
   style?: Object,
+  onEnter: (node: HTMLElement, appearing: boolean) => void,
+  onEntering: (node: HTMLElement, appearing: boolean) => void,
+  onEntered: (node: HTMLElement, appearing: boolean) => void,
+  onExit: (node: HTMLElement) => void,
+  onExiting: (node: HTMLElement) => void,
+  onExited: (node: HTMLElement) => void,
 };
