@@ -18,18 +18,18 @@ The other way to add a transition is using `<Transition>` from `react-transition
 The `transitionFactory` aims to solve that by wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in less than 10 lines of code in the simpliest case.
 
 ```
-const ScaleTransition = transitionFactory([
+const ScaleTransition = transitionFactory(
   {
     transition: 'transform',
     getStartStyle: (start = 0) => `scale(${start})`,
     getEndStyle: (end = 1) => `scale(${end})`,
   }
-]);
+);
 ```
 
 And you're done!
 # API
-#### `transitionFactory(transitionConfigs: Array<TransitionConfig>, staticStyles?: Object, defaultProps?: TransitionProps): React.Component<TransitionProps>`
+#### `transitionFactory(transitionConfigs: Arguments<TransitionConfig>): React.Component<TransitionProps>`
 
 The `transitionFactory` component factory returns a pre-configured `<Transition>` component given the `TransitionConfig`(s) from the `transitionConfigs` array.
 
@@ -51,17 +51,21 @@ const config: TransitionConfig = {
 
 It's recommended you pass in default parameters for the functions for `getStartStyle` and `getEndStyle`. These will be the default values, which can be overridden by `this.props.start` and `this.props.end` in your component. In the end, what is returned by the function is up to you, as long as it is valid CSS.
 
-The optional `staticStyles` object applies any additional CSS styles you need to persist across all your transition states. Some common CSS properties you may want to persist include `display` and `transformOrigin` which can affect your transition.
+You can also pass down a `style` prop to apply any additional CSS styles you need to persist across all your transition states. Some common CSS properties you may want to persist include `display` and `transformOrigin` which can affect your transition.
 
 ```
-const RandomTransition = transitionFactory([
+const RandomTransition = transitionFactory(
   ...
-], {
-  transformOrigin: 'top',
-});
-```
-Finally the `defaultProps` allows you to specify any default props you want your component to have, just in case you want a default `timeout`, `easing` or other properties so you spend less time configurating your transition. Also keep in mind all `props` are passed down to the `<Transition>` component so you get all the power of `react-transition-group` and more.
+);
 
+return (
+  <RandomTransition style={{ transformOrigin: 'top' }}>
+    {...}
+  </RandomTransition>
+);
+```
+
+The following are all of the props that are supported by `react-transition-factory`.
 ```
 export type TransitionProps = {
   children: Node,
@@ -86,11 +90,11 @@ export type TransitionProps = {
 import transitionFactory from 'react-transition-factory';
 import { opacity, rotate, scale } from 'react-transition-factory';
 
-const BatmanWipeTransition = transitionFactory([
+const BatmanWipeTransition = transitionFactory(
   opacity,
   rotate,
   scale.all,
-]);
+);
 ```
 
 ![batman_logo](https://user-images.githubusercontent.com/4651424/34085227-29b25146-e35b-11e7-9b44-645e67775330.gif)
