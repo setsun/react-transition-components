@@ -39,7 +39,16 @@ const getStyleString = (
     : style;
 
 const transitionFactory = (...args: Array<any>) => {
-  const transitions: Array<TransitionConfig> = [...args];
+  // If transition argument is a string, convert it into an object with default
+  // props
+  const transitions: Array<TransitionConfig> = args.map(transition => (
+    typeof transition === 'string'
+      ? {
+        transition,
+        getStartStyle: identity,
+        getEndStyle: identity,
+      } : transition
+  ));
 
   return class extends React.Component<TransitionProps> {
     static transitions = transitions;
