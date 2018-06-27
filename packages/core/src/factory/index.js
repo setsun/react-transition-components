@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Transition } from 'react-transition-group';
-import camelCase from 'lodash.camelcase';
+import camelcaseCSS from 'camelcase-css';
 import type {
   TransitionProps,
   TransitionConfig,
@@ -85,7 +85,7 @@ const transitionFactory = (...args: Array<any>) => {
         transition: this.getTransitionProperty(timeout, delay, easing),
         ...transitions.reduce((style, transition, index) => {
           const startVal = getPrimitiveValue(start, index);
-          const transitionName = camelCase(transition.transition);
+          const transitionName = camelcaseCSS(transition.transition);
 
           style[transitionName] = getStyleString(
             transitionName,
@@ -105,7 +105,7 @@ const transitionFactory = (...args: Array<any>) => {
         (styles, transition, index) => {
           const startVal = getPrimitiveValue(start, index);
           const endVal = getPrimitiveValue(end, index);
-          const transitionName = camelCase(transition.transition);
+          const transitionName = camelcaseCSS(transition.transition);
 
           styles.exited[transitionName] = getStyleString(
             transitionName,
