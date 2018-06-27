@@ -49,6 +49,6 @@
     "react-transition-group": "^2.3.1"
   },
   "dependencies": {
-    "lodash.camelcase": "^4.3.0"
+    "camelcase-css": "^2.0.0"
   }
 }
