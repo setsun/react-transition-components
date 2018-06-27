@@ -27,6 +27,8 @@ const naiveMemoize = (callback): Function => {
   };
 };
 
+const identity = value => value;
+
 const getStyleString = (
   transition: string,
   currentStyle: string,
@@ -86,11 +88,12 @@ const transitionFactory = (...args: Array<any>) => {
         ...transitions.reduce((style, transition, index) => {
           const startVal = getPrimitiveValue(start, index);
           const transitionName = camelcaseCSS(transition.transition);
+          const getStartStyle = transition.getStartStyle || identity;
 
           style[transitionName] = getStyleString(
             transitionName,
             style[transitionName],
-            transition.getStartStyle(startVal)
+            getStartStyle(startVal)
           );
           return style;
         }, {}),
@@ -106,26 +109,28 @@ const transitionFactory = (...args: Array<any>) => {
           const startVal = getPrimitiveValue(start, index);
           const endVal = getPrimitiveValue(end, index);
           const transitionName = camelcaseCSS(transition.transition);
+          const getStartStyle = transition.getStartStyle || identity;
+          const getEndStyle = transition.getEndStyle || identity;
 
           styles.exited[transitionName] = getStyleString(
             transitionName,
             styles.exited[transitionName],
-            transition.getStartStyle(startVal)
+            getStartStyle(startVal)
           );
           styles.entering[transitionName] = getStyleString(
             transitionName,
             styles.entering[transitionName],
-            transition.getEndStyle(endVal)
+            getEndStyle(endVal)
           );
           styles.entered[transitionName] = getStyleString(
             transitionName,
             styles.entered[transitionName],
-            transition.getEndStyle(endVal)
+            getEndStyle(endVal)
           );
           styles.exiting[transitionName] = getStyleString(
             transitionName,
             styles.exiting[transitionName],
-            transition.getStartStyle(startVal)
+            getStartStyle(startVal)
           );
 
           return styles;
