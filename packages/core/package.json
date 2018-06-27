@@ -1,9 +1,10 @@
 {
   "name": "react-transition-factory",
-  "version": "2.0.0-alpha.10",
+  "version": "2.0.0-alpha.12",
   "description": "Simple transition / animation component creation for React",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "src/index.js",
   "engines": {
     "npm": "^5.0.0"
   },
@@ -53,6 +54,6 @@
     "react-transition-group": "^2.2.3"
   },
   "dependencies": {
-    "lodash.camelcase": "^4.3.0"
+    "camelcase-css": "^2.0.0"
   }
 }
