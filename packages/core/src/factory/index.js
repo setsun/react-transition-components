@@ -17,16 +17,6 @@ const triggerReflow = (node: HTMLElement) => { node && node.scrollTop };
 const getPrimitiveValue = (value, index): any =>
   Array.isArray(value) ? value[index] : value;
 
-const naiveMemoize = (callback): Function => {
-  const cache = {};
-
-  return (...args: Array<any>): any => {
-    const key = args.join('-');
-    if (!cache.hasOwnProperty(key)) cache[key] = callback.apply(null, args);
-    return cache[key];
-  };
-};
-
 const identity = value => value;
 
 const getStyleString = (
@@ -39,8 +29,7 @@ const getStyleString = (
     : style;
 
 const transitionFactory = (...args: Array<any>) => {
-  // If transition argument is a string, convert it into an object with default
-  // props
+  // If transition argument is a string, convert it into an object with default props
   const transitions: Array<TransitionConfig> = args.map(transition => (
     typeof transition === 'string'
       ? {
@@ -50,7 +39,11 @@ const transitionFactory = (...args: Array<any>) => {
       } : transition
   ));
 
-  return class extends React.Component<TransitionProps> {
+  type State = {
+    mounted: boolean,
+  }
+
+  class TransitionComponent extends React.Component<TransitionProps, State> {
     static transitions = transitions;
 
     static defaultProps = {
@@ -61,13 +54,16 @@ const transitionFactory = (...args: Array<any>) => {
 
     constructor(props: TransitionProps) {
       super(props);
+      this.state = { mounted: false };
     }
 
-    getGlobalTimeout = naiveMemoize(
-      (timeout: number, delay: number): number =>
-        (Array.isArray(timeout) ? Math.max(...timeout) : timeout) +
-        (Array.isArray(delay) ? Math.max(...delay) : delay)
-    );
+    componentDidMount() {
+      this.setState({ mounted: true });
+    }
+
+    getGlobalTimeout = (timeout: number, delay: number): number =>
+      (Array.isArray(timeout) ? Math.max(...timeout) : timeout) +
+      (Array.isArray(delay) ? Math.max(...delay) : delay)
 
     getTransitionProperty = (
       timeout: number,
@@ -92,8 +88,12 @@ const transitionFactory = (...args: Array<any>) => {
       easing: string,
       start: ArrayOrValue
     ): Object => {
+      const { appear } = this.props;
+      const { mounted } = this.state;
+      const shouldTransition = appear || mounted;
+
       return {
-        transition: this.getTransitionProperty(timeout, delay, easing),
+        transition: shouldTransition ? this.getTransitionProperty(timeout, delay, easing) : '',
         ...transitions.reduce((style, transition, index) => {
           const startVal = getPrimitiveValue(start, index);
           const transitionName = camelcaseCSS(transition.transition);
@@ -153,23 +153,21 @@ const transitionFactory = (...args: Array<any>) => {
       );
     };
 
-    getFinalStyle = naiveMemoize(
-      (
-        state: string,
-        timeout: number,
-        delay: number,
-        easing: string,
-        start: ArrayOrValue,
-        end: ArrayOrValue,
-        staticStyle: Object
-      ): Object => {
-        return {
-          ...this.getDefaultStyle(timeout, delay, easing, start),
-          ...this.getTransitionStates(start, end)[state],
-          ...(staticStyle || {}),
-        };
-      }
-    );
+    getFinalStyle = (
+      state: string,
+      timeout: number,
+      delay: number,
+      easing: string,
+      start: ArrayOrValue,
+      end: ArrayOrValue,
+      staticStyle: Object
+    ): Object => {
+      return {
+        ...this.getDefaultStyle(timeout, delay, easing, start),
+        ...this.getTransitionStates(start, end)[state],
+        ...(staticStyle || {}),
+      };
+    };
 
     onEnter = (node: HTMLElement, appearing: boolean) => {
       triggerReflow(node);
@@ -264,6 +262,15 @@ const transitionFactory = (...args: Array<any>) => {
       );
     }
   };
+
+  TransitionComponent.defaultProps = {
+    appear: true,
+    in: true,
+    mountOnEnter: true,
+    unmountOnExit: true,
+  };
+
+  return TransitionComponent;
 };
 
 export default transitionFactory;
