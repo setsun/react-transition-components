@@ -23,6 +23,7 @@ export type TransitionProps = {
   timeout: Array<number | { enter?: number, exit?: number }> | number,
   delay: Array<number | { enter?: number, exit?: number }> | number,
   easing: ArrayOrString,
+  appear: boolean,
   start?: ArrayOrValue,
   end?: ArrayOrValue,
   style?: Object,
