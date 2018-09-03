@@ -1,23 +1,62 @@
 {
-  "lint-staged": {
-    "*.{js,json,css}": ["prettier --write", "git add"]
+  "name": "react-choreography",
+  "version": "3.0.0-rc.0",
+  "description": "Simple transition / animation component creation for React",
+  "license": "MIT",
+  "repository": "https://github.com/Setsun/react-choreography",
+  "module": "src/index.js",
+  "main": "dist/index.js",
+  "engines": {
+    "npm": "^6.0.0"
   },
+  "keywords": [
+    "react",
+    "react-component",
+    "react-transition-group",
+    "transition",
+    "animation",
+    "staggered"
+  ],
   "scripts": {
-    "start": "lerna run --scope @react-choreography/showcase start",
-    "precommit": "lint-staged",
-    "eslint-prettier-check":
-      "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
+    "dev:client": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "prepare": "npm run build",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-eslint": "^4.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-loader": "2.0.0",
-    "eslint-plugin-import": "2.12.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react": "7.8.2",
-    "lerna": "^2.11.0",
-    "lint-staged": "^7.1.2",
-    "prettier": "^1.13.3"
+    "@babel/core": "7.0.0",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "8.0.2",
+    "babel-preset-setsun": "2.1.3",
+    "cross-env": "5.2.0",
+    "css-loader": "1.0.0",
+    "dotenv": "6.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-eslint": "^5.0.1",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-config-setsun": "2.1.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "2.6.0",
+    "eslint-plugin-react": "^7.11.1",
+    "file-loader": "2.0.0",
+    "nodemon": "1.18.4",
+    "prettier": "^1.14.2",
+    "react": "16.4.2",
+    "react-dom": "16.4.2",
+    "react-transition-group": "2.4.0",
+    "source-map-support": "0.5.9",
+    "style-loader": "0.23.0",
+    "url-loader": "1.1.1",
+    "webpack": "4.17.1",
+    "webpack-cli": "3.1.0",
+    "webpack-node-externals": "1.7.2"
+  },
+  "peerDependencies": {
+    "react": "^16.4.2",
+    "react-transition-group": "^2.4.0"
+  },
+  "dependencies": {
+    "camelcase-css": "2.0.1"
   }
 }
