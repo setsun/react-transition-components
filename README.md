@@ -87,7 +87,7 @@ export type TransitionProps = {
 
 ### Example
 ```
-import transitionFactory from 'react-transition-factory';
+import choreography from 'react-transition-factory';
 import { opacity, rotate, scale } from 'react-transition-factory';
 
 const BatmanWipeTransition = transitionFactory(
