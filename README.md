@@ -1,13 +1,17 @@
-# React Transition Factory
+# React Choreography
 
-A component factory for generating easily configurable `<Transition>` components from `react-transition-group` without the boilerplate.
+### ⚠️ React Choreography's API is being reworked & is currently being converted to TypeScript. Documentation below may be out of date.  ⚠️
 
-React Transition Factory is roughly 3 kB gzipped, and has peer dependencies on `react` and `react-transition-group`.
+### ⚠️ For a stable API, please checkout the `v2` branch.  ⚠️
 
-`npm i react-transition-factory`
+An animation component library & higher-order component for generating easily configurable `<Transition>` components from `react-transition-group` without the boilerplate.
+
+React Choreography is roughly 3 kB gzipped, and has peer dependencies on `react` and `react-transition-group`.
+
+`npm i react-choreography`
 
 # Motivation
-The drive behind `react-transition-factory` comes from being able to create common transition components for React easily using the tried and true `react-transition-group`.
+The drive behind `react-choreography` comes from being able to create common transition components for React easily using the tried and true `react-transition-group`.
 
 Not only that, but these components need to be easily configurable with a simple API, and minimal context switching.
 
@@ -15,10 +19,10 @@ One of the easiest and most common ways to add a enter/exit transition is using 
 
 The other way to add a transition is using `<Transition>` from `react-transition-group`, which allows us to express our transitions using React inline styles. This solves our previous issue since we can dynamically generate all of our styles in JavaScript and not have to maintain a static CSS stylesheet. However there is decent amount of configuration needed, of which you need to know the different transition styles of your component which includes your `default` style, the `entering` style, `entered` style and `exiting` style.
 
-The `transitionFactory` aims to solve that by wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in less than 10 lines of code in the simpliest case.
+`react-choreography`  aims to solve that by providing a higher-order component for wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in less than 10 lines of code in the simpliest case.
 
 ```
-const ScaleTransition = transitionFactory(
+const ScaleTransition = choreography(
   {
     transition: 'transform',
     getStartStyle: (start = 0) => `scale(${start})`,
@@ -29,9 +33,9 @@ const ScaleTransition = transitionFactory(
 
 And you're done!
 # API
-#### `transitionFactory(transitionConfigs: Arguments<TransitionConfig>): React.Component<TransitionProps>`
+#### `choreography(transitionConfigs: Arguments<TransitionConfig>): React.Component<TransitionProps>`
 
-The `transitionFactory` component factory returns a pre-configured `<Transition>` component given the `TransitionConfig`(s) from the `transitionConfigs` array.
+The `choreography` higher-order component returns a pre-configured `<Transition>` component given the `TransitionConfig`(s) from the `transitionConfigs` array.
 
 A `TransitionConfig` has the following shape:
 ```
@@ -54,7 +58,7 @@ It's recommended you pass in default parameters for the functions for `getStartS
 You can also pass down a `style` prop to apply any additional CSS styles you need to persist across all your transition states. Some common CSS properties you may want to persist include `display` and `transformOrigin` which can affect your transition.
 
 ```
-const RandomTransition = transitionFactory(
+const RandomTransition = choreography(
   ...
 );
 
@@ -65,7 +69,7 @@ return (
 );
 ```
 
-The following are all of the props that are supported by `react-transition-factory`.
+The following are all of the props that are supported by `react-choreography`.
 ```
 export type TransitionProps = {
   children: Node,
@@ -77,7 +81,7 @@ export type TransitionProps = {
 ```
 
 # Presets
-`react-transition-factory` comes out of the box with some common presets, if you want to compose your own transition components quickly.
+`react-choreography` comes out of the box with some common presets, if you want to compose your own transition components quickly.
 
 - opacity
 - rotate
@@ -87,10 +91,10 @@ export type TransitionProps = {
 
 ### Example
 ```
-import choreography from 'react-transition-factory';
-import { opacity, rotate, scale } from 'react-transition-factory';
+import choreography from 'react-choreography';
+import { opacity, rotate, scale } from 'react-choreography/presets';
 
-const BatmanWipeTransition = transitionFactory(
+const BatmanWipeTransition = choreography(
   opacity,
   rotate,
   scale.all,
@@ -98,6 +102,3 @@ const BatmanWipeTransition = transitionFactory(
 ```
 
 ![batman_logo](https://user-images.githubusercontent.com/4651424/34085227-29b25146-e35b-11e7-9b44-645e67775330.gif)
-
-# Components
-For those who want to get up and running quickly, please check out `react-transition-components` for a component library created using `react-transition-factory` of common use case transitions: https://github.com/Setsun/react-transition-components
