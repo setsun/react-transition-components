@@ -1,7 +1,7 @@
-import choreography from '../../core';
+import createTransition from '../../createTransition';
 import { scale } from '../../presets';
 
-const ScaleTransition = choreography(scale.all);
+const ScaleTransition = createTransition(scale.all);
 ScaleTransition.displayName = 'ScaleTransition';
 
 export default ScaleTransition;

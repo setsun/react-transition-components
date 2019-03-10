@@ -1,19 +1,17 @@
-// @flow
-
-import React from 'react';
-import choreography from '../../core';
+import * as React from 'react';
+import createTransition from '../../createTransition';
 import { opacity, translate } from '../../presets';
 import { TransitionProps } from '../../types';;
 import { directions } from '../constants';
 
 type SlideTransitionProps = TransitionProps & {
-  direction: directions.left | directions.right | directions.top | directions.bottom,
+  direction: directions,
 };
 
-const SlideTopTransition = choreography(translate.top, opacity);
-const SlideBottomTransition = choreography(translate.bottom, opacity);
-const SlideLeftTransition = choreography(translate.left, opacity);
-const SlideRightTransition = choreography(translate.right, opacity);
+const SlideTopTransition = createTransition(translate.top, opacity);
+const SlideBottomTransition = createTransition(translate.bottom, opacity);
+const SlideLeftTransition = createTransition(translate.left, opacity);
+const SlideRightTransition = createTransition(translate.right, opacity);
 
 class SlideTransition extends React.Component<SlideTransitionProps> {
   static defaultProps = {
