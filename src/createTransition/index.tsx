@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import camelcaseCSS from 'camelcase-css';
 import { Transition } from 'react-transition-group';
 import { TransitionProps, TransitionStates, TransitionConfig, ArrayOrValue, ArrayOrNumber } from '../types';
@@ -19,7 +19,7 @@ const getStyleString = (
     ? `${currentStyle} ${style}`
     : style;
 
-const choreography = (...args: Array<any>) => {
+const createTransition = (...args: Array<any>): any => {
   const transitions: Array<TransitionConfig> = [...args];
 
   return class extends React.Component {
@@ -214,16 +214,14 @@ const choreography = (...args: Array<any>) => {
             );
 
             if (typeof children === 'function') {
-              childProps.style = style;
-              return children(state, childProps);
+              return children(state, { ...childProps, style });
             }
 
             const child = React.Children.only(children);
-            const childStyle = child.props.style;
 
             return React.cloneElement(child, {
               style: {
-                ...childStyle,
+                ...child.props.style,
                 ...style,
               },
             });
@@ -234,4 +232,4 @@ const choreography = (...args: Array<any>) => {
   };
 };
 
-export default choreography;
+export default createTransition;

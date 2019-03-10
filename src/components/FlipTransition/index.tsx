@@ -1,34 +1,32 @@
-// @flow
-
-import React from 'react';
-import choreography from '../../core';
+import * as React from 'react';
+import createTransition from '../../createTransition';
 import { rotate3d } from '../../presets';
 import { TransitionProps } from '../../types';;
 import { directions } from '../constants';
 
 type FlipTransitionProps = TransitionProps & {
-  direction: directions.left | directions.right | directions.top | directions.bottom,
+  direction: directions,
 };
 
-const FlipTopTransition = choreography(rotate3d.top);
+const FlipTopTransition = createTransition(rotate3d.top);
 FlipTopTransition.defaultProps = {
   ...FlipTopTransition.defaultProps,
   style: { transformOrigin: 'top', perspectiveOrigin: 'top', perspective: '0' },
 };
 
-const FlipBottomTransition = choreography(rotate3d.bottom);
+const FlipBottomTransition = createTransition(rotate3d.bottom);
 FlipBottomTransition.defaultProps = {
   ...FlipBottomTransition.defaultProps,
   style: { transformOrigin: 'bottom', perspectiveOrigin: 'bottom', perspective: '0' },
 };
 
-const FlipLeftTransition = choreography(rotate3d.left);
+const FlipLeftTransition = createTransition(rotate3d.left);
 FlipLeftTransition.defaultProps = {
   ...FlipLeftTransition.defaultProps,
   style: { transformOrigin: 'left', perspectiveOrigin: 'left', perspective: '0' },
 };
 
-const FlipRightTransition = choreography(rotate3d.right);
+const FlipRightTransition = createTransition(rotate3d.right);
 FlipRightTransition.defaultProps = {
   ...FlipRightTransition.defaultProps,
   style: { transformOrigin: 'right', perspectiveOrigin: 'right', perspective: '0' },

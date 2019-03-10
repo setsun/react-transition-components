@@ -1,7 +1,7 @@
-import choreography from '../../core';
+import createTransition from '../../createTransition';
 import  { opacity } from '../../presets';
 
-const FadeTransition = choreography(opacity);
+const FadeTransition = createTransition(opacity);
 FadeTransition.displayName = 'FadeTransition';
 
 export default FadeTransition;
