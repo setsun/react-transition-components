@@ -1,9 +1,7 @@
-// @flow
-
-import choreography from '../../core';
+import createTransition from '../../createTransition';
 import { opacity, rotate } from '../../presets';
 
-const RotateTransition = choreography(rotate, opacity);
+const RotateTransition = createTransition(rotate, opacity);
 RotateTransition.displayName = 'RotateTransition';
 
 export default RotateTransition;

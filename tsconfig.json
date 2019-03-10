@@ -4,7 +4,6 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "jsx": "react",
-    "noEmit": true,
     "pretty": true,
     "skipLibCheck": true,
     "allowJs": true
