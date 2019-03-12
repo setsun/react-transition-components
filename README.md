@@ -15,86 +15,9 @@ One of the easiest and most common ways to add a enter/exit transition is using 
 
 The other way to add a transition is using `<Transition>` from `react-transition-group`, which allows us to express our transitions using React inline styles. This solves our previous issue since we can dynamically generate all of our styles in JavaScript and not have to maintain a static CSS stylesheet. However there is decent amount of configuration needed, of which you need to know the different transition styles of your component which includes your `default` style, the `entering` style, `entered` style and `exiting` style.
 
-`react-transition-components`  aims to solve that by providing a higher-order component for wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in less than 10 lines of code in the simpliest case.
+`react-transition-components`  aims to solve that by providing a higher-order component for wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in less than 10 lines of code in the simplest case.
 
-```
-const ScaleTransition = transitionComponent(
-  {
-    transition: 'transform',
-    getStartStyle: (start = 0) => `scale(${start})`,
-    getEndStyle: (end = 1) => `scale(${end})`,
-  }
-);
-```
-
-And you're done!
 # API
-#### `createTransition(transitionConfigs: Arguments<TransitionConfig>): React.Component<TransitionProps>`
+#### `createTransition(defaultStyle, transitionStyles, transitionProperty): React.Component`
 
-The `createTransition` higher-order component returns a pre-configured `<Transition>` component given the `TransitionConfig`(s) from the `transitionConfigs` array.
-
-A `TransitionConfig` has the following shape:
-```
-type TransitionConfig = {
-  transition: string,
-  getStartStyle: Function,
-  getEndStyle: Function,
-}
-
-// example
-const config: TransitionConfig = {
-  transition: 'transform',
-  getStartStyle: (start = 0) => `scale(${start})`,
-  getEndStyle: (end = 1) => `scale(${end})`,
-}
-```
-
-It's recommended you pass in default parameters for the functions for `getStartStyle` and `getEndStyle`. These will be the default values, which can be overridden by `this.props.start` and `this.props.end` in your component. In the end, what is returned by the function is up to you, as long as it is valid CSS.
-
-You can also pass down a `style` prop to apply any additional CSS styles you need to persist across all your transition states. Some common CSS properties you may want to persist include `display` and `transformOrigin` which can affect your transition.
-
-```
-const RandomTransition = createTransition(
-  ...
-);
-
-return (
-  <RandomTransition style={{ transformOrigin: 'top' }}>
-    {...}
-  </RandomTransition>
-);
-```
-
-The following are all of the props that are supported by `react-transition-components`.
-```
-export type TransitionProps = {
-  children: Node,
-  start?: string | number | Array<string | number>,
-  end?: string | number | Array<string | number>,
-  timeout: number | Array<number>,
-  easing: string | Array<string>,
-};
-```
-
-# Presets
-`react-transition-components` comes out of the box with some common presets, if you want to compose your own transition components quickly.
-
-- opacity
-- rotate
-- rotate3d { top, bottom, left, right }
-- translate { top, bottom, left, right }
-- scale { all, vertical, horizontal }
-
-### Example
-```
-import createTransition from 'react-transition-components/core';
-import { opacity, rotate, scale } from 'react-transition-components/presets';
-
-const BatmanWipeTransition = createTransition(
-  opacity,
-  rotate,
-  scale.all,
-);
-```
-
-![batman_logo](https://user-images.githubusercontent.com/4651424/34085227-29b25146-e35b-11e7-9b44-645e67775330.gif)
+The `createTransition` higher-order component returns a pre-configured `<Transition>` component
