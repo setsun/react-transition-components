@@ -1,29 +1,19 @@
-export type ArrayOrValue = Array<string | number> | string | number;
-export type ArrayOrNumber = Array<number> | number;
-export interface TransitionStates {
-  entering: Object;
-  entered: Object;
-  exiting: Object;
-};
+import { TransitionStatus, TransitionProps, TransitionChildren } from 'react-transition-group/Transition';
 
-export interface TransitionConfig {
-  transition: string;
-  getStartStyle: (value: any) => string;
-  getEndStyle: (value: any) => string;
-};
+export type AugmentedTransitionChildren = TransitionChildren | ((status: TransitionStatus, style: Object) => React.ReactNode)
 
-export interface TransitionProps {
-  children: Function | Node,
-  timeout: ArrayOrNumber,
-  delay: ArrayOrNumber,
-  easing: ArrayOrValue,
-  start?: ArrayOrValue,
-  end?: ArrayOrValue,
-  style?: Object,
-  onEnter: (node: HTMLElement, appearing: boolean) => void,
-  onEntering: (node: HTMLElement, appearing: boolean) => void,
-  onEntered: (node: HTMLElement, appearing: boolean) => void,
-  onExit: (node: HTMLElement) => void,
-  onExiting: (node: HTMLElement) => void,
-  onExited: (node: HTMLElement) => void,
+export type TransitionStyles = {
+  [key in TransitionStatus]?: Object
+}
+
+export type TransitionComponentProps = TransitionProps & {
+  children: AugmentedTransitionChildren,
+  easing?: string,
+}
+
+export enum directions {
+  left = 'left',
+  right = 'right',
+  top ='top',
+  bottom = 'bottom',
 };

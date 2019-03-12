@@ -1,56 +1,94 @@
 import * as React from 'react';
 import createTransition from '../../createTransition';
-import { rotate3d } from '../../presets';
-import { TransitionProps } from '../../types';;
-import { directions } from '../constants';
+import { TransitionComponentProps, directions } from '../../types';
 
-type FlipTransitionProps = TransitionProps & {
-  direction: directions,
+type Props = TransitionComponentProps & {
+  direction: directions
+}
+
+const defaultStyles = {
+  top: { transformOrigin: 'top', perspectiveOrigin: 'top', perspective: '0' },
+  bottom: { transformOrigin: 'bottom', perspectiveOrigin: 'bottom', perspective: '0' },
+  left: { transformOrigin: 'left', perspectiveOrigin: 'left', perspective: '0' },
+  right: { transformOrigin: 'right', perspectiveOrigin: 'right', perspective: '0' }
 };
 
-const FlipTopTransition = createTransition(rotate3d.top);
-FlipTopTransition.defaultProps = {
-  ...FlipTopTransition.defaultProps,
-  style: { transformOrigin: 'top', perspectiveOrigin: 'top', perspective: '0' },
+const transitionStyles = {
+  top: {
+    entering: { transform: 'rotate3d(1, 0, 0, 0.25turn)' },
+    entered: { transform: 'rotate3d(1, 0, 0, 0turn)' },
+    exiting: { transform: 'rotate3d(1, 0, 0, 0turn)' },
+    exited: { transform: 'rotate3d(1, 0, 0, 0.25turn)' },
+  },
+  bottom: {
+    entering: { transform: 'rotate3d(1, 0, 0, -0.25turn)' },
+    entered: { transform: 'rotate3d(1, 0, 0, 0turn)' },
+    exiting: { transform: 'rotate3d(1, 0, 0, 0turn)' },
+    exited: { transform: 'rotate3d(1, 0, 0, -0.25turn)' },
+  },
+  left: {
+    entering: { transform: 'rotate3d(0, 1, 0, 0.25turn)' },
+    entered: { transform: 'rotate3d(0, 1, 0, 0turn)' },
+    exiting: { transform: 'rotate3d(0, 1, 0, 0turn)' },
+    exited: { transform: 'rotate3d(0, 1, 0, 0.25turn)' },
+  },
+  right: {
+    entering: { transform: 'rotate3d(0, 1, 0, -0.25turn)' },
+    entered: { transform: 'rotate3d(0, 1, 0, 0turn)' },
+    exiting: { transform: 'rotate3d(0, 1, 0, 0turn)' },
+    exited: { transform: 'rotate3d(0, 1, 0, -0.25turn)' },
+  },
 };
 
-const FlipBottomTransition = createTransition(rotate3d.bottom);
-FlipBottomTransition.defaultProps = {
-  ...FlipBottomTransition.defaultProps,
-  style: { transformOrigin: 'bottom', perspectiveOrigin: 'bottom', perspective: '0' },
+const transitionProperty = 'transform';
+
+const FlipTopTransition = createTransition(
+  defaultStyles.top,
+  transitionStyles.top,
+  transitionProperty,
+);
+
+const FlipBottomTransition = createTransition(
+  defaultStyles.bottom,
+  transitionStyles.bottom,
+  transitionProperty,
+);
+
+const FlipLeftTransition = createTransition(
+  defaultStyles.left,
+  transitionStyles.left,
+  transitionProperty,
+);
+
+const FlipRightTransition = createTransition(
+  defaultStyles.right,
+  transitionStyles.right,
+  transitionProperty,
+);
+
+const Components = {
+  top: FlipTopTransition,
+  bottom: FlipBottomTransition,
+  left: FlipLeftTransition,
+  right: FlipRightTransition,
 };
 
-const FlipLeftTransition = createTransition(rotate3d.left);
-FlipLeftTransition.defaultProps = {
-  ...FlipLeftTransition.defaultProps,
-  style: { transformOrigin: 'left', perspectiveOrigin: 'left', perspective: '0' },
-};
+const FlipTransition = ({
+  direction,
+  children,
+  ...rest
+}: Props) => {
+  const TransitionComponent = Components[direction];
 
-const FlipRightTransition = createTransition(rotate3d.right);
-FlipRightTransition.defaultProps = {
-  ...FlipRightTransition.defaultProps,
-  style: { transformOrigin: 'right', perspectiveOrigin: 'right', perspective: '0' },
-};
+  return (
+    <TransitionComponent {...rest}>
+      {children}
+    </TransitionComponent>
+  );
+}
 
-class FlipTransition extends React.Component<FlipTransitionProps> {
-  static defaultProps = {
-    direction: directions.left,
-  };
-
-  render() {
-    const { direction, ...rest } = this.props;
-
-    switch (direction) {
-      case directions.left:
-        return <FlipLeftTransition {...rest} />;
-      case directions.right:
-        return <FlipRightTransition {...rest} />;
-      case directions.top:
-        return <FlipTopTransition {...rest} />;
-      case directions.bottom:
-        return <FlipBottomTransition {...rest} />;
-    }
-  }
+FlipTransition.defaultProps = {
+  direction: directions.left,
 }
 
 export default FlipTransition;
