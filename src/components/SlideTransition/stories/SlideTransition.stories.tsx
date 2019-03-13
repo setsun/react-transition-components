@@ -18,8 +18,10 @@ storiesOf('Slide Transition', module)
   .addDecorator(withKnobs)
   .add('Slide', () => (
     <SlideTransition
-      direction={radios(label, options, defaultValue)}
       in={boolean('in', true)}
+      direction={radios(label, options, defaultValue)}
+      start={number('start', 16)}
+      end={number('end', 0)}
       easing={text('easing', 'ease-in-out')}
       timeout={number('timeout', 300)}
     >

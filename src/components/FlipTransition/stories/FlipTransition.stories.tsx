@@ -18,8 +18,10 @@ storiesOf('Flip Transition', module)
   .addDecorator(withKnobs)
   .add('Flip', () => (
     <FlipTransition
-      direction={radios(label, options, defaultValue)}
       in={boolean('in', true)}
+      direction={radios(label, options, defaultValue)}
+      start={number('start', 0.25)}
+      end={number('end', 0)}
       easing={text('easing', 'ease-in-out')}
       timeout={number('timeout', 300)}
     >
