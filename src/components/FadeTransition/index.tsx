@@ -1,9 +1,5 @@
 import createTransition from '../../createTransition';
 
-const defaultStyle = {
-  opacity: 0,
-};
-
 const transitionStyles = {
   entering: { opacity: 0 },
   entered: { opacity: 1 },
@@ -11,11 +7,13 @@ const transitionStyles = {
   exited: { opacity: 0 },
 };
 
+const defaultStyle = {};
+
 const transitionProperty = 'opacity';
 
 const FadeTransition = createTransition(
-  defaultStyle,
   transitionStyles,
+  defaultStyle,
   transitionProperty,
 );
 
