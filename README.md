@@ -1,10 +1,10 @@
 # React Transition Components
 
-An animation component library & higher-order component for generating easily configurable `<Transition>` components from `react-transition-group` without the boilerplate.
+An animation component library & higher-order component for generating easily configurable `<Transition>` components from `react-transition-group`.
 
-React Transition Components is roughly 1 kB gzipped, and has peer dependencies on `react` and `react-transition-group`.
+React Transition Components is roughly 2 kB gzipped, has peer dependencies on `react` and `react-transition-group`, and supports `webpack` tree-shaking by default: https://bundlephobia.com/result?p=react-transition-components@3.0.0-rc.6
 
-`npm i react-transition-group`
+`npm i react-transition-components`
 
 # Motivation
 The drive behind `react-transition-components` comes from being able to create common transition components for React easily using the tried and true `react-transition-group`.
@@ -13,11 +13,83 @@ Not only that, but these components need to be easily configurable with a simple
 
 One of the easiest and most common ways to add a enter/exit transition is using `<CSSTransition>` from `react-transition-group`. However the downfalls of that API is having to create a React component and maintaining separate CSS classes to express your enter/exit states. Not only that, but dynamically changing the `duration` and `easing` in your CSS is nearly impossible without additional tooling. This is even harder to manage if you are transitioning on multiple CSS properties at once.
 
-The other way to add a transition is using `<Transition>` from `react-transition-group`, which allows us to express our transitions using React inline styles. This solves our previous issue since we can dynamically generate all of our styles in JavaScript and not have to maintain a static CSS stylesheet. However there is decent amount of configuration needed, of which you need to know the different transition styles of your component which includes your `default` style, the `entering` style, `entered` style and `exiting` style.
+The other way to add a transition is using `<Transition>` from `react-transition-group`, which allows us to express our transitions using React inline styles. This solves our previous issue since we can dynamically generate all of our styles in JavaScript and not have to maintain a static CSS stylesheet.
 
-`react-transition-components`  aims to solve that by providing a higher-order component for wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in less than 10 lines of code in the simplest case.
+`react-transition-components` aims to provide a component library of common UI transitions, and to make it easier to create re-usable transition components by providing a `createTransition` higher-order component for wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in less than 15 lines of code in the simplest case:
+
+```jsx
+import { createTransition } from 'react-transition-components';
+
+const transitionStyles = {
+  entering: { transform: 'scale(0)' },
+  entered: { transform: 'scale(1)' },
+  exiting: { transform: 'scale(0)' },
+  exited: { transform: 'scale(0)' },
+};
+
+const ScaleTransition = createTransition(transitionStyles);
+
+ScaleTransition.displayName = 'ScaleTransition';
+
+export default ScaleTransition;
+```
 
 # API
-#### `createTransition(defaultStyle, transitionStyles, transitionProperty): React.Component`
+### `createTransition(transitionStyles, defaultStyle, transitionProperty)`
 
-The `createTransition` higher-order component returns a pre-configured `<Transition>` component
+The `createTransition` higher-order component returns a pre-configured `<Transition>` component that allows you to create transition components that can be used immediately, and can be configured via `props` as your animation needs change. `createTransition` has the following type signature:
+
+```ts
+type createTransition = (
+  transitionStyles: TransitionStyles | LazyTransitionStyles,
+  defaultStyle?: Object,
+  transitionProperty?: string,
+) => React.SFC<TransitionProps>
+```
+
+Full TypeScript typings can be found at: https://github.com/Setsun/react-transition-components/blob/master/src/types/index.ts
+
+#### `transitionStyles: TransitionStyles | LazyTransitionStyles`
+The `transitionStyles` argument is what drives your component animation. This can take the form of an object of the following shape for static transitions:
+
+```jsx
+const transitionStyles = {
+  entering: { opacity: 0 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 },
+};
+
+const FadeTransition = createTransition(transitionStyles);
+```
+
+For more configuration, `transitionStyles` can also be a function which is passed down the current component `props`. This allows your styles to be generated on demand, and be dynamic passed on changing animation needs:
+
+```jsx
+const transitionStyles = (props) => {
+  const { start, end } = props;
+
+  return {
+    entering: { opacity: start },
+    entered: { opacity: end },
+    exiting: { opacity: start },
+    exited: { opacity: start },
+  };
+};
+
+const FadeTransition = createTransition(transitionStyles);
+
+```
+
+#### `defaultStyle: Object`
+The `defaultStyle` object is a style object to be passed down to your `React` component for any persistent styles you want your component to have throughout each transition state.
+
+#### `transitionProperty: string`
+The `transitionProperty` argument is a CSS `transition-property` value that can be passed down as an optimization. By default, it is set to `all`.
+
+# Components
+- `FadeTransition`
+- `SlideTransition`
+- `ScaleTransition`
+- `FlipTransition`
+- `RotateTransition`
