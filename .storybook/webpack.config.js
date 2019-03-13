@@ -9,9 +9,10 @@ const path = require('path');
 // to "React Create App". This only has babel loader to load JavaScript.
 
 module.exports = {
-  plugins: [
-    // your custom plugins
-  ],
+  resolve: {
+    modules: [path.resolve('./node_modules'), path.resolve('./src')],
+    extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.json'],
+  },
   module: {
     rules: [
       {
@@ -27,4 +28,7 @@ module.exports = {
 
     ],
   },
+  plugins: [
+    // your custom plugins
+  ],
 };
