@@ -12,8 +12,8 @@ const withForceReflow = (callback) => (node, ...rest) => {
 };
 
 const createTransition = (
-  defaultStyle: Object,
   transitionStyles: TransitionStyles,
+  defaultStyle?: Object,
   transitionProperty = 'all'
 ) => {
   const TransitionComponent = ({

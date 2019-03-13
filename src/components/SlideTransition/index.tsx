@@ -40,30 +40,25 @@ const transitionStyles = {
   },
 };
 
-const transitionProperty = 'all';
 
 const SlideTopTransition = createTransition(
-  defaultStyles.top,
   transitionStyles.top,
-  transitionProperty,
+  defaultStyles.top,
 );
 
 const SlideBottomTransition = createTransition(
-  defaultStyles.bottom,
   transitionStyles.bottom,
-  transitionProperty,
+  defaultStyles.bottom,
 );
 
 const SlideLeftTransition = createTransition(
-  defaultStyles.left,
   transitionStyles.left,
-  transitionProperty,
+  defaultStyles.left,
 );
 
 const SlideRightTransition = createTransition(
-  defaultStyles.right,
   transitionStyles.right,
-  transitionProperty,
+  defaultStyles.right,
 );
 
 const Components = {
