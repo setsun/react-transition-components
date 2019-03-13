@@ -62,5 +62,8 @@
     "react": "^16.8.4",
     "react-transition-group": "^2.6.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "@storybook/addon-knobs": "^5.0.1"
+  }
 }
