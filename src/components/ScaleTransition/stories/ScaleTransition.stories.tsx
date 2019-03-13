@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+import { text, boolean, number } from '@storybook/addon-knobs';
 
 import ScaleTransition from '../';
 
@@ -10,7 +10,6 @@ const PlaceKitten = (props) => (
 );
 
 storiesOf('Scale Transition', module)
-  .addDecorator(withKnobs)
   .add('Scale', () => (
     <ScaleTransition
       in={boolean('in', true)}

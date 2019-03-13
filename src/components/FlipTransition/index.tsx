@@ -15,55 +15,49 @@ const defaultStyles = {
 
 const transitionStyles = {
   top: ({ start, end }) => ({
-    entering: { transform: `rotate3d(1, 0, 0, ${start}turn)` },
-    entered: { transform: `rotate3d(1, 0, 0, ${end}turn)` },
-    exiting: { transform: `rotate3d(1, 0, 0, ${start}turn)` },
-    exited: { transform: `rotate3d(1, 0, 0, ${start}turn)` },
+    entering: { transform: `rotate3d(1, 0, 0, ${start}turn)`, opacity: 0 },
+    entered: { transform: `rotate3d(1, 0, 0, ${end}turn)`, opacity: 1 },
+    exiting: { transform: `rotate3d(1, 0, 0, ${start}turn)`, opacity: 0 },
+    exited: { transform: `rotate3d(1, 0, 0, ${start}turn)`, opacity: 0 },
   }),
   bottom: ({ start, end }) => ({
-    entering: { transform: `rotate3d(1, 0, 0, -${start}turn)` },
-    entered: { transform: `rotate3d(1, 0, 0, ${end}turn)` },
-    exiting: { transform: `rotate3d(1, 0, 0, -${start}turn)` },
-    exited: { transform: `rotate3d(1, 0, 0, -${start}turn)` },
+    entering: { transform: `rotate3d(1, 0, 0, -${start}turn)`, opacity: 0 },
+    entered: { transform: `rotate3d(1, 0, 0, ${end}turn)`, opacity: 1 },
+    exiting: { transform: `rotate3d(1, 0, 0, -${start}turn)`, opacity: 0 },
+    exited: { transform: `rotate3d(1, 0, 0, -${start}turn)`, opacity: 0 },
   }),
   left: ({ start, end }) => ({
-    entering: { transform: `rotate3d(0, 1, 0, ${start}turn)` },
-    entered: { transform: `rotate3d(0, 1, 0, ${end}turn)` },
-    exiting: { transform: `rotate3d(0, 1, 0, ${start}turn)` },
-    exited: { transform: `rotate3d(0, 1, 0, ${start}turn)` },
+    entering: { transform: `rotate3d(0, 1, 0, ${start}turn)`, opacity: 0 },
+    entered: { transform: `rotate3d(0, 1, 0, ${end}turn)`, opacity: 1 },
+    exiting: { transform: `rotate3d(0, 1, 0, ${start}turn)`, opacity: 0 },
+    exited: { transform: `rotate3d(0, 1, 0, ${start}turn)`, opacity: 0 },
   }),
   right: ({ start, end }) => ({
-    entering: { transform: `rotate3d(0, 1, 0, -${start}turn)` },
-    entered: { transform: `rotate3d(0, 1, 0, ${end}turn)` },
-    exiting: { transform: `rotate3d(0, 1, 0, -${start}turn)` },
-    exited: { transform: `rotate3d(0, 1, 0, -${start}turn)` },
+    entering: { transform: `rotate3d(0, 1, 0, -${start}turn)`, opacity: 0 },
+    entered: { transform: `rotate3d(0, 1, 0, ${end}turn)`, opacity: 1 },
+    exiting: { transform: `rotate3d(0, 1, 0, -${start}turn)`, opacity: 0 },
+    exited: { transform: `rotate3d(0, 1, 0, -${start}turn)`, opacity: 0 },
   }),
 };
-
-const transitionProperty = 'transform';
 
 const FlipTopTransition = createTransition(
   transitionStyles.top,
   defaultStyles.top,
-  transitionProperty,
 );
 
 const FlipBottomTransition = createTransition(
   transitionStyles.bottom,
   defaultStyles.bottom,
-  transitionProperty,
 );
 
 const FlipLeftTransition = createTransition(
   transitionStyles.left,
   defaultStyles.left,
-  transitionProperty,
 );
 
 const FlipRightTransition = createTransition(
   transitionStyles.right,
   defaultStyles.right,
-  transitionProperty,
 );
 
 const Components = {

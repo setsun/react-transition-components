@@ -21,6 +21,11 @@ module.exports = {
         use: [{ loader: 'babel-loader' }],
       },
       {
+        test: /\.stories\.tsx?$/,
+        use: [{ loader: require.resolve('@storybook/addon-storysource/loader') }],
+        enforce: 'pre',
+      },
+      {
         test: /\.js(x?)$/,
         exclude: /(node_modules)/,
         use: [{ loader: 'babel-loader' }],
