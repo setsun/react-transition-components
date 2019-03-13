@@ -14,6 +14,8 @@ storiesOf('Fade Transition', module)
   .add('Fade', () => (
     <FadeTransition
       in={boolean('in', true)}
+      start={number('start', 0)}
+      end={number('end', 1)}
       easing={text('easing', 'ease-in-out')}
       timeout={number('timeout', 300)}
     >

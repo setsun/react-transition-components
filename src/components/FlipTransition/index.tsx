@@ -14,30 +14,30 @@ const defaultStyles = {
 };
 
 const transitionStyles = {
-  top: {
-    entering: { transform: 'rotate3d(1, 0, 0, 0.25turn)' },
-    entered: { transform: 'rotate3d(1, 0, 0, 0turn)' },
-    exiting: { transform: 'rotate3d(1, 0, 0, 0.25turn)' },
-    exited: { transform: 'rotate3d(1, 0, 0, 0.25turn)' },
-  },
-  bottom: {
-    entering: { transform: 'rotate3d(1, 0, 0, -0.25turn)' },
-    entered: { transform: 'rotate3d(1, 0, 0, 0turn)' },
-    exiting: { transform: 'rotate3d(1, 0, 0, -0.25turn)' },
-    exited: { transform: 'rotate3d(1, 0, 0, -0.25turn)' },
-  },
-  left: {
-    entering: { transform: 'rotate3d(0, 1, 0, 0.25turn)' },
-    entered: { transform: 'rotate3d(0, 1, 0, 0turn)' },
-    exiting: { transform: 'rotate3d(0, 1, 0, 0.25turn)' },
-    exited: { transform: 'rotate3d(0, 1, 0, 0.25turn)' },
-  },
-  right: {
-    entering: { transform: 'rotate3d(0, 1, 0, -0.25turn)' },
-    entered: { transform: 'rotate3d(0, 1, 0, 0turn)' },
-    exiting: { transform: 'rotate3d(0, 1, 0, -0.25turn)' },
-    exited: { transform: 'rotate3d(0, 1, 0, -0.25turn)' },
-  },
+  top: ({ start, end }) => ({
+    entering: { transform: `rotate3d(1, 0, 0, ${start}turn)` },
+    entered: { transform: `rotate3d(1, 0, 0, ${end}turn)` },
+    exiting: { transform: `rotate3d(1, 0, 0, ${start}turn)` },
+    exited: { transform: `rotate3d(1, 0, 0, ${start}turn)` },
+  }),
+  bottom: ({ start, end }) => ({
+    entering: { transform: `rotate3d(1, 0, 0, -${start}turn)` },
+    entered: { transform: `rotate3d(1, 0, 0, ${end}turn)` },
+    exiting: { transform: `rotate3d(1, 0, 0, -${start}turn)` },
+    exited: { transform: `rotate3d(1, 0, 0, -${start}turn)` },
+  }),
+  left: ({ start, end }) => ({
+    entering: { transform: `rotate3d(0, 1, 0, ${start}turn)` },
+    entered: { transform: `rotate3d(0, 1, 0, ${end}turn)` },
+    exiting: { transform: `rotate3d(0, 1, 0, ${start}turn)` },
+    exited: { transform: `rotate3d(0, 1, 0, ${start}turn)` },
+  }),
+  right: ({ start, end }) => ({
+    entering: { transform: `rotate3d(0, 1, 0, -${start}turn)` },
+    entered: { transform: `rotate3d(0, 1, 0, ${end}turn)` },
+    exiting: { transform: `rotate3d(0, 1, 0, -${start}turn)` },
+    exited: { transform: `rotate3d(0, 1, 0, -${start}turn)` },
+  }),
 };
 
 const transitionProperty = 'transform';
@@ -74,11 +74,10 @@ const Components = {
 };
 
 const FlipTransition = ({
-  direction,
   children,
   ...rest
 }: Props) => {
-  const TransitionComponent = Components[direction];
+  const TransitionComponent = Components[rest.direction];
 
   return (
     <TransitionComponent {...rest}>
@@ -89,6 +88,8 @@ const FlipTransition = ({
 
 FlipTransition.defaultProps = {
   direction: directions.left,
+  start: 0.25,
+  end: 0,
 }
 
 export default FlipTransition;
