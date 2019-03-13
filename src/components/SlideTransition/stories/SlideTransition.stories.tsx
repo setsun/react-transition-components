@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
+import { withKnobs, text, boolean, number, radios } from '@storybook/addon-knobs';
+import { directions } from '../../../types';
 
 import SlideTransition from '../';
 
@@ -8,24 +10,19 @@ const PlaceKitten = (props) => (
   <img src="https://placekitten.com/g/312/312" {...props} />
 );
 
+const label = 'direction';
+const options = directions
+const defaultValue = directions.top;
+
 storiesOf('Slide Transition', module)
-  .add('Slide (Top)', () => (
-    <SlideTransition direction="top">
+  .addDecorator(withKnobs)
+  .add('Slide', () => (
+    <SlideTransition
+      direction={radios(label, options, defaultValue)}
+      in={boolean('in', true)}
+      easing={text('easing', 'ease-in-out')}
+      timeout={number('timeout', 300)}
+    >
       <PlaceKitten />
     </SlideTransition>
-  ))
-  .add('Slide (Left)', () => (
-    <SlideTransition direction="left">
-      <PlaceKitten />
-    </SlideTransition>
-  ))
-  .add('Slide (Right)', () => (
-    <SlideTransition direction="right">
-      <PlaceKitten />
-    </SlideTransition>
-  ))
-  .add('Slide (Bottom)', () => (
-    <SlideTransition direction="bottom">
-      <PlaceKitten />
-    </SlideTransition>
-  ))
+  ));
