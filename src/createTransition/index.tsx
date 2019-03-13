@@ -3,20 +3,34 @@ import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import { TransitionComponentProps, TransitionStyles, LazyTransitionStyles } from '../types';
 
-// This is for to force a repaint, which is necessary in order to transition styles when changing inline styles.
-// CSSTransition from react-transition-group also follows this implementation:
-// https://github.com/reactjs/react-transition-group/blob/5007303e729a74be66a21c3e2205e4916821524b/src/CSSTransition.js#L208-L215
-const withForceReflow = (callback) => (node, ...rest) => {
+/**
+ * This is for to force a repaint, which is necessary in order to transition styles when changing inline styles.
+ * CSSTransition from react-transition-group also follows this implementation:
+ * https://github.com/reactjs/react-transition-group/blob/5007303e729a74be66a21c3e2205e4916821524b/src/CSSTransition.js#L208-L215
+ */
+const withForceReflow = (callback: Function) => (node: HTMLElement, ...rest) => {
   node.scrollTop;
   callback && callback(node, ...rest);
+};
+
+/**
+ * Gets a CSS transition shorthand string
+ * example: all 300ms ease-in-out
+ */
+const getTransitionString = (transitionProperty, timeout, easing) => {
+  const transitionPropertyValue = transitionProperty || 'all';
+  const timeoutValue = timeout || 0;
+  const easingValue = easing || 'ease-in-out';
+
+  return `${transitionPropertyValue} ${timeoutValue}ms ${easingValue}`;
 };
 
 const createTransition = (
   transitionStyles: LazyTransitionStyles | TransitionStyles,
   defaultStyle?: Object,
-  transitionProperty = 'all'
-) => {
-  const TransitionComponent = (props: TransitionComponentProps): React.ReactNode => {
+  transitionProperty?: string,
+): React.SFC<TransitionComponentProps> => {
+  const TransitionComponent = (props: TransitionComponentProps) => {
     const {
       timeout,
       easing,
@@ -30,11 +44,14 @@ const createTransition = (
       ...rest
     } = props;
 
-    // example: all 300ms ease-in-out
-    const transition = `${transitionProperty} ${timeout}ms ${easing}`;
+    const transition = getTransitionString(transitionProperty, timeout, easing);
 
     return (
       <Transition
+        in
+        appear
+        mountOnEnter
+        unmountOnExit
         timeout={timeout}
         onEnter={withForceReflow(onEnter)}
         onEntered={withForceReflow(onEntered)}
@@ -74,15 +91,6 @@ const createTransition = (
       </Transition>
     )
   }
-
-  TransitionComponent.defaultProps = {
-    in: true,
-    appear: true,
-    mountOnEnter: true,
-    unmountOnExit: true,
-    easing: 'ease-in-out',
-    timeout: 300,
-  };
 
   return TransitionComponent;
 };

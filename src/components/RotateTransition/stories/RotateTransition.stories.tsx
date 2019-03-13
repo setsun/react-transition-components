@@ -14,6 +14,8 @@ storiesOf('Rotate Transition', module)
   .add('Rotate', () => (
     <RotateTransition
       in={boolean('in', true)}
+      start={number('start', 0.5)}
+      end={number('end', 0)}
       easing={text('easing', 'ease-in-out')}
       timeout={number('timeout', 300)}
     >

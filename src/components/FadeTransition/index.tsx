@@ -1,11 +1,11 @@
 import createTransition from '../../createTransition';
 
-const transitionStyles = {
-  entering: { opacity: 0 },
-  entered: { opacity: 1 },
-  exiting: { opacity: 0 },
-  exited: { opacity: 0 },
-};
+const transitionStyles = ({ start, end }) => ({
+  entering: { opacity: start },
+  entered: { opacity: end },
+  exiting: { opacity: start },
+  exited: { opacity: start },
+});
 
 const defaultStyle = {};
 
@@ -16,6 +16,11 @@ const FadeTransition = createTransition(
   defaultStyle,
   transitionProperty,
 );
+
+FadeTransition.defaultProps = {
+  start: 0,
+  end: 1,
+};
 
 FadeTransition.displayName = 'FadeTransition';
 
