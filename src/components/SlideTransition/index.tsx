@@ -17,25 +17,25 @@ const transitionStyles = {
   top: {
     entering: { transform: 'translate(0, -16px)', opacity: 0 },
     entered: { transform: 'translate(0, 0)', opacity: 1 },
-    exiting: { transform: 'translate(0, 0)', opacity: 1 },
+    exiting: { transform: 'translate(0, -16px)', opacity: 0 },
     exited: { transform: 'translate(0, -16px)', opacity: 0 },
   },
   bottom: {
     entering: { transform: 'translate(0, 16px)', opacity: 0 },
     entered: { transform: 'translate(0, 0)', opacity: 1 },
-    exiting: { transform: 'translate(0, 0)', opacity: 1 },
+    exiting: { transform: 'translate(0, 16px)', opacity: 0 },
     exited: { transform: 'translate(0, 16px)', opacity: 0 },
   },
   left: {
     entering: { transform: 'translate(-16px, 0)', opacity: 0 },
     entered: { transform: 'translate(0, 0)', opacity: 1 },
-    exiting: { transform: 'translate(0, 0)', opacity: 1 },
+    exiting: { transform: 'translate(-16px, 0)', opacity: 0 },
     exited: { transform: 'translate(-16px, 0)', opacity: 0 },
   },
   right: {
     entering: { transform: 'translate(16px, 0)', opacity: 0 },
     entered: { transform: 'translate(0, 0)', opacity: 1 },
-    exiting: { transform: 'translate(0, 0)', opacity: 1 },
+    exiting: { transform: 'translate(16px, 0)', opacity: 0 },
     exited: { transform: 'translate(16px, 0)', opacity: 0 },
   },
 };
