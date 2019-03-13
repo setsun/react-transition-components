@@ -17,25 +17,25 @@ const transitionStyles = {
   top: {
     entering: { transform: 'rotate3d(1, 0, 0, 0.25turn)' },
     entered: { transform: 'rotate3d(1, 0, 0, 0turn)' },
-    exiting: { transform: 'rotate3d(1, 0, 0, 0turn)' },
+    exiting: { transform: 'rotate3d(1, 0, 0, 0.25turn)' },
     exited: { transform: 'rotate3d(1, 0, 0, 0.25turn)' },
   },
   bottom: {
     entering: { transform: 'rotate3d(1, 0, 0, -0.25turn)' },
     entered: { transform: 'rotate3d(1, 0, 0, 0turn)' },
-    exiting: { transform: 'rotate3d(1, 0, 0, 0turn)' },
+    exiting: { transform: 'rotate3d(1, 0, 0, -0.25turn)' },
     exited: { transform: 'rotate3d(1, 0, 0, -0.25turn)' },
   },
   left: {
     entering: { transform: 'rotate3d(0, 1, 0, 0.25turn)' },
     entered: { transform: 'rotate3d(0, 1, 0, 0turn)' },
-    exiting: { transform: 'rotate3d(0, 1, 0, 0turn)' },
+    exiting: { transform: 'rotate3d(0, 1, 0, 0.25turn)' },
     exited: { transform: 'rotate3d(0, 1, 0, 0.25turn)' },
   },
   right: {
     entering: { transform: 'rotate3d(0, 1, 0, -0.25turn)' },
     entered: { transform: 'rotate3d(0, 1, 0, 0turn)' },
-    exiting: { transform: 'rotate3d(0, 1, 0, 0turn)' },
+    exiting: { transform: 'rotate3d(0, 1, 0, -0.25turn)' },
     exited: { transform: 'rotate3d(0, 1, 0, -0.25turn)' },
   },
 };
