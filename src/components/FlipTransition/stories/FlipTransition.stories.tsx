@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, boolean, number, radios } from '@storybook/addon-knobs';
+import { text, boolean, number, radios } from '@storybook/addon-knobs';
 import { directions } from '../../../types';
 
 import FlipTransition from '../';
@@ -15,7 +15,6 @@ const options = directions
 const defaultValue = directions.top;
 
 storiesOf('Flip Transition', module)
-  .addDecorator(withKnobs)
   .add('Flip', () => (
     <FlipTransition
       in={boolean('in', true)}
