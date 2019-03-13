@@ -3,6 +3,14 @@ import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import { TransitionStyles, TransitionComponentProps } from '../types';
 
+// This is for to force a repaint, which is necessary in order to transition styles when changing inline styles.
+// CSSTransition from react-transition-group also follows this implementation:
+// https://github.com/reactjs/react-transition-group/blob/5007303e729a74be66a21c3e2205e4916821524b/src/CSSTransition.js#L208-L215
+const withForceReflow = (callback) => (node, ...rest) => {
+  node.scrollTop;
+  callback && callback(node, ...rest);
+};
+
 const createTransition = (
   defaultStyle: Object,
   transitionStyles: TransitionStyles,
@@ -12,21 +20,33 @@ const createTransition = (
     timeout,
     easing,
     children,
+    onEnter,
+    onEntered,
+    onEntering,
+    onExit,
+    onExited,
+    onExiting,
     ...rest
   }: TransitionComponentProps): React.ReactNode => {
-    // e.g. all 300s ease-in-out
+    // example: all 300ms ease-in-out
     const transition = `${transitionProperty} ${timeout}ms ${easing}`;
 
     return (
       <Transition
         timeout={timeout}
+        onEnter={withForceReflow(onEnter)}
+        onEntered={withForceReflow(onEntered)}
+        onEntering={withForceReflow(onEntering)}
+        onExit={withForceReflow(onExit)}
+        onExiting={withForceReflow(onExiting)}
+        onExited={withForceReflow(onExited)}
         {...rest}
       >
         {(status: TransitionStatus) => {
           const style = {
+            transition,
             ...defaultStyle,
             ...transitionStyles[status],
-            transition,
           };
 
           // support function as child render
