@@ -40,7 +40,7 @@ const transitionStyles = {
   },
 };
 
-const transitionProperty = 'transform';
+const transitionProperty = 'all';
 
 const FlipTopTransition = createTransition(
   defaultStyles.top,
