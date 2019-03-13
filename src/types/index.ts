@@ -6,6 +6,8 @@ export type TransitionStyles = {
   [key in TransitionStatus]?: Object
 }
 
+export type LazyTransitionStyles = (props: Object) => TransitionStyles;
+
 export type TransitionComponentProps = TransitionProps & {
   children: AugmentedTransitionChildren,
   easing?: string,
