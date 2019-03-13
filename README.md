@@ -2,7 +2,7 @@
 
 An animation component library & higher-order component for generating easily configurable `<Transition>` components from `react-transition-group`.
 
-React Transition Components is roughly 2 kB gzipped, has peer dependencies on `react` and `react-transition-group`, and supports `webpack` tree-shaking by default: https://bundlephobia.com/result?p=react-transition-components@3.0.0-rc.6
+`react-transition-components` is roughly 2 kB gzipped, has peer dependencies on `react` and `react-transition-group`, and supports `webpack` tree-shaking by default: https://bundlephobia.com/result?p=react-transition-components@3.0.0-rc.7
 
 `npm i react-transition-components`
 
