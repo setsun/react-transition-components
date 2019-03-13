@@ -40,29 +40,29 @@ const transitionStyles = {
   },
 };
 
-const transitionProperty = 'all';
+const transitionProperty = 'transform';
 
 const FlipTopTransition = createTransition(
-  defaultStyles.top,
   transitionStyles.top,
+  defaultStyles.top,
   transitionProperty,
 );
 
 const FlipBottomTransition = createTransition(
-  defaultStyles.bottom,
   transitionStyles.bottom,
+  defaultStyles.bottom,
   transitionProperty,
 );
 
 const FlipLeftTransition = createTransition(
-  defaultStyles.left,
   transitionStyles.left,
+  defaultStyles.left,
   transitionProperty,
 );
 
 const FlipRightTransition = createTransition(
-  defaultStyles.right,
   transitionStyles.right,
+  defaultStyles.right,
   transitionProperty,
 );
 

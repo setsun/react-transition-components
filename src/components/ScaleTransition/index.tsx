@@ -1,9 +1,5 @@
 import createTransition from '../../createTransition';
 
-const defaultStyle = {
-  transform: 'scale(0)',
-};
-
 const transitionStyles = {
   entering: { transform: 'scale(0)' },
   entered: { transform: 'scale(1)' },
@@ -11,11 +7,13 @@ const transitionStyles = {
   exited: { transform: 'scale(0)'},
 };
 
+const defaultStyle = {};
+
 const transitionProperty = 'transform';
 
 const ScaleTransition = createTransition(
-  defaultStyle,
   transitionStyles,
+  defaultStyle,
   transitionProperty,
 );
 
