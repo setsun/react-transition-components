@@ -4,8 +4,8 @@ import { storiesOf } from '@storybook/react';
 
 import FlipTransition from '../';
 
-const PlaceKitten = () => (
-  <img src="https://placekitten.com/g/312/312" />
+const PlaceKitten = (props) => (
+  <img src="https://placekitten.com/g/312/312" {...props} />
 );
 
 storiesOf('Flip Transition', module)

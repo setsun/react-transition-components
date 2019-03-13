@@ -21,13 +21,14 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
     "@storybook/addon-actions": "^5.0.1",
     "@storybook/addon-links": "^5.0.1",
     "@storybook/react": "^5.0.1",
+    "@storybook/storybook-deployer": "^2.8.1",
     "@types/react-transition-group": "^2.0.16",
     "@types/storybook__react": "^4.0.1",
     "babel-eslint": "^10.0.1",
