@@ -10,7 +10,7 @@ const createTransition = (
 ) => {
   const TransitionComponent = ({
     timeout,
-    easing = 'ease-in-out',
+    easing,
     children,
     ...rest
   }: TransitionComponentProps): React.ReactNode => {
@@ -48,7 +48,12 @@ const createTransition = (
   }
 
   TransitionComponent.defaultProps = {
+    in: true,
+    appear: true,
+    mountOnEnter: true,
+    unmountOnExit: true,
     easing: 'ease-in-out',
+    timeout: 300,
   };
 
   return TransitionComponent;
