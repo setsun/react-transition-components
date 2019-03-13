@@ -40,7 +40,7 @@ const transitionStyles = {
   },
 };
 
-const transitionProperty = 'transform';
+const transitionProperty = 'all';
 
 const SlideTopTransition = createTransition(
   defaultStyles.top,
