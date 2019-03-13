@@ -14,6 +14,7 @@ const createTransition = (
     children,
     ...rest
   }: TransitionComponentProps): React.ReactNode => {
+    // e.g. all 300s ease-in-out
     const transition = `${transitionProperty} ${timeout}ms ${easing}`;
 
     return (
