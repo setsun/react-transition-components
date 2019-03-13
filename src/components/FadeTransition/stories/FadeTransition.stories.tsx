@@ -2,30 +2,15 @@ import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import FlipTransition from '../';
+import FadeTransition from '../';
 
-const PlaceKitten = () => (
-  <img src="https://placekitten.com/g/312/312" />
+const PlaceKitten = (props) => (
+  <img src="https://placekitten.com/g/312/312" {...props} />
 );
 
-storiesOf('Flip Transition', module)
-  .add('Flip (Top)', () => (
-    <FlipTransition direction="top">
+storiesOf('Fade Transition', module)
+  .add('Fade', () => (
+    <FadeTransition>
       <PlaceKitten />
-    </FlipTransition>
-  ))
-  .add('Flip (Left)', () => (
-    <FlipTransition direction="left">
-      <PlaceKitten />
-    </FlipTransition>
-  ))
-  .add('Flip (Right)', () => (
-    <FlipTransition direction="right">
-      <PlaceKitten />
-    </FlipTransition>
-  ))
-  .add('Flip (Bottom)', () => (
-    <FlipTransition direction="bottom">
-      <PlaceKitten />
-    </FlipTransition>
+    </FadeTransition>
   ))
