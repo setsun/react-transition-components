@@ -7,10 +7,10 @@ type Props = TransitionComponentProps & {
 }
 
 const defaultStyles = {
-  top: { transformOrigin: 'top', perspectiveOrigin: 'top', perspective: '0' },
-  bottom: { transformOrigin: 'bottom', perspectiveOrigin: 'bottom', perspective: '0' },
-  left: { transformOrigin: 'left', perspectiveOrigin: 'left', perspective: '0' },
-  right: { transformOrigin: 'right', perspectiveOrigin: 'right', perspective: '0' }
+  top: { transform: 'translate(0, -16px)', opacity: 0 },
+  bottom: { transform: 'translate(0, 16px)', opacity: 0 },
+  left: { transform: 'translate(-16px, 0)', opacity: 0 },
+  right: { transform: 'translate(16px, 0)', opacity: 0 },
 };
 
 const transitionStyles = {
