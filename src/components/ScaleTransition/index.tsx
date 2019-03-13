@@ -1,21 +1,13 @@
 import createTransition from '../../createTransition';
 
 const transitionStyles = ({ start, end }) => ({
-  entering: { transform: `scale(${start})` },
-  entered: { transform: `scale(${end})` },
-  exiting: { transform: `scale(${start})` },
-  exited: { transform: `scale(${start})` },
+  entering: { transform: `scale(${start})`, opacity: 0 },
+  entered: { transform: `scale(${end})`, opacity: 1 },
+  exiting: { transform: `scale(${start})`, opacity: 0 },
+  exited: { transform: `scale(${start})`, opacity: 0 },
 });
 
-const defaultStyle = {};
-
-const transitionProperty = 'transform';
-
-const ScaleTransition = createTransition(
-  transitionStyles,
-  defaultStyle,
-  transitionProperty,
-);
+const ScaleTransition = createTransition(transitionStyles);
 
 ScaleTransition.displayName = 'ScaleTransition';
 

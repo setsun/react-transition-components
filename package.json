@@ -1,8 +1,9 @@
 {
   "name": "react-transition-components",
   "version": "3.0.0-rc.7",
-  "description": "Simple transition / animation component creation for React",
+  "author": "Setsun <setsun@setsun.io>",
   "license": "MIT",
+  "description": "Easily configurable React components for animations / transitions 💃",
   "repository": "https://github.com/Setsun/react-transition-components",
   "module": "src/index.js",
   "main": "dist/index.js",
@@ -17,7 +18,7 @@
     "animation"
   ],
   "scripts": {
-    "dev:client": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
+    "start": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006",
@@ -26,8 +27,10 @@
   "devDependencies": {
     "@babel/core": "7.3.4",
     "@storybook/addon-actions": "^5.0.1",
+    "@storybook/addon-info": "^5.0.1",
     "@storybook/addon-knobs": "^5.0.1",
     "@storybook/addon-links": "^5.0.1",
+    "@storybook/addon-storysource": "^5.0.1",
     "@storybook/react": "^5.0.1",
     "@storybook/storybook-deployer": "^2.8.1",
     "@types/react-transition-group": "^2.0.16",

@@ -1108,6 +1108,26 @@
     react-inspector "^2.3.0"
     uuid "^3.3.2"
 
+"@storybook/addon-info@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-info/-/addon-info-5.0.1.tgz#959de89d0c1b24f8d560fac8a44b6d46b4abc5c4"
+  dependencies:
+    "@storybook/addons" "5.0.1"
+    "@storybook/client-logger" "5.0.1"
+    "@storybook/components" "5.0.1"
+    "@storybook/theming" "5.0.1"
+    core-js "^2.6.5"
+    global "^4.3.2"
+    marksy "^6.1.0"
+    nested-object-assign "^1.0.1"
+    prop-types "^15.6.2"
+    react "^16.8.1"
+    react-addons-create-fragment "^15.5.3"
+    react-element-to-jsx-string "^14.0.2"
+    react-is "^16.8.1"
+    react-lifecycles-compat "^3.0.4"
+    util-deprecate "^1.0.2"
+
 "@storybook/addon-knobs@^5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-5.0.1.tgz#c7a3449691d07485d3e31681db47655749ccaa16"
@@ -1140,6 +1160,22 @@
     global "^4.3.2"
     prop-types "^15.6.2"
     qs "^6.5.2"
+
+"@storybook/addon-storysource@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-5.0.1.tgz#5815ae981e8e957d37afb9bf5c586bb75398bcc6"
+  dependencies:
+    "@storybook/addons" "5.0.1"
+    "@storybook/components" "5.0.1"
+    "@storybook/router" "5.0.1"
+    "@storybook/theming" "5.0.1"
+    core-js "^2.6.5"
+    estraverse "^4.2.0"
+    loader-utils "^1.2.1"
+    prettier "^1.16.4"
+    prop-types "^15.6.2"
+    react-syntax-highlighter "^8.0.1"
+    regenerator-runtime "^0.12.1"
 
 "@storybook/addons@5.0.1":
   version "5.0.1"
@@ -2260,6 +2296,10 @@ babel-runtime@^6.18.0, babel-runtime@^6.26.0:
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
+
+babel-standalone@^6.26.0:
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/babel-standalone/-/babel-standalone-6.26.0.tgz#15fb3d35f2c456695815ebf1ed96fe7f015b6886"
 
 bail@^1.0.0:
   version "1.0.3"
@@ -3629,7 +3669,7 @@ esrecurse@^4.1.0:
   dependencies:
     estraverse "^4.1.0"
 
-estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1:
+estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
 
@@ -3820,7 +3860,7 @@ faye-websocket@~0.11.1:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fbjs@^0.8.0, fbjs@^0.8.1:
+fbjs@^0.8.0, fbjs@^0.8.1, fbjs@^0.8.4:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   dependencies:
@@ -4074,6 +4114,10 @@ get-caller-file@^1.0.1:
 get-func-name@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/get-func-name/-/get-func-name-2.0.0.tgz#ead774abee72e20409433a066366023dd6887a41"
+
+get-own-enumerable-property-symbols@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-2.0.1.tgz#5c4ad87f2834c4b9b4e84549dc1e0650fb38c24b"
 
 get-stdin@^6.0.0:
   version "6.0.0"
@@ -4338,7 +4382,7 @@ he@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
-he@1.2.x:
+he@1.2.x, he@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
 
@@ -4765,6 +4809,10 @@ is-number@^3.0.0:
   dependencies:
     kind-of "^3.0.2"
 
+is-obj@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
+
 is-object@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-object/-/is-object-1.0.1.tgz#8952688c5ec2ffd6b03ecc85e769e02903083470"
@@ -4773,7 +4821,7 @@ is-plain-obj@^1.0.0, is-plain-obj@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
 
-is-plain-object@^2.0.1, is-plain-object@^2.0.3, is-plain-object@^2.0.4:
+is-plain-object@2.0.4, is-plain-object@^2.0.1, is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
   dependencies:
@@ -4788,6 +4836,10 @@ is-regex@^1.0.4:
   resolved "https://registry.yarnpkg.com/is-regex/-/is-regex-1.0.4.tgz#5517489b547091b0930e095654ced25ee97e9491"
   dependencies:
     has "^1.0.1"
+
+is-regexp@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-regexp/-/is-regexp-1.0.0.tgz#fd2d883545c46bac5a633e7b9a09e87fa2cb5069"
 
 is-retry-allowed@^1.1.0:
   version "1.1.0"
@@ -5044,7 +5096,7 @@ loader-utils@1.1.0:
     emojis-list "^2.0.0"
     json5 "^0.5.0"
 
-loader-utils@1.2.3, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.3:
+loader-utils@1.2.3, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.1, loader-utils@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.2.3.tgz#1ff5dc6911c9f0a062531a4c04b609406108c2c7"
   dependencies:
@@ -5110,7 +5162,7 @@ lodash@>4.17.4, lodash@^4.0.1, lodash@^4.17.10, lodash@^4.17.11:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   dependencies:
@@ -5188,6 +5240,18 @@ markdown-to-jsx@^6.9.1:
   dependencies:
     prop-types "^15.6.2"
     unquote "^1.1.0"
+
+marked@^0.3.12:
+  version "0.3.19"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.19.tgz#5d47f709c4c9fc3c216b6d46127280f40b39d790"
+
+marksy@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/marksy/-/marksy-6.1.0.tgz#36482148a1115cc78570855f7ebd744bb453d5cc"
+  dependencies:
+    babel-standalone "^6.26.0"
+    he "^1.1.1"
+    marked "^0.3.12"
 
 material-colors@^1.2.1:
   version "1.2.6"
@@ -5473,6 +5537,10 @@ negotiator@0.6.1:
 neo-async@^2.5.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
+
+nested-object-assign@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/nested-object-assign/-/nested-object-assign-1.0.3.tgz#5aca69390d9affe5a612152b5f0843ae399ac597"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -6397,6 +6465,14 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-create-fragment@^15.5.3:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-addons-create-fragment/-/react-addons-create-fragment-15.6.2.tgz#a394de7c2c7becd6b5475ba1b97ac472ce7c74f8"
+  dependencies:
+    fbjs "^0.8.4"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.0"
+
 react-clientside-effect@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.0.tgz#db823695f75e9616a5e4dd6d908e5ea627fb2516"
@@ -6471,6 +6547,13 @@ react-draggable@^3.1.1:
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.0"
+
+react-element-to-jsx-string@^14.0.2:
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/react-element-to-jsx-string/-/react-element-to-jsx-string-14.0.2.tgz#586d248bb2416855aa6ac3881e18726832c146d2"
+  dependencies:
+    is-plain-object "2.0.4"
+    stringify-object "3.2.2"
 
 react-error-overlay@^5.1.4:
   version "5.1.4"
@@ -7364,6 +7447,14 @@ string_decoder@~1.1.1:
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
   dependencies:
     safe-buffer "~5.1.0"
+
+stringify-object@3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/stringify-object/-/stringify-object-3.2.2.tgz#9853052e5a88fb605a44cd27445aa257ad7ffbcd"
+  dependencies:
+    get-own-enumerable-property-symbols "^2.0.1"
+    is-obj "^1.0.1"
+    is-regexp "^1.0.0"
 
 strip-ansi@5.0.0:
   version "5.0.0"
