@@ -15,7 +15,7 @@ One of the easiest and most common ways to add a enter/exit transition is using 
 
 The other way to add a transition is using `<Transition>` from `react-transition-group`, which allows us to express our transitions using React inline styles. This solves our previous issue since we can dynamically generate all of our styles in JavaScript and not have to maintain a static CSS stylesheet.
 
-`react-transition-components` aims to provide a component library of common UI transitions, and to make it easier to create re-usable transition components by providing a `createTransition` higher-order component for wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in less than 15 lines of code in the simplest case:
+`react-transition-components` aims to provide a component library of common UI transitions, and to make it easier to create re-usable transition components by providing a `createTransition` higher-order component for wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in 10 lines of code in the simplest case:
 
 ```jsx
 import { createTransition } from 'react-transition-components';
@@ -27,11 +27,7 @@ const transitionStyles = {
   exited: { transform: 'scale(0)' },
 };
 
-const ScaleTransition = createTransition(transitionStyles);
-
-ScaleTransition.displayName = 'ScaleTransition';
-
-export default ScaleTransition;
+export const ScaleTransition = createTransition(transitionStyles);
 ```
 
 # API
@@ -42,7 +38,7 @@ The `createTransition` higher-order component returns a pre-configured `<Transit
 ```ts
 type createTransition = (
   transitionStyles: TransitionStyles | LazyTransitionStyles,
-  defaultStyle?: Object,
+  defaultStyle?: React.CSSProperties | LazyCSSProperties,
   transitionProperty?: string,
 ) => React.SFC<TransitionProps>
 ```
@@ -79,10 +75,49 @@ const transitionStyles = (props) => {
 
 const FadeTransition = createTransition(transitionStyles);
 
+FadeTransition.defaultProps = {
+  start: 0,
+  end: 1,
+};
 ```
 
-#### `defaultStyle: Object`
+#### `defaultStyle: React.CSSProperties | LazyCSSProperties`
 The `defaultStyle` object is a style object to be passed down to your `React` component for any persistent styles you want your component to have throughout each transition state.
+
+```jsx
+const transitionStyles = {...};
+
+const defaultStyle = {
+  transformOrigin: 'top',
+  perspective: '0'
+};
+
+const FlipTopTransition = createTransition(
+  transitionStyles,
+  defaultStyle,
+);
+```
+
+Similar to `transitionStyles`, `defaultStyle` can also be a function to generate your default styles based on component `props`.
+
+```jsx
+const transitionStyles = {...};
+
+const defaultStyle = (props) => {
+  const { transformOrigin } = props;
+
+  return { transformOrigin, perspective: '0' };
+}
+
+const FlipTransition = createTransition(
+  transitionStyles,
+  defaultStyle,
+);
+
+FadeTransition.defaultProps = {
+  transformOrigin: 'top',
+};
+```
 
 #### `transitionProperty: string`
 The `transitionProperty` argument is a CSS `transition-property` value that can be passed down as an optimization. By default, it is set to `all`.

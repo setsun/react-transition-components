@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
-import { TransitionComponentProps, TransitionStyles, LazyTransitionStyles } from '../types';
+import {
+  TransitionComponentProps,
+  TransitionStyles,
+  LazyTransitionStyles,
+  LazyCSSProperties,
+} from '../types';
 
 /**
  * This is for to force a repaint, which is necessary in order to transition styles when changing inline styles.
@@ -27,7 +32,7 @@ const getTransitionString = (transitionProperty, timeout, easing) => {
 
 const createTransition = (
   transitionStyles: LazyTransitionStyles | TransitionStyles,
-  defaultStyle?: Object,
+  defaultStyle?: LazyCSSProperties | React.CSSProperties,
   transitionProperty?: string,
 ): React.SFC<TransitionComponentProps> => {
   const TransitionComponent = (props: TransitionComponentProps) => {
@@ -44,7 +49,16 @@ const createTransition = (
       ...rest
     } = props;
 
+    // example: all 300ms ease-in-out
     const transition = getTransitionString(transitionProperty, timeout, easing);
+
+    // generate the default style lazily, or use the static style object
+    const computedDefaultStyle = typeof defaultStyle === 'function' ?
+      defaultStyle(props) : defaultStyle;
+
+    // generate the transition styles lazily, or use the static styles object
+    const computedTransitionStyles = typeof transitionStyles === 'function' ?
+      transitionStyles(props) : transitionStyles;
 
     return (
       <Transition
@@ -62,15 +76,10 @@ const createTransition = (
         {...rest}
       >
         {(status: TransitionStatus) => {
-          // generate the styles lazily, or use the static style object
-          const transitionStyle = typeof transitionStyles === 'function' ?
-            transitionStyles(props)[status] :
-            transitionStyles[status];
-
           const style = {
             transition,
-            ...defaultStyle,
-            ...transitionStyle,
+            ...computedDefaultStyle,
+            ...computedTransitionStyles[status],
           };
 
           // support function as child render
@@ -86,7 +95,7 @@ const createTransition = (
               ...style,
               ...childStyle,
             }
-          })
+          });
         }}
       </Transition>
     )
