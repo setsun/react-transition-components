@@ -13,6 +13,7 @@ storiesOf('Scale Transition', module)
   .add('Scale', () => (
     <ScaleTransition
       in={boolean('in', true)}
+      fade={boolean('fade', true)}
       start={number('start', 0)}
       end={number('end', 1)}
       easing={text('easing', 'ease-in-out')}
