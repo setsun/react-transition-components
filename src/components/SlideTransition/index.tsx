@@ -1,77 +1,49 @@
-import * as React from 'react';
 import createTransition from '../../createTransition';
 import { TransitionComponentProps, directions } from '../../types';
 
 type Props = TransitionComponentProps & {
-  direction: directions
+  direction: directions,
+  start: number,
+  end: number,
+  fade: boolean,
 }
 
-const transitionStyles = {
-  top: ({ start, end }) => ({
-    entering: { transform: `translate(0, -${start}px)`, opacity: 0 },
-    entered: { transform: `translate(0, ${end}px)`, opacity: 1 },
-    exiting: { transform: `translate(0, -${start}px)`, opacity: 0 },
-    exited: { transform: `translate(0, -${start}px)`, opacity: 0 },
+const transitionStylesByDirection = {
+  top: ({ start, end, fade }: Props) => ({
+    entering: { transform: `translate(0, -${start}px)`, opacity: (fade ? 0 : undefined) },
+    entered: { transform: `translate(0, ${end}px)`, opacity: (fade ? 1 : undefined) },
+    exiting: { transform: `translate(0, -${start}px)`, opacity: (fade ? 0 : undefined) },
+    exited: { transform: `translate(0, -${start}px)`, opacity: (fade ? 0 : undefined) },
   }),
-  bottom: ({ start, end }) => ({
-    entering: { transform: `translate(0, ${start}px)`, opacity: 0 },
-    entered: { transform: `translate(0, ${end}px)`, opacity: 1 },
-    exiting: { transform: `translate(0, ${start}px)`, opacity: 0 },
-    exited: { transform: `translate(0, ${start}px)`, opacity: 0 },
+  bottom: ({ start, end, fade }: Props) => ({
+    entering: { transform: `translate(0, ${start}px)`, opacity: (fade ? 0 : undefined) },
+    entered: { transform: `translate(0, ${end}px)`, opacity: (fade ? 1 : undefined) },
+    exiting: { transform: `translate(0, ${start}px)`, opacity: (fade ? 0 : undefined) },
+    exited: { transform: `translate(0, ${start}px)`, opacity: (fade ? 0 : undefined) },
   }),
-  left: ({ start, end }) => ({
-    entering: { transform: `translate(-${start}px, 0)`, opacity: 0 },
-    entered: { transform: `translate(0, ${end}px)`, opacity: 1 },
-    exiting: { transform: `translate(-${start}px, 0)`, opacity: 0 },
-    exited: { transform: `translate(-${start}px, 0)`, opacity: 0 },
+  left: ({ start, end, fade }: Props) => ({
+    entering: { transform: `translate(-${start}px, 0)`, opacity: (fade ? 0 : undefined) },
+    entered: { transform: `translate(0, ${end}px)`, opacity: (fade ? 1 : undefined) },
+    exiting: { transform: `translate(-${start}px, 0)`, opacity: (fade ? 0 : undefined) },
+    exited: { transform: `translate(-${start}px, 0)`, opacity: (fade ? 0 : undefined) },
   }),
-  right: ({ start, end }) => ({
-    entering: { transform: `translate(${start}px, 0)`, opacity: 0 },
-    entered: { transform: `translate(0, ${end}px)`, opacity: 1 },
-    exiting: { transform: `translate(${start}px, 0)`, opacity: 0 },
-    exited: { transform: `translate(${start}px, 0)`, opacity: 0 },
+  right: ({ start, end, fade }: Props) => ({
+    entering: { transform: `translate(${start}px, 0)`, opacity: (fade ? 0 : undefined) },
+    entered: { transform: `translate(0, ${end}px)`, opacity: (fade ? 1 : undefined) },
+    exiting: { transform: `translate(${start}px, 0)`, opacity: (fade ? 0 : undefined) },
+    exited: { transform: `translate(${start}px, 0)`, opacity: (fade ? 0 : undefined) },
   }),
 };
 
+const transitionStyles = (props: Props) => transitionStylesByDirection[props.direction](props);
 
-const SlideTopTransition = createTransition(
-  transitionStyles.top,
+const SlideTransition: React.SFC<Props> = createTransition(
+  transitionStyles,
 );
-
-const SlideBottomTransition = createTransition(
-  transitionStyles.bottom,
-);
-
-const SlideLeftTransition = createTransition(
-  transitionStyles.left,
-);
-
-const SlideRightTransition = createTransition(
-  transitionStyles.right,
-);
-
-const Components = {
-  top: SlideTopTransition,
-  bottom: SlideBottomTransition,
-  left: SlideLeftTransition,
-  right: SlideRightTransition,
-};
-
-const SlideTransition = ({
-  children,
-  ...rest
-}: Props) => {
-  const TransitionComponent = Components[rest.direction];
-
-  return (
-    <TransitionComponent {...rest}>
-      {children}
-    </TransitionComponent>
-  );
-}
 
 SlideTransition.defaultProps = {
   direction: directions.top,
+  fade: true,
   start: 16,
   end: 0,
 }

@@ -1,4 +1,10 @@
 import createTransition from '../../createTransition';
+import { TransitionComponentProps } from '../../types';
+
+type Props = TransitionComponentProps & {
+  start: number,
+  end: number,
+}
 
 const transitionStyles = ({ start, end }) => ({
   entering: { opacity: start },
@@ -11,7 +17,7 @@ const defaultStyle = {};
 
 const transitionProperty = 'opacity';
 
-const FadeTransition = createTransition(
+const FadeTransition: React.SFC<Props> = createTransition(
   transitionStyles,
   defaultStyle,
   transitionProperty,
