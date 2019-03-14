@@ -1,19 +1,27 @@
 import createTransition from '../../createTransition';
+import { TransitionComponentProps } from '../../types';
 
-const transitionStyles = ({ start, end }) => ({
-  entering: { transform: `rotate(${start}turn)`, opacity: 0 },
-  entered: { transform: `rotate(${end}turn)`, opacity: 1, },
-  exiting: { transform: `rotate(${start}turn)`, opacity: 0 },
-  exited: { transform: `rotate(${start}turn)`, opacity: 0 },
+type Props = TransitionComponentProps & {
+  start: number,
+  end: number,
+  fade: boolean,
+}
+
+const transitionStyles = ({ start, end, fade }: Props) => ({
+  entering: { transform: `rotate(${start}deg)`, opacity: (fade ? 0 : undefined), },
+  entered: { transform: `rotate(${end}deg)`, opacity: (fade ? 1 : undefined), },
+  exiting: { transform: `rotate(${start}deg)`, opacity: (fade ? 0 : undefined), },
+  exited: { transform: `rotate(${start}deg)`, opacity: (fade ? 0 : undefined), },
 });
 
-const RotateTransition = createTransition(
+const RotateTransition: React.SFC<Props> = createTransition(
   transitionStyles,
 );
 
 RotateTransition.defaultProps = {
-  start: 0.5,
+  start: 90,
   end: 0,
+  fade: true,
 };
 
 RotateTransition.displayName = 'RotateTransition';

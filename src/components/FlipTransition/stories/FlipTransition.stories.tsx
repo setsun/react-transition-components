@@ -18,6 +18,7 @@ storiesOf('Flip Transition', module)
   .add('Flip', () => (
     <FlipTransition
       in={boolean('in', true)}
+      fade={boolean('fade', true)}
       direction={radios(label, options, defaultValue)}
       start={number('start', 0.25)}
       end={number('end', 0)}

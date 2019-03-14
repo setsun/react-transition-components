@@ -18,6 +18,7 @@ storiesOf('Slide Transition', module)
   .add('Slide', () => (
     <SlideTransition
       in={boolean('in', true)}
+      fade={boolean('fade', true)}
       direction={radios(label, options, defaultValue)}
       start={number('start', 16)}
       end={number('end', 0)}
