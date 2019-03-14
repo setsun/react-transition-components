@@ -6,14 +6,14 @@ type Props = TransitionComponentProps & {
   direction: directions
 }
 
-const defaultStylesByDirection = {
+const defaultStyleByDirection = {
   top: { transformOrigin: 'top', perspectiveOrigin: 'top', perspective: '0' },
   bottom: { transformOrigin: 'bottom', perspectiveOrigin: 'bottom', perspective: '0' },
   left: { transformOrigin: 'left', perspectiveOrigin: 'left', perspective: '0' },
   right: { transformOrigin: 'right', perspectiveOrigin: 'right', perspective: '0' }
 };
 
-const defaultStyles = ({ direction }: Props) => defaultStylesByDirection[direction];
+const defaultStyle = ({ direction }: Props) => defaultStyleByDirection[direction];
 
 const transitionStylesByDirection = {
   top: ({ start, end, fade }: Props) => ({
@@ -46,7 +46,7 @@ const transitionStyles = (props: Props) => transitionStylesByDirection[props.dir
 
 const FlipTransition: React.SFC<Props> = createTransition(
   transitionStyles,
-  defaultStyles,
+  defaultStyle,
 );
 
 FlipTransition.defaultProps = {

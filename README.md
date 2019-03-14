@@ -89,6 +89,7 @@ const transitionStyles = {...};
 
 const defaultStyle = {
   transformOrigin: 'top',
+  perspectiveOrigin: 'top',
   perspective: '0'
 };
 
@@ -103,19 +104,26 @@ Similar to `transitionStyles`, `defaultStyle` can also be a function to generate
 ```jsx
 const transitionStyles = {...};
 
-const defaultStyle = (props) => {
-  const { transformOrigin } = props;
+const defaultStyleByDirection = {
+  top: { transformOrigin: 'top', perspectiveOrigin: 'top', perspective: '0' },
+  bottom: { transformOrigin: 'bottom', perspectiveOrigin: 'bottom', perspective: '0' },
+  left: { transformOrigin: 'left', perspectiveOrigin: 'left', perspective: '0' },
+  right: { transformOrigin: 'right', perspectiveOrigin: 'right', perspective: '0' }
+};
 
-  return { transformOrigin, perspective: '0' };
-}
+const defaultStyle = (props) => {
+  const { direction } = props;
+
+  return defaultStyleByDirection[direction];
+};
 
 const FlipTransition = createTransition(
   transitionStyles,
   defaultStyle,
 );
 
-FadeTransition.defaultProps = {
-  transformOrigin: 'top',
+FlipTransition.defaultProps = {
+  direction: 'top',
 };
 ```
 
