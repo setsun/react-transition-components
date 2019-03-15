@@ -1,26 +1,26 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import FadeTransition from '../';
+import SkewTransition from '../';
 
-describe('FadeTransition', () => {
+describe('SkewTransition', () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(
-      <FadeTransition timeout={300}>
+      <SkewTransition timeout={300}>
         <div />
-      </FadeTransition>
+      </SkewTransition>
     );
   });
 
-  describe('when the FadeTransition is entering', () => {
+  describe('when the SkewTransition is entering', () => {
     it('should apply entering styles', () => {
 
     });
   })
 
-  describe('when the FadeTransition is exiting', () => {
+  describe('when the SkewTransition is exiting', () => {
     it('should apply exiting styles', () => {
 
     });

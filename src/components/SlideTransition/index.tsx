@@ -2,10 +2,10 @@ import createTransition from '../../createTransition';
 import { TransitionComponentProps, directions } from '../../types';
 
 type Props = TransitionComponentProps & {
-  direction: directions,
-  start: number,
-  end: number,
-  fade: boolean,
+  direction?: directions,
+  start?: number,
+  end?: number,
+  fade?: boolean,
 }
 
 const transitionStylesByDirection = {

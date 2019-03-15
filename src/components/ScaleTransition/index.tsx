@@ -2,9 +2,9 @@ import createTransition from '../../createTransition';
 import { TransitionComponentProps } from '../../types';
 
 type Props = TransitionComponentProps & {
-  start: number,
-  end: number,
-  fade: boolean,
+  start?: number,
+  end?: number,
+  fade?: boolean,
 }
 
 const transitionStyles = ({ start, end, fade }: Props) => ({
