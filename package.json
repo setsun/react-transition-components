@@ -1,6 +1,6 @@
 {
   "name": "react-transition-components",
-  "version": "3.0.0-rc.9",
+  "version": "3.0.0-rc.10",
   "author": "Setsun <setsun@setsun.io>",
   "license": "MIT",
   "description": "Easily configurable React components for animations / transitions 💃",
