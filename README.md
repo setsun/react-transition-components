@@ -136,3 +136,4 @@ The `transitionProperty` argument is a CSS `transition-property` value that can 
 - `ScaleTransition`
 - `FlipTransition`
 - `RotateTransition`
+- `SkewTransition`
