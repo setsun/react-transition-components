@@ -10,7 +10,6 @@ addParameters({
 
   },
   options: {
-    panelPosition: 'right',
     theme: themes.dark,
   }
 });
