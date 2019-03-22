@@ -1,26 +1,26 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import SlideTransition from '../';
+import TranslateTransition from '..';
 
-describe('SlideTransition', () => {
+describe('TranslateTransition', () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(
-      <SlideTransition timeout={300}>
+      <TranslateTransition timeout={300}>
         <div />
-      </SlideTransition>
+      </TranslateTransition>
     );
   });
 
-  describe('when the SlideTransition is entering', () => {
+  describe('when the TranslateTransition is entering', () => {
     it('should apply entering styles', () => {
 
     });
   })
 
-  describe('when the SlideTransition is exiting', () => {
+  describe('when the TranslateTransition is exiting', () => {
     it('should apply exiting styles', () => {
 
     });

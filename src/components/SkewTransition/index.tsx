@@ -1,5 +1,6 @@
 import createTransition from '../../createTransition';
 import { TransitionComponentProps } from '../../types';
+import defaultTransformStyle from '../defaultTransformStyle';
 
 type Props = TransitionComponentProps & {
   x: {
@@ -27,7 +28,8 @@ const transitionStyles = (props: Props) => {
 };
 
 const SkewTransition: React.SFC<Props> = createTransition(
-  transitionStyles
+  transitionStyles,
+  defaultTransformStyle,
 );
 
 SkewTransition.defaultProps = {
