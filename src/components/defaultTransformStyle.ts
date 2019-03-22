@@ -3,6 +3,7 @@ const defaultTransformStyle = (props) => ({
   transformOrigin: props.transformOrigin,
   perspectiveOrigin: props.perspectiveOrigin,
   perspective: props.perspective,
+  backfaceVisibility: props.backfaceVisibility,
 });
 
 export default defaultTransformStyle;

@@ -21,7 +21,7 @@ storiesOf('Rotate Transition', module)
       y={number('y', 0)}
       z={number('z', 1)}
       a={object('a', {
-        start: 90,
+        start: 180,
         end: 0,
       })}
     >
