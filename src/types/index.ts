@@ -15,10 +15,3 @@ export type TransitionComponentProps = TransitionProps & {
   children: AugmentedTransitionChildren,
   easing?: string,
 }
-
-export enum directions {
-  left = 'left',
-  right = 'right',
-  top ='top',
-  bottom = 'bottom',
-};
