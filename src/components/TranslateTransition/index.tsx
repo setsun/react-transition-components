@@ -32,28 +32,28 @@ const baseStyle = {
 }
 
 const presetMap = {
-  top: {
+  [presets.top]: {
     ...baseStyle,
     y: {
       start: -16,
       end: 0,
     },
   },
-  bottom: {
+  [presets.bottom]: {
     ...baseStyle,
     y: {
       start: 16,
       end: 0,
     },
   },
-  left: {
+  [presets.left]: {
     ...baseStyle,
     x: {
       start: -16,
       end: 0,
     }
   },
-  right: {
+  [presets.right]: {
     ...baseStyle,
     x: {
       start: 16,
@@ -64,10 +64,8 @@ const presetMap = {
 
 const transitionStyles = (props: Props) => {
   const { preset, fade } = props;
-  const presetValue = presetMap[preset] || {};
-  const x = (presetValue.x || props.x || { start: 0, end: 0 });
-  const y = (presetValue.y || props.y || { start: 0, end: 0 });
-  const z = (presetValue.z || props.z || { start: 0, end: 0 });
+  const style = presetMap[preset] || props || baseStyle;
+  const { x, y, z } = style;
 
   return {
     entering: { transform: `translate3d(${x.start}px, ${y.start}px, ${z.start}px)`, opacity: (fade ? 0 : undefined) },
@@ -84,6 +82,7 @@ const TranslateTransition: React.SFC<Props> = createTransition(
 
 TranslateTransition.defaultProps = {
   ...presetMap[presets.top],
+  preset: undefined,
   fade: true,
 }
 

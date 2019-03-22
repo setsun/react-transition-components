@@ -2,16 +2,27 @@ import createTransition from '../../createTransition';
 import { TransitionComponentProps } from '../../types';
 import defaultTransformStyle from '../defaultTransformStyle';
 
+export enum presets {
+  x = 'x',
+  y = 'y',
+  z = 'z'
+};
+
 type Props = TransitionComponentProps & {
+  preset?: presets,
   start?: number,
   end?: number,
   fade?: boolean,
 }
 
-export enum presets {
-  x = 'x',
-  y = 'y',
-  z = 'z'
+const basePreset = {
+  x: 0,
+  y: 0,
+  z: 0,
+  a: {
+    start: 0,
+    end: 0,
+  },
 };
 
 const presetMap = {
@@ -46,11 +57,8 @@ const presetMap = {
 
 const transitionStyles = (props: Props) => {
   const { fade, preset } = props;
-  const presetValue = presetMap[preset] || {};
-  const x = (presetValue.x || props.x || 0);
-  const y = (presetValue.x || props.y || 0);
-  const z = (presetValue.z || props.z || 0);
-  const a = (presetValue.a || props.a || { start: 0, end: 0 });
+  const style = presetMap[preset] || props || basePreset;
+  const { x, y, z, a } = style;
 
   return {
     entering: { transform: `rotate3d(${x}, ${y}, ${z}, ${a.start}deg)`, opacity: (fade ? 0 : undefined), },
