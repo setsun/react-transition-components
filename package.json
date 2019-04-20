@@ -20,21 +20,22 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "test": "jest src/*",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006",
     "deploy-storybook": "storybook-to-ghpages"
   },
   "devDependencies": {
     "@babel/core": "7.4.3",
-    "@storybook/addon-actions": "^5.0.6",
-    "@storybook/addon-info": "^5.0.6",
-    "@storybook/addon-knobs": "^5.0.6",
-    "@storybook/addon-links": "^5.0.6",
-    "@storybook/addon-storysource": "^5.0.6",
-    "@storybook/react": "^5.0.6",
+    "@storybook/addon-actions": "^5.0.10",
+    "@storybook/addon-info": "^5.0.10",
+    "@storybook/addon-knobs": "^5.0.10",
+    "@storybook/addon-links": "^5.0.10",
+    "@storybook/addon-storysource": "^5.0.10",
+    "@storybook/react": "^5.0.10",
     "@storybook/storybook-deployer": "^2.8.1",
     "@types/jest": "^24.0.11",
-    "@types/react-transition-group": "^2.0.16",
+    "@types/react-transition-group": "^2.9.0",
     "@types/storybook__react": "^4.0.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "8.0.5",
@@ -42,25 +43,33 @@
     "cross-env": "5.2.0",
     "dotenv": "7.0.0",
     "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "eslint": "^5.16.0",
     "eslint-config-eslint": "^5.0.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-config-setsun": "2.2.1",
-    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-prettier": "3.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "prettier": "^1.16.4",
+    "jest": "^24.7.1",
+    "prettier": "^1.17.0",
     "react": "16.8.4",
     "react-dom": "16.8.6",
     "react-transition-group": "2.6.0",
-    "source-map-support": "0.5.11",
-    "webpack": "4.29.6",
+    "source-map-support": "0.5.12",
+    "webpack": "4.30.0",
     "webpack-cli": "3.3.0"
   },
   "peerDependencies": {
     "react": "^16.8.6",
-    "react-transition-group": "^2.8.0"
+    "react-transition-group": "^4.0.0"
+  },
+  "jest": {
+    "verbose": true,
+    "setupFiles": [
+      "./.jest/setup.js"
+    ]
   },
   "sideEffects": false
 }

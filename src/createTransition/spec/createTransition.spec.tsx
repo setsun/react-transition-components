@@ -3,20 +3,17 @@ import { shallow } from 'enzyme';
 
 import createTransition from '../';
 
-const createTestTransition = () => {
-  const transitionStyles = {
+const createTestTransition = (
+  transitionStyles = {
     entering: { opacity: 0 },
     entered: { opacity: 1 },
     exiting: { opacity: 0 },
     exited: { opacity: 0 },
-  };
-
-  const defaultStyle = {
+  },
+  defaultStyle = {
     color: 'black',
-  };
-
-  return createTransition(transitionStyles, defaultStyle);
-};
+  }
+) => createTransition(transitionStyles, defaultStyle);
 
 describe('createTransition', () => {
   describe('when the child element is passed in', () => {
@@ -25,19 +22,22 @@ describe('createTransition', () => {
     describe('and it is a react child node', () => {
       const wrapper = shallow(
         <TestTransition timeout={300}>
-          <div data-test-id="test-node"></div>
+          <div></div>
         </TestTransition>
       );
 
       it('should apply the styles to the node', () => {
-        const testNode = wrapper.find('data-test-id="test-node"');
-        expect(testNode.props().style).toEqual({});
+        const result = wrapper.find('div').props().style;
+        const expected = {};
+
+        expect(result).toEqual(expected);
       });
     });
 
     describe('and it is a react child function', () => {
       const mockChild = jest.fn();
-      const wrapper = shallow(
+
+      shallow(
         <TestTransition timeout={300}>
           {mockChild}
         </TestTransition>
@@ -50,25 +50,35 @@ describe('createTransition', () => {
   });
 
   describe('when a transitionStyle is passed in', () => {
+    const mockLazyTransitionStyle = jest.fn();
+    const Transition = createTestTransition(mockLazyTransitionStyle);
+
     describe('and it is lazy', () => {
       it('should be passed the component props on render', () => {
-
+        const expected = {};
+        expect(mockLazyTransitionStyle).toBeCalledWith(expected);
       });
 
       it('should return a transitionStyle object', () => {
-
+        const expected = {};
+        expect(mockLazyTransitionStyle).toReturnWith(expected);
       });
     })
   });
 
   describe('when a defaultStyle is passed in', () => {
+    const mockLazyDefaultStyle = jest.fn();
+    const Transition = createTestTransition(jest.fn(), mockLazyDefaultStyle);
+
     describe('and it is lazy', () => {
       it('should be passed the component props on render', () => {
-
+        const expected = {};
+        expect(mockLazyDefaultStyle).toBeCalledWith(expected);
       });
 
       it('should return a defaultStyle object', () => {
-
+        const expected = {};
+        expect(mockLazyDefaultStyle).toBeCalledWith(expected);
       });
     })
   });
