@@ -15,7 +15,9 @@ describe('TranslateTransition', () => {
   });
 
   describe('when the TranslateTransition is entering', () => {
-    wrapper.setProps({ in: true });
+    beforeEach(() => {
+      wrapper.setProps({ in: true });
+    });
 
     it('should apply entering styles', () => {
       const result = wrapper.find('div').props().style;
@@ -26,7 +28,9 @@ describe('TranslateTransition', () => {
   })
 
   describe('when the TranslateTransition is exiting', () => {
-    wrapper.setProps({ in: false });
+    beforeEach(() => {
+      wrapper.setProps({ in: false });
+    });
 
     it('should apply exiting styles', () => {
       const result = wrapper.find('div').props().style;

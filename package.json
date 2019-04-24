@@ -26,16 +26,16 @@
     "deploy-storybook": "storybook-to-ghpages"
   },
   "devDependencies": {
-    "@babel/core": "7.4.3",
-    "@storybook/addon-actions": "^5.0.10",
-    "@storybook/addon-info": "^5.0.10",
-    "@storybook/addon-knobs": "^5.0.10",
-    "@storybook/addon-links": "^5.0.10",
-    "@storybook/addon-storysource": "^5.0.10",
-    "@storybook/react": "^5.0.10",
+    "@babel/core": "7.4.4",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-info": "^5.0.11",
+    "@storybook/addon-knobs": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addon-storysource": "^5.0.11",
+    "@storybook/react": "^5.0.11",
     "@storybook/storybook-deployer": "^2.8.1",
-    "@types/jest": "^24.0.11",
-    "@types/react-transition-group": "^2.9.0",
+    "@types/jest": "^24.0.12",
+    "@types/react-transition-group": "^2.9.1",
     "@types/storybook__react": "^4.0.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "8.0.5",
@@ -46,7 +46,7 @@
     "enzyme-adapter-react-16": "^1.12.1",
     "eslint": "^5.16.0",
     "eslint-config-eslint": "^5.0.1",
-    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-prettier": "^4.2.0",
     "eslint-config-setsun": "2.2.1",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-node": "^8.0.1",
@@ -56,14 +56,15 @@
     "prettier": "^1.17.0",
     "react": "16.8.4",
     "react-dom": "16.8.6",
-    "react-transition-group": "2.6.0",
+    "react-popper-tooltip": "^2.8.2",
+    "react-transition-group": "3.0.0",
     "source-map-support": "0.5.12",
     "webpack": "4.30.0",
-    "webpack-cli": "3.3.0"
+    "webpack-cli": "3.3.1"
   },
   "peerDependencies": {
     "react": "^16.8.6",
-    "react-transition-group": "^4.0.0"
+    "react-transition-group": "^3.0.0"
   },
   "jest": {
     "verbose": true,
