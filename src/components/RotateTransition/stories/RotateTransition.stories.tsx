@@ -13,9 +13,9 @@ storiesOf('Rotate Transition', module)
   .add('Rotate', () => (
     <RotateTransition
       in={boolean('in', true)}
+      fade={boolean('fade', true)}
       timeout={number('timeout', 300)}
       easing={text('easing', 'ease-in-out')}
-      fade={boolean('fade', true)}
       preset={radios(label, options, undefined)}
       x={number('x', 0)}
       y={number('y', 0)}

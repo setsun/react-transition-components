@@ -13,9 +13,9 @@ storiesOf('Translate Transition', module)
   .add('Translate', () => (
     <TranslateTransition
       in={boolean('in', true)}
+      fade={boolean('fade', true)}
       timeout={number('timeout', 300)}
       easing={text('easing', 'ease-in-out')}
-      fade={boolean('fade', true)}
       preset={radios(label, options, undefined)}
       x={object('x', {
         start: 0,

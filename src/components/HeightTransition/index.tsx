@@ -7,23 +7,20 @@ type Props = TransitionComponentProps & {
   height: string,
 }
 
-const transitionStyles = ({ height }) => ({
-  entering: { height: 0 },
-  entered: { height },
-  exiting: { height: 0 },
-  exited: { height: 0 },
+const transitionStyles = ({ height, fade }) => ({
+  entering: { height: 0, opacity: (fade ? 0 : undefined) },
+  entered: { height, opacity: (fade ? 1 : undefined) },
+  exiting: { height: 0, opacity: (fade ? 0 : undefined) },
+  exited: { height: 0, opacity: (fade ? 0 : undefined) },
 });
 
 const defaultStyle = ({ height }) => ({
   overflow: height !== 'auto' ? 'hidden' : null,
 });
 
-const transitionProperty = 'height';
-
 const BaseHeightTransition: React.SFC<Props> = createTransition(
   transitionStyles,
   defaultStyle,
-  transitionProperty,
 );
 
 const HeightTransition = ({
