@@ -10,9 +10,9 @@ storiesOf('Scale Transition', module)
   .add('Scale', () => (
     <ScaleTransition
       in={boolean('in', true)}
+      fade={boolean('fade', true)}
       timeout={number('timeout', 300)}
       easing={text('easing', 'ease-in-out')}
-      fade={boolean('fade', true)}
       x={object('x', {
         start: 0,
         end: 1,
