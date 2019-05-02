@@ -51,9 +51,13 @@ describe('createTransition', () => {
 
   describe('when a transitionStyle is passed in', () => {
     const mockLazyTransitionStyle = jest.fn();
-    const Transition = createTestTransition(mockLazyTransitionStyle);
+    const TestTransition = createTestTransition(mockLazyTransitionStyle);
 
     describe('and it is lazy', () => {
+      beforeEach(() => {
+        shallow(<TestTransition />);
+      })
+
       it('should be passed the component props on render', () => {
         const expected = {};
         expect(mockLazyTransitionStyle).toBeCalledWith(expected);
@@ -68,9 +72,13 @@ describe('createTransition', () => {
 
   describe('when a defaultStyle is passed in', () => {
     const mockLazyDefaultStyle = jest.fn();
-    const Transition = createTestTransition(jest.fn(), mockLazyDefaultStyle);
+    const TestTransition = createTestTransition(jest.fn(), mockLazyDefaultStyle);
 
     describe('and it is lazy', () => {
+      beforeEach(() => {
+        shallow(<TestTransition />);
+      })
+
       it('should be passed the component props on render', () => {
         const expected = {};
         expect(mockLazyDefaultStyle).toBeCalledWith(expected);
