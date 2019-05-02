@@ -29,32 +29,34 @@ const BaseHeightTransition: React.SFC<Props> = createTransition(
 const HeightTransition = ({
   children,
   onEnter,
-  onEntered,
   onExit,
+  timeout,
   ...rest
 }: TransitionComponentProps) => {
   const [height, setHeight] = useState('auto');
 
   return (
     <BaseHeightTransition
-      mountOnEnter={false}
-      unmountOnExit={false}
+      timeout={timeout}
       height={height}
       onEnter={(node, isAppearing) => {
-        const dimensions = node.getBoundingClientRect();
-
-        console.log(dimensions);
+        const child = node.children[0];
+        const dimensions = child.getBoundingClientRect();
 
         setHeight(`${dimensions.height}px`);
+
         onEnter && onEnter(node, isAppearing);
       }}
-      onEntered={(node, isAppearing) => {
-        // setHeight('auto');
-        onEntered && onEntered(node, isAppearing);
+      onExit={(node) => {
+        setHeight('0px');
+
+        onExit && onExit(node);
       }}
       {...rest}
     >
-      {children}
+      <div>
+        {children}
+      </div>
     </BaseHeightTransition>
   )
 }
