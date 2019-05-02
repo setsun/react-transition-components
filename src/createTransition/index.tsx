@@ -101,6 +101,11 @@ const createTransition = (
     )
   }
 
+  TransitionComponent.defaultProps = {
+    timeout: 300,
+    easing: 'ease-in-out'
+  };
+
   return TransitionComponent;
 };
 
