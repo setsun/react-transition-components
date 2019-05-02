@@ -6,6 +6,7 @@ import {
   TransitionStyles,
   LazyTransitionStyles,
   LazyCSSProperties,
+  AugmentedTransitionChildrenFunction,
 } from '../types';
 
 /**
@@ -23,6 +24,8 @@ const withForceReflow = (callback: Function) => (node: HTMLElement, ...rest) => 
  * example: all 300ms ease-in-out
  */
 const getTransitionString = (transitionProperty, timeout, easing) => {
+  // have some reasonable fallbacks, so we reduce the chance of generating
+  // an invalid CSS transition shorthand string
   const transitionPropertyValue = transitionProperty || 'all';
   const timeoutValue = timeout || 0;
   const easingValue = easing || 'ease-in-out';
@@ -84,12 +87,14 @@ const createTransition = (
 
           // support function as child render
           if (typeof children === 'function') {
-            return children(status, style);
+            const childrenFn = children as AugmentedTransitionChildrenFunction;
+            return childrenFn(status, style);
           }
 
-          const child = React.Children.only(children);
+          const child = React.Children.only(children) as React.ReactElement;
           const childStyle = child.props.style || {};
 
+          // clone the child, with extended inline styles
           return React.cloneElement(child, {
             style: {
               ...style,
@@ -101,6 +106,8 @@ const createTransition = (
     )
   }
 
+  // default timing / easing values to allow immediate usage
+  // without needing to pass down any additional props
   TransitionComponent.defaultProps = {
     timeout: 300,
     easing: 'ease-in-out'
