@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import SkewTransition from '../';
+import HeightTransition from '..';
 
-describe('SkewTransition', () => {
+describe('HeightTransition', () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(
-      <SkewTransition timeout={300}>
+      <HeightTransition timeout={300}>
         <div />
-      </SkewTransition>
+      </HeightTransition>
     );
   });
 
-  describe('when the SkewTransition is entering', () => {
+  describe('when the HeightTransition is entering', () => {
     beforeEach(() => {
       wrapper.setProps({ in: true });
     });
@@ -27,7 +27,7 @@ describe('SkewTransition', () => {
     });
   })
 
-  describe('when the SkewTransition is exiting', () => {
+  describe('when the HeightTransition is exiting', () => {
     beforeEach(() => {
       wrapper.setProps({ in: false });
     });

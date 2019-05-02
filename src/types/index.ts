@@ -12,6 +12,7 @@ export type AugmentedTransitionChildren =
   TransitionChildren | ((status: TransitionStatus, style: React.CSSProperties) => React.ReactNode);
 
 export type TransitionComponentProps = TransitionProps & {
-  children: AugmentedTransitionChildren,
-  easing?: string,
+  children: AugmentedTransitionChildren;
+  timeout?: number;
+  easing?: string;
 }

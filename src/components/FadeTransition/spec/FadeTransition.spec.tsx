@@ -15,14 +15,28 @@ describe('FadeTransition', () => {
   });
 
   describe('when the FadeTransition is entering', () => {
-    it('should apply entering styles', () => {
+    beforeEach(() => {
+      wrapper.setProps({ in: true });
+    });
 
+    it('should apply entering styles', () => {
+      const result = wrapper.find('div').props().style;
+      const expected = {};
+
+      expect(result).toEqual(expected);
     });
   })
 
   describe('when the FadeTransition is exiting', () => {
-    it('should apply exiting styles', () => {
+    beforeEach(() => {
+      wrapper.setProps({ in: false });
+    });
 
+    it('should apply exiting styles', () => {
+      const result = wrapper.find('div').props().style;
+      const expected = {};
+
+      expect(result).toEqual(expected);
     });
   })
 })

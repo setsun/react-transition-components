@@ -3,13 +3,13 @@ import { TransitionComponentProps } from '../../types';
 import defaultTransformStyle from '../defaultTransformStyle';
 
 type Props = TransitionComponentProps & {
-  x: {
-    start?: number,
-    end?: number,
+  x?: {
+    start: number,
+    end: number,
   },
-  y: {
-    start?: number,
-    end?: number,
+  y?: {
+    start: number,
+    end: number,
   },
   fade?: boolean,
 }
