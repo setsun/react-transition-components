@@ -30,6 +30,9 @@ const transitionStyles = {
 export const ScaleTransition = createTransition(transitionStyles);
 ```
 
+# Components
+`react-transition-components` comes out of the box with multiple components that work out of the box. A Storybook is live at:  https://setsun.io/react-transition-components
+
 # API
 ### `createTransition(transitionStyles, defaultStyle, transitionProperty)`
 
@@ -129,10 +132,3 @@ FlipTransition.defaultProps = {
 
 #### `transitionProperty: string`
 The `transitionProperty` argument is a CSS `transition-property` value that can be passed down as an optimization. By default, it is set to `all`.
-
-# Components
-- `FadeTransition`
-- `TranslateTransition`
-- `ScaleTransition`
-- `RotateTransition`
-- `SkewTransition`
