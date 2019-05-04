@@ -7,6 +7,8 @@ import {
   LazyTransitionStyles,
   LazyCSSProperties,
   AugmentedTransitionChildrenFunction,
+  TimingObject,
+  Timing,
 } from '../types';
 
 /**
@@ -19,18 +21,31 @@ const withForceReflow = (callback: Function) => (node: HTMLElement, ...rest) => 
   callback && callback(node, ...rest);
 };
 
+const toTimingObject = (timing: Timing): TimingObject =>
+  typeof timing === 'number' ? { enter: timing, exit: timing } : timing;
+
+const getTimingValue = (timingObject: TimingObject, status: TransitionStatus): number =>
+  timingObject[status.indexOf('enter') > -1 ? 'enter' : 'exit'];
+
 /**
  * Gets a CSS transition shorthand string
  * example: all 300ms ease-in-out
  */
-const getTransitionString = (transitionProperty, timeout, easing) => {
+const getTransitionString = (
+  transitionProperty: string,
+  duration: TimingObject,
+  delay: TimingObject,
+  easing: string,
+  status: TransitionStatus
+) => {
   // have some reasonable fallbacks, so we reduce the chance of generating
   // an invalid CSS transition shorthand string
   const transitionPropertyValue = transitionProperty || 'all';
-  const timeoutValue = timeout || 0;
+  const durationValue = getTimingValue(duration, status) || 0;
+  const delayValue = getTimingValue(delay, status) || 0;
   const easingValue = easing || 'ease-in-out';
 
-  return `${transitionPropertyValue} ${timeoutValue}ms ${easingValue}`;
+  return `${transitionPropertyValue} ${durationValue}ms ${easingValue} ${delayValue}ms`;
 };
 
 const createTransition = (
@@ -40,7 +55,8 @@ const createTransition = (
 ): React.SFC<TransitionComponentProps> => {
   const TransitionComponent = (props: TransitionComponentProps) => {
     const {
-      timeout,
+      duration,
+      delay,
       easing,
       children,
       onEnter,
@@ -52,9 +68,6 @@ const createTransition = (
       ...rest
     } = props;
 
-    // example: all 300ms ease-in-out
-    const transition = getTransitionString(transitionProperty, timeout, easing);
-
     // generate the default style lazily, or use the static style object
     const computedDefaultStyle = typeof defaultStyle === 'function' ?
       defaultStyle(props) : defaultStyle;
@@ -63,13 +76,20 @@ const createTransition = (
     const computedTransitionStyles = typeof transitionStyles === 'function' ?
       transitionStyles(props) : transitionStyles;
 
+    // convert to timing objects for consistency
+    const durationObject = toTimingObject(duration);
+    const delayObject = toTimingObject(delay);
+
     return (
       <Transition
         in
         appear
         mountOnEnter
         unmountOnExit
-        timeout={timeout}
+        timeout={{
+          enter: durationObject.enter + delayObject.enter,
+          exit: durationObject.exit + delayObject.exit,
+        }}
         onEnter={withForceReflow(onEnter)}
         onEntered={withForceReflow(onEntered)}
         onEntering={withForceReflow(onEntering)}
@@ -79,6 +99,9 @@ const createTransition = (
         {...rest}
       >
         {(status: TransitionStatus) => {
+          // example: all 300ms ease-in-out
+          const transition = getTransitionString(transitionProperty, durationObject, delayObject, easing, status);
+
           const style = {
             transition,
             ...computedDefaultStyle,
@@ -109,7 +132,8 @@ const createTransition = (
   // default timing / easing values to allow immediate usage
   // without needing to pass down any additional props
   TransitionComponent.defaultProps = {
-    timeout: 300,
+    duration: 300,
+    delay: 0,
     easing: 'ease-in-out'
   };
 

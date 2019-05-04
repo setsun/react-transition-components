@@ -12,8 +12,13 @@ export type AugmentedTransitionChildrenFunction = ((status: TransitionStatus, st
 
 export type AugmentedTransitionChildren = TransitionChildren | AugmentedTransitionChildrenFunction;
 
-export type TransitionComponentProps = TransitionProps & {
+export type TimingObject = { enter?: number, exit?: number };
+
+export type Timing = number | TimingObject;
+
+export type TransitionComponentProps = Pick<TransitionProps, Exclude<keyof TransitionProps, 'timeout'>> & {
   children: AugmentedTransitionChildren;
-  timeout?: number;
+  duration?: Timing;
+  delay?: Timing;
   easing?: string;
 }
