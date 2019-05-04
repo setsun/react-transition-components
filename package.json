@@ -7,6 +7,7 @@
   "repository": "https://github.com/Setsun/react-transition-components",
   "module": "src/index.js",
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "engines": {
     "npm": "^6.0.0"
   },
@@ -21,6 +22,8 @@
     "start": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "test": "jest src/*",
+    "typecheck": "tsc --noEmit --jsx react src/*",
+    "typegen": "tsc  --jsx react --emitDeclarationOnly -d --declarationDir types src/*",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006",
     "deploy-storybook": "storybook-to-ghpages"
@@ -59,6 +62,7 @@
     "react-popper-tooltip": "^2.8.2",
     "react-transition-group": "3.0.0",
     "source-map-support": "0.5.12",
+    "typescript": "^3.4.5",
     "webpack": "4.30.0",
     "webpack-cli": "3.3.1"
   },

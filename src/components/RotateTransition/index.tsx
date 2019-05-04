@@ -74,6 +74,7 @@ const RotateTransition: React.SFC<Props> = createTransition(
 );
 
 RotateTransition.defaultProps = {
+  ...RotateTransition.defaultProps,
   ...presetMap[presets.z],
   preset: undefined,
   fade: true,

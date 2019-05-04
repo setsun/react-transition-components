@@ -65,6 +65,7 @@ const ScaleTransition: React.SFC<Props> = createTransition(
 );
 
 ScaleTransition.defaultProps = {
+  ...ScaleTransition.defaultProps,
   ...presetMap[presets.all],
   fade: true,
 };
