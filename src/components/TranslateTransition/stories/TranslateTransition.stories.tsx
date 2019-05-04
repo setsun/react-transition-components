@@ -14,8 +14,15 @@ storiesOf('Translate Transition', module)
     <TranslateTransition
       in={boolean('in', true)}
       fade={boolean('fade', true)}
-      timeout={number('timeout', 300)}
       easing={text('easing', 'ease-in-out')}
+      duration={object('duration', {
+        enter: 300,
+        exit: 300,
+      })}
+      delay={object('delay', {
+        enter: 0,
+        exit: 0,
+      })}
       preset={radios(label, options, undefined)}
       x={object('x', {
         start: 0,
