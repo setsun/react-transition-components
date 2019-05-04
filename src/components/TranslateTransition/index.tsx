@@ -81,6 +81,7 @@ const TranslateTransition: React.SFC<Props> = createTransition(
 );
 
 TranslateTransition.defaultProps = {
+  ...TranslateTransition.defaultProps,
   ...presetMap[presets.top],
   preset: undefined,
   fade: true,

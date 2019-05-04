@@ -24,6 +24,7 @@ const FadeTransition: React.SFC<Props> = createTransition(
 );
 
 FadeTransition.defaultProps = {
+  ...FadeTransition.defaultProps,
   start: 0,
   end: 1,
 };
