@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { text, boolean, number, object } from '@storybook/addon-knobs';
+import { text, boolean, object } from '@storybook/addon-knobs';
 import StoryPreview from '../../../story-components/Preview';
 
 import SkewTransition from '../';
@@ -11,8 +11,15 @@ storiesOf('Skew Transition', module)
     <SkewTransition
       in={boolean('in', true)}
       fade={boolean('fade', true)}
-      timeout={number('timeout', 300)}
       easing={text('easing', 'ease-in-out')}
+      duration={object('duration', {
+        enter: 300,
+        exit: 300,
+      })}
+      delay={object('delay', {
+        enter: 0,
+        exit: 0,
+      })}
       x={object('x', {
         start: 45,
         end: 0,

@@ -86,6 +86,7 @@ const createTransition = (
         appear
         mountOnEnter
         unmountOnExit
+        {...rest}
         timeout={{
           enter: durationObject.enter + delayObject.enter,
           exit: durationObject.exit + delayObject.exit,
@@ -96,7 +97,6 @@ const createTransition = (
         onExit={withForceReflow(onExit)}
         onExiting={withForceReflow(onExiting)}
         onExited={withForceReflow(onExited)}
-        {...rest}
       >
         {(status: TransitionStatus) => {
           // example: all 300ms ease-in-out
