@@ -1,4 +1,5 @@
 import createTransition from '../../createTransition';
+import { withFade } from '../FadeTransition';
 import { TransitionComponentProps } from '../../types';
 import defaultTransformStyle from '../defaultTransformStyle';
 
@@ -19,12 +20,12 @@ const transitionStyles = (props: Props) => {
   const x = (props.x || { start: 0, end: 0 });
   const y = (props.y || { start: 0, end: 0 });
 
-  return {
-    entering: { transform: `skew(${x.start}deg, ${y.start}deg)`, opacity: (fade ? 0 : undefined) },
-    entered: { transform: `skew(${x.end}deg, ${y.end}deg)`, opacity: (fade ? 1 : undefined) },
-    exiting: { transform: `skew(${x.start}deg, ${y.start}deg)`, opacity: (fade ? 0 : undefined) },
-    exited: { transform: `skew(${x.start}deg, ${y.start}deg)`, opacity: (fade ? 0 : undefined) },
-  };
+  return withFade(fade, {
+    entering: { transform: `skew(${x.start}deg, ${y.start}deg)` },
+    entered: { transform: `skew(${x.end}deg, ${y.end}deg)` },
+    exiting: { transform: `skew(${x.start}deg, ${y.start}deg)` },
+    exited: { transform: `skew(${x.start}deg, ${y.start}deg)` },
+  });
 };
 
 const SkewTransition: React.SFC<Props> = createTransition(

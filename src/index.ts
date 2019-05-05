@@ -1,3 +1,5 @@
+/// <amd-module name="react-transition-components" />
+
 import createTransition from './createTransition';
 import FadeTransition from './components/FadeTransition';
 import ScaleTransition from './components/ScaleTransition';

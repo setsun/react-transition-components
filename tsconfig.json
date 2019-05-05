@@ -2,13 +2,21 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es6",
-    "module": "commonjs",
+    "module": "amd",
     "moduleResolution": "node",
     "jsx": "react",
     "pretty": true,
     "skipLibCheck": true,
-    "allowJs": true
+    "declaration": true,
+    "removeComments": true,
+    "emitDeclarationOnly": true,
+    "outFile": "dist/types/index.d.ts"
   },
   "include": ["./src/**/*"],
-  "exclude": ["./node_modules/**/*"]
+  "exclude": [
+    "./node_modules/**/*",
+    "./src/story-components/**",
+    "./src/**/*.stories.tsx",
+    "./src/**/*.spec.tsx"
+  ]
 }
