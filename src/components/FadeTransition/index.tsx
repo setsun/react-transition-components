@@ -8,7 +8,7 @@ type Props = TransitionComponentProps & {
 
 // utility function for other components to use, to conditionally add a
 // opacity transition to their transition style objects.
-export const withFade = (fade: boolean, styles: TransitionStyles) => ({
+export const withFade = (fade: boolean, styles: any): TransitionStyles => ({
   entering: { ...styles.entering, opacity: (fade ? 0 : undefined) },
   entered: { ...styles.entered, opacity: (fade ? 1 : undefined) },
   exiting: { ...styles.exiting, opacity: (fade ? 0 : undefined) },
