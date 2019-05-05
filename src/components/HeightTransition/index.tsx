@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { useState } from 'react';
 import createTransition from '../../createTransition';
+import { withFade } from '../FadeTransition';
 import { TransitionComponentProps } from '../../types';
 
 type Props = TransitionComponentProps & {
   height: string,
 }
 
-const transitionStyles = ({ height, fade }) => ({
-  entering: { height: 0, opacity: (fade ? 0 : undefined) },
-  entered: { height, opacity: (fade ? 1 : undefined) },
-  exiting: { height: 0, opacity: (fade ? 0 : undefined) },
-  exited: { height: 0, opacity: (fade ? 0 : undefined) },
+const transitionStyles = ({ height, fade }) => withFade(fade, {
+  entering: { height: 0 },
+  entered: { height },
+  exiting: { height: 0 },
+  exited: { height: 0 },
 });
 
 const defaultStyle = ({ height }) => ({

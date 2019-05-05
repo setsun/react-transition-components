@@ -17,7 +17,7 @@ import {
  * https://github.com/reactjs/react-transition-group/blob/5007303e729a74be66a21c3e2205e4916821524b/src/CSSTransition.js#L208-L215
  */
 const withForceReflow = (callback: Function) => (node: HTMLElement, ...rest) => {
-  node.scrollTop;
+  node && node.scrollTop;
   callback && callback(node, ...rest);
 };
 
@@ -29,7 +29,7 @@ const getTimingValue = (timingObject: TimingObject, status: TransitionStatus): n
 
 /**
  * Gets a CSS transition shorthand string
- * example: all 300ms ease-in-out
+ * example: all 300ms ease-in-out 0ms
  */
 const getTransitionString = (
   transitionProperty: string,
@@ -111,7 +111,7 @@ const createTransition = (
           // support function as child render
           if (typeof children === 'function') {
             const childrenFn = children as AugmentedTransitionChildrenFunction;
-            return childrenFn(status, style);
+            return childrenFn(style, status);
           }
 
           const child = React.Children.only(children) as React.ReactElement;

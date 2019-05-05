@@ -8,7 +8,7 @@ export type LazyTransitionStyles = (props: Object) => TransitionStyles;
 
 export type LazyCSSProperties = (props: Object) => React.CSSProperties;
 
-export type AugmentedTransitionChildrenFunction = ((status: TransitionStatus, style: React.CSSProperties) => React.ReactNode);
+export type AugmentedTransitionChildrenFunction = ((style: React.CSSProperties, status: TransitionStatus) => React.ReactNode);
 
 export type AugmentedTransitionChildren = TransitionChildren | AugmentedTransitionChildrenFunction;
 
