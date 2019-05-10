@@ -12,6 +12,7 @@ addParameters({
   options: {
     theme: themes.dark,
     panelPosition: 'right',
+    sidebarAnimations: false,
   }
 });
 

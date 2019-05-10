@@ -7,6 +7,7 @@ import SkewTransition from './components/SkewTransition';
 import TranslateTransition from './components/TranslateTransition';
 import HeightTransition from './components/HeightTransition';
 import RotateTransition from './components/RotateTransition';
+import ClipTransition from './components/ClipTransition';
 
 export { createTransition };
 export { FadeTransition };
@@ -15,3 +16,4 @@ export { SkewTransition };
 export { HeightTransition };
 export { TranslateTransition };
 export { RotateTransition };
+export { ClipTransition };
