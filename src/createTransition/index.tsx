@@ -7,17 +7,9 @@ import {
   withForceReflow,
 } from './utils';
 import {
-  TransitionComponentChildren,
+  TransitionConfig,
   TransitionComponentProps,
-  LazyCSSProperties,
 } from '../types';
-
-type TransitionConfig = {
-  from: LazyCSSProperties | React.CSSProperties,
-  enter: LazyCSSProperties | React.CSSProperties,
-  exit?: LazyCSSProperties | React.CSSProperties,
-  transitionProperty?: string,
-};
 
 const createTransition = ({
   from,
@@ -32,24 +24,22 @@ const createTransition = ({
       easing,
       children,
       onEnter,
-      onEntered,
-      onEntering,
       onExit,
-      onExited,
-      onExiting,
       ...rest
     } = props;
 
-    // convert to timing objects for consistency
+    // calculate durations / delays, for enter / exit
     const durationObject = toTimingObject(duration);
     const delayObject = toTimingObject(delay);
+    const enterTimeout = durationObject.enter + delayObject.enter;
+    const exitTimeout = durationObject.exit + delayObject.exit;
 
     // generate the styles lazily, or use the static style object
     const fromStyle = typeof from === 'function' ? from(props) : (from || {});
     const enterStyle = typeof enter === 'function' ? enter(props) : (enter || {});
 
-    // default to from style, if exit ends up being undefined
-    const exitStyle = typeof exit === 'function' ? exit(props) : (exit || from);
+    // default the exit style to the from style, if exit ends up being undefined
+    const exitStyle = typeof exit === 'function' ? exit(props) : (exit || fromStyle);
 
     const transitionStyles = {
       entering: enterStyle,
@@ -65,41 +55,29 @@ const createTransition = ({
         mountOnEnter
         unmountOnExit
         {...rest}
-        timeout={{
-          enter: durationObject.enter + delayObject.enter,
-          exit: durationObject.exit + delayObject.exit,
-        }}
+        timeout={{ enter: enterTimeout, exit: exitTimeout }}
         onEnter={withForceReflow(onEnter)}
-        onEntered={withForceReflow(onEntered)}
-        onEntering={withForceReflow(onEntering)}
         onExit={withForceReflow(onExit)}
-        onExiting={withForceReflow(onExiting)}
-        onExited={withForceReflow(onExited)}
       >
         {(status: TransitionStatus) => {
-          // example: all 300ms ease-in-out
-          const transition = getTransitionString(transitionProperty, durationObject, delayObject, easing, status);
-
           const style = {
-            transition,
+            transition: getTransitionString(transitionProperty, durationObject, delayObject, easing, status),
             ...fromStyle,
             ...transitionStyles[status],
           };
 
           // support function as child render
           if (typeof children === 'function') {
-            const childrenFn = children;
-            return childrenFn(style, status);
+            return children(style, status);
           }
 
           const child = React.Children.only(children) as React.ReactElement;
-          const childStyle = child.props.style || {};
 
           // clone the child, with extended inline styles
           return React.cloneElement(child, {
             style: {
               ...style,
-              ...childStyle,
+              ...(child.props.style || {}),
             }
           });
         }}
@@ -108,7 +86,6 @@ const createTransition = ({
   }
 
   // default timing / easing values to allow immediate usage
-  // without needing to pass down any additional props
   TransitionComponent.defaultProps = {
     duration: 300,
     delay: 0,

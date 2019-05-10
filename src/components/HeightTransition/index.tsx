@@ -9,8 +9,8 @@ type Props = TransitionComponentProps & {
 }
 
 const BaseHeightTransition: React.SFC<Props> = createTransition({
-  from: ({ fade }) => ({ height: 0, opacity: (fade ? 0 : undefined) }),
-  enter: ({ height, fade }) => ({ height, opacity: (fade ? 1 : undefined) }),
+  from: ({ fade }) => ({ height: 0, opacity: (fade && 0) }),
+  enter: ({ height, fade }) => ({ height, opacity: (fade && 1) }),
 });
 
 const getHeight = (node: HTMLElement) => {

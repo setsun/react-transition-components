@@ -1,53 +1,25 @@
 import createTransition from '../../createTransition';
-import { TransitionComponentProps } from '../../types';
+import { TransitionComponentProps, TweenProp } from '../../types';
 
 type Props = TransitionComponentProps & {
-  start?: number,
-  end?: number,
-  fade?: boolean,
+  x?: TweenProp;
+  y?: TweenProp;
+  z?: TweenProp;
+  fade?: boolean;
 }
 
-export enum presets {
-  all = 'all',
-  x = 'x',
-  y = 'y',
-  z = 'z',
-};
+const baseTween = { start: 0, end: 1 };
 
 const basePreset = {
-  x: {
-    start: 0,
-    end: 1,
-  },
-  y: {
-    start: 0,
-    end: 1,
-  },
-  z: {
-    start: 0,
-    end: 1,
-  },
-}
-
-const presetMap = {
-  [presets.all]: basePreset,
-  [presets.x]: {
-    ...basePreset,
-    y: {
-      start: 1,
-      end: 1,
-    },
-    z: {
-      start: 1,
-      end: 1,
-    }
-  }
-}
+  x: baseTween,
+  y: baseTween,
+  z: baseTween,
+};
 
 const getScaleProperties = (props: Props) => {
-  const x = (props.x || { start: 0, end: 0 });
-  const y = (props.y || { start: 0, end: 0 });
-  const z = (props.z || { start: 0, end: 0 });
+  const x = (props.x || baseTween);
+  const y = (props.y || baseTween);
+  const z = (props.z || baseTween);
 
   return { x, y, z };
 };
@@ -56,18 +28,18 @@ const ScaleTransition: React.SFC<Props> = createTransition({
   from: (props: Props) => {
     const { fade } = props;
     const { x, y, z } = getScaleProperties(props);
-    return { transform: `scale3d(${x.start}, ${y.start}, ${z.start})`, opacity: (fade ? 0 : undefined) };
+    return { transform: `scale3d(${x.start}, ${y.start}, ${z.start})`, opacity: (fade && 0) };
   },
   enter: (props: Props) => {
     const { fade } = props;
     const { x, y, z } = getScaleProperties(props);
-    return { transform: `scale3d(${x.end}, ${y.end}, ${z.end})`, opacity: (fade ? 1 : undefined) };
+    return { transform: `scale3d(${x.end}, ${y.end}, ${z.end})`, opacity: (fade && 1) };
   }
 });
 
 ScaleTransition.defaultProps = {
   ...ScaleTransition.defaultProps,
-  ...presetMap[presets.all],
+  ...basePreset,
   fade: true,
 };
 
