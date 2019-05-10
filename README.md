@@ -11,11 +11,7 @@ The drive behind `react-transition-components` comes from being able to create c
 
 Not only that, but these components need to be easily configurable with a simple API, and minimal context switching.
 
-One of the easiest and most common ways to add a enter/exit transition is using `<CSSTransition>` from `react-transition-group`. However the downfalls of that API is having to create a React component and maintaining separate CSS classes to express your enter/exit states. Not only that, but dynamically changing the `duration` and `easing` in your CSS is nearly impossible without additional tooling. This is even harder to manage if you are transitioning on multiple CSS properties at once.
-
-The other way to add a transition is using `<Transition>` from `react-transition-group`, which allows us to express our transitions using React inline styles. This solves our previous issue since we can dynamically generate all of our styles in JavaScript and not have to maintain a static CSS stylesheet.
-
-`react-transition-components` aims to provide a component library of common UI transitions, and to make it easier to create re-usable transition components by providing a `createTransition` higher-order component for wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in 6 lines of code in the simplest case:
+`react-transition-components` aims to provide a component library of common UI transitions, and to make it easier to create re-usable transition components by providing a `createTransition` higher-order component for wrapping `<Transition>` and providing a very simple API for allowing you to express a transition in **6** lines of code in the simplest case:
 
 ```jsx
 import { createTransition } from 'react-transition-components';
