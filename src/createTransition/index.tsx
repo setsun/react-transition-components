@@ -7,22 +7,24 @@ import {
   withForceReflow,
 } from './utils';
 import {
+  TransitionComponentChildren,
   TransitionComponentProps,
   LazyCSSProperties,
-  AugmentedTransitionChildrenFunction,
 } from '../types';
+
+type TransitionConfig = {
+  from: LazyCSSProperties | React.CSSProperties,
+  enter: LazyCSSProperties | React.CSSProperties,
+  exit?: LazyCSSProperties | React.CSSProperties,
+  transitionProperty?: string,
+};
 
 const createTransition = ({
   from,
   enter,
   exit,
   transitionProperty,
-} : {
-  from: LazyCSSProperties | React.CSSProperties,
-  enter: LazyCSSProperties | React.CSSProperties,
-  exit?: LazyCSSProperties | React.CSSProperties,
-  transitionProperty?: string,
-}): React.SFC<TransitionComponentProps> => {
+}: TransitionConfig): React.SFC<TransitionComponentProps> => {
   const TransitionComponent = (props: TransitionComponentProps) => {
     const {
       duration,
@@ -86,7 +88,7 @@ const createTransition = ({
 
           // support function as child render
           if (typeof children === 'function') {
-            const childrenFn = children as AugmentedTransitionChildrenFunction;
+            const childrenFn = children;
             return childrenFn(style, status);
           }
 
