@@ -2,57 +2,27 @@ import * as React from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import {
+  getTransitionString,
+  toTimingObject,
+  withForceReflow,
+} from './utils';
+import {
   TransitionComponentProps,
-  TransitionStyles,
-  LazyTransitionStyles,
   LazyCSSProperties,
   AugmentedTransitionChildrenFunction,
-  TimingObject,
-  Timing,
 } from '../types';
 
-/**
- * This is for to force a repaint, which is necessary in order to transition styles when changing inline styles.
- * CSSTransition from react-transition-group also follows this implementation:
- * https://github.com/reactjs/react-transition-group/blob/5007303e729a74be66a21c3e2205e4916821524b/src/CSSTransition.js#L208-L215
- */
-const withForceReflow = (callback: Function) => (node: HTMLElement, ...rest) => {
-  node && node.scrollTop;
-  callback && callback(node, ...rest);
-};
-
-const toTimingObject = (timing: Timing): TimingObject =>
-  typeof timing === 'number' ? { enter: timing, exit: timing } : timing;
-
-const getTimingValue = (timingObject: TimingObject, status: TransitionStatus): number =>
-  timingObject[status.indexOf('enter') > -1 ? 'enter' : 'exit'];
-
-/**
- * Gets a CSS transition shorthand string
- * example: all 300ms ease-in-out 0ms
- */
-const getTransitionString = (
-  transitionProperty: string,
-  duration: TimingObject,
-  delay: TimingObject,
-  easing: string,
-  status: TransitionStatus
-) => {
-  // have some reasonable fallbacks, so we reduce the chance of generating
-  // an invalid CSS transition shorthand string
-  const transitionPropertyValue = transitionProperty || 'all';
-  const durationValue = getTimingValue(duration, status) || 0;
-  const delayValue = getTimingValue(delay, status) || 0;
-  const easingValue = easing || 'ease-in-out';
-
-  return `${transitionPropertyValue} ${durationValue}ms ${easingValue} ${delayValue}ms`;
-};
-
-const createTransition = (
-  transitionStyles: LazyTransitionStyles | TransitionStyles,
-  defaultStyle?: LazyCSSProperties | React.CSSProperties,
+const createTransition = ({
+  from,
+  enter,
+  exit,
+  transitionProperty,
+} : {
+  from: LazyCSSProperties | React.CSSProperties,
+  enter: LazyCSSProperties | React.CSSProperties,
+  exit?: LazyCSSProperties | React.CSSProperties,
   transitionProperty?: string,
-): React.SFC<TransitionComponentProps> => {
+}): React.SFC<TransitionComponentProps> => {
   const TransitionComponent = (props: TransitionComponentProps) => {
     const {
       duration,
@@ -68,17 +38,23 @@ const createTransition = (
       ...rest
     } = props;
 
-    // generate the default style lazily, or use the static style object
-    const computedDefaultStyle = typeof defaultStyle === 'function' ?
-      defaultStyle(props) : defaultStyle;
-
-    // generate the transition styles lazily, or use the static styles object
-    const computedTransitionStyles = typeof transitionStyles === 'function' ?
-      transitionStyles(props) : transitionStyles;
-
     // convert to timing objects for consistency
     const durationObject = toTimingObject(duration);
     const delayObject = toTimingObject(delay);
+
+    // generate the styles lazily, or use the static style object
+    const fromStyle = typeof from === 'function' ? from(props) : (from || {});
+    const enterStyle = typeof enter === 'function' ? enter(props) : (enter || {});
+
+    // default to from style, if exit ends up being undefined
+    const exitStyle = typeof exit === 'function' ? exit(props) : (exit || from);
+
+    const transitionStyles = {
+      entering: enterStyle,
+      entered: enterStyle,
+      exiting: exitStyle,
+      exited: exitStyle,
+    };
 
     return (
       <Transition
@@ -104,8 +80,8 @@ const createTransition = (
 
           const style = {
             transition,
-            ...computedDefaultStyle,
-            ...computedTransitionStyles[status],
+            ...fromStyle,
+            ...transitionStyles[status],
           };
 
           // support function as child render

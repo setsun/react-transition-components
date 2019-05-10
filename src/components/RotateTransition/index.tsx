@@ -1,7 +1,5 @@
 import createTransition from '../../createTransition';
-import { withFade } from '../FadeTransition';
 import { TransitionComponentProps } from '../../types';
-import defaultTransformStyle from '../defaultTransformStyle';
 
 export enum presets {
   x = 'x',
@@ -56,23 +54,23 @@ const presetMap = {
   },
 };
 
-const transitionStyles = (props: Props) => {
-  const { fade, preset } = props;
-  const style = presetMap[preset] || props || basePreset;
-  const { x, y, z, a } = style;
+const getRotateProperties = (props: Props) => {
+  const { preset } = props;
+  return presetMap[preset] || props || basePreset;
+};
 
-  return withFade(fade, {
-    entering: { transform: `rotate3d(${x}, ${y}, ${z}, ${a.start}deg)` },
-    entered: { transform: `rotate3d(${x}, ${y}, ${z}, ${a.end}deg)` },
-    exiting: { transform: `rotate3d(${x}, ${y}, ${z}, ${a.start}deg)` },
-    exited: { transform: `rotate3d(${x}, ${y}, ${z}, ${a.start}deg)` },
-  });
-}
-
-const RotateTransition: React.SFC<Props> = createTransition(
-  transitionStyles,
-  defaultTransformStyle,
-);
+const RotateTransition: React.SFC<Props> = createTransition({
+  from: (props) => {
+    const { fade } = props;
+    const { x, y, z, a } = getRotateProperties(props);
+    return { transform: `rotate3d(${x}, ${y}, ${z}, ${a.start}deg)`, opacity: (fade ? 0 : undefined) };
+  },
+  enter: (props) => {
+    const { fade } = props;
+    const { x, y, z, a } = getRotateProperties(props);
+    return { transform: `rotate3d(${x}, ${y}, ${z}, ${a.end}deg)`, opacity: (fade ? 1 : undefined) };
+  },
+});
 
 RotateTransition.defaultProps = {
   ...RotateTransition.defaultProps,
