@@ -1,7 +1,5 @@
 import createTransition from '../../createTransition';
-import { withFade } from '../FadeTransition';
 import { TransitionComponentProps } from '../../types';
-import defaultTransformStyle from '../defaultTransformStyle';
 
 type Props = TransitionComponentProps & {
   start?: number,
@@ -46,24 +44,26 @@ const presetMap = {
   }
 }
 
-const transitionStyles = (props: Props) => {
-  const { fade } = props;
+const getScaleProperties = (props: Props) => {
   const x = (props.x || { start: 0, end: 0 });
   const y = (props.y || { start: 0, end: 0 });
   const z = (props.z || { start: 0, end: 0 });
 
-  return withFade(fade, {
-    entering: { transform: `scale3d(${x.start}, ${y.start}, ${z.start})` },
-    entered: { transform: `scale3d(${x.end}, ${y.end}, ${z.end})` },
-    exiting: { transform: `scale3d(${x.start}, ${y.start}, ${z.start})` },
-    exited: { transform: `scale3d(${x.start}, ${y.start}, ${z.start})` },
-  });
+  return { x, y, z };
 };
 
-const ScaleTransition: React.SFC<Props> = createTransition(
-  transitionStyles,
-  defaultTransformStyle,
-);
+const ScaleTransition: React.SFC<Props> = createTransition({
+  from: (props: Props) => {
+    const { fade } = props;
+    const { x, y, z } = getScaleProperties(props);
+    return { transform: `scale3d(${x.start}, ${y.start}, ${z.start})`, opacity: (fade ? 0 : undefined) };
+  },
+  enter: (props: Props) => {
+    const { fade } = props;
+    const { x, y, z } = getScaleProperties(props);
+    return { transform: `scale3d(${x.end}, ${y.end}, ${z.end})`, opacity: (fade ? 1 : undefined) };
+  }
+});
 
 ScaleTransition.defaultProps = {
   ...ScaleTransition.defaultProps,

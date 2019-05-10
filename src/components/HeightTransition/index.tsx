@@ -1,28 +1,17 @@
 import * as React from 'react';
 import { useState } from 'react';
 import createTransition from '../../createTransition';
-import { withFade } from '../FadeTransition';
 import { TransitionComponentProps } from '../../types';
 
 type Props = TransitionComponentProps & {
-  height: string,
+  height: string | number;
+  fade?: boolean;
 }
 
-const transitionStyles = ({ height, fade }) => withFade(fade, {
-  entering: { height: 0 },
-  entered: { height },
-  exiting: { height: 0 },
-  exited: { height: 0 },
+const BaseHeightTransition: React.SFC<Props> = createTransition({
+  from: ({ fade }) => ({ height: 0, overflow: 'hidden', opacity: (fade ? 0 : undefined) }),
+  enter: ({ height, fade }) => ({ height, opacity: (fade ? 1 : undefined) }),
 });
-
-const defaultStyle = ({ height }) => ({
-  overflow: height !== 'auto' ? 'hidden' : null,
-});
-
-const BaseHeightTransition: React.SFC<Props> = createTransition(
-  transitionStyles,
-  defaultStyle,
-);
 
 const HeightTransition = ({
   children,
@@ -30,7 +19,7 @@ const HeightTransition = ({
   onExit,
   timeout,
   ...rest
-}: TransitionComponentProps) => {
+}: Props) => {
   const [height, setHeight] = useState('auto');
 
   return (

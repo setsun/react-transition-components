@@ -1,7 +1,5 @@
 import createTransition from '../../createTransition';
 import { TransitionComponentProps } from '../../types';
-import defaultTransformStyle from '../defaultTransformStyle';
-import { withFade } from '../FadeTransition';
 
 export enum presets {
   top = 'top',
@@ -63,23 +61,23 @@ const presetMap = {
   },
 }
 
-const transitionStyles = (props: Props) => {
-  const { preset, fade } = props;
-  const style = presetMap[preset] || props || baseStyle;
-  const { x, y, z } = style;
-
-  return withFade(fade, {
-    entering: { transform: `translate3d(${x.start}px, ${y.start}px, ${z.start}px)` },
-    entered: { transform: `translate3d(${x.end}px, ${y.end}px, ${z.end}px)` },
-    exiting: { transform: `translate3d(${x.start}px, ${y.start}px, ${z.start}px)` },
-    exited: { transform: `translate3d(${x.start}px, ${y.start}px, ${z.start}px)` },
-  });
+const getTranslateProperties = (props: Props) => {
+  const { preset } = props;
+  return presetMap[preset] || props || baseStyle;
 }
 
-const TranslateTransition: React.SFC<Props> = createTransition(
-  transitionStyles,
-  defaultTransformStyle,
-);
+const TranslateTransition: React.SFC<Props> = createTransition({
+  from: (props: Props) => {
+    const { fade } = props;
+    const { x, y, z } = getTranslateProperties(props);
+    return { transform: `translate3d(${x.start}px, ${y.start}px, ${z.start}px)`, opacity: (fade ? 0 : undefined) };
+  },
+  enter: (props: Props) => {
+    const { fade } = props;
+    const { x, y, z } = getTranslateProperties(props);
+    return { transform: `translate3d(${x.end}px, ${y.end}px, ${z.end}px)`, opacity: (fade ? 1 : undefined) };
+  },
+});
 
 TranslateTransition.defaultProps = {
   ...TranslateTransition.defaultProps,

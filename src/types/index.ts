@@ -1,12 +1,6 @@
 import { TransitionStatus, TransitionProps, TransitionChildren } from 'react-transition-group/Transition';
 
-export type TransitionStyles = {
-  [key in TransitionStatus]?: React.CSSProperties
-}
-
-export type LazyTransitionStyles = (props: Object) => TransitionStyles;
-
-export type LazyCSSProperties = (props: Object) => React.CSSProperties;
+export type LazyCSSProperties = (props: any) => React.CSSProperties;
 
 export type AugmentedTransitionChildrenFunction = ((style: React.CSSProperties, status: TransitionStatus) => React.ReactNode);
 
