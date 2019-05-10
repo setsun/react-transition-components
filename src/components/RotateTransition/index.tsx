@@ -1,5 +1,5 @@
 import createTransition from '../../createTransition';
-import { TransitionComponentProps } from '../../types';
+import { TransitionComponentProps, TweenProp } from '../../types';
 
 export enum presets {
   x = 'x',
@@ -8,10 +8,12 @@ export enum presets {
 };
 
 type Props = TransitionComponentProps & {
-  preset?: presets,
-  start?: number,
-  end?: number,
-  fade?: boolean,
+  preset?: presets;
+  x?: number;
+  y?: number;
+  z?: number;
+  a?: TweenProp;
+  fade?: boolean;
 }
 
 const basePreset = {
@@ -19,38 +21,23 @@ const basePreset = {
   y: 0,
   z: 0,
   a: {
-    start: 0,
+    start: 90,
     end: 0,
   },
 };
 
 const presetMap = {
   [presets.x]: {
+    ...basePreset,
     x: 1,
-    y: 0,
-    z: 0,
-    a: {
-      start: 90,
-      end: 0,
-    },
   },
   [presets.y]: {
-    x: 0,
+    ...basePreset,
     y: 1,
-    z: 0,
-    a: {
-      start: 90,
-      end: 0,
-    },
   },
   [presets.z]: {
-    x: 0,
-    y: 0,
+    ...basePreset,
     z: 1,
-    a: {
-      start: 90,
-      end: 0,
-    },
   },
 };
 
@@ -63,12 +50,12 @@ const RotateTransition: React.SFC<Props> = createTransition({
   from: (props) => {
     const { fade } = props;
     const { x, y, z, a } = getRotateProperties(props);
-    return { transform: `rotate3d(${x}, ${y}, ${z}, ${a.start}deg)`, opacity: (fade ? 0 : undefined) };
+    return { transform: `rotate3d(${x}, ${y}, ${z}, ${a.start}deg)`, opacity: (fade && 0) };
   },
   enter: (props) => {
     const { fade } = props;
     const { x, y, z, a } = getRotateProperties(props);
-    return { transform: `rotate3d(${x}, ${y}, ${z}, ${a.end}deg)`, opacity: (fade ? 1 : undefined) };
+    return { transform: `rotate3d(${x}, ${y}, ${z}, ${a.end}deg)`, opacity: (fade && 1) };
   },
 });
 

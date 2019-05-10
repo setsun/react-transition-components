@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { text, boolean, object } from '@storybook/addon-knobs';
 import StoryPreview from '../../../story-components/Preview';
 
-import ScaleTransition, { presets } from '../';
+import ScaleTransition from '../';
 
 storiesOf('Scale Transition', module)
   .add('Scale', () => (
