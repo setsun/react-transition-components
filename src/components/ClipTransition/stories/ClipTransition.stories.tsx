@@ -4,26 +4,39 @@ import { storiesOf } from '@storybook/react';
 import { text, boolean, radios, object } from '@storybook/addon-knobs';
 import StoryPreview from '../../../story-components/Preview';
 
-import ClipTransition, { presets } from '../';
+import ClipTransition, { shapes } from '../';
 
-const label = 'preset';
-const options = presets;
+const label = 'shape';
+const options = shapes;
 
 storiesOf('Clip Transition', module)
   .add('Clip', () => (
-    <ClipTransition
-      in={boolean('in', true)}
-      easing={text('easing', 'ease-in-out')}
-      duration={object('duration', {
-        enter: 300,
-        exit: 300,
-      })}
-      delay={object('delay', {
-        enter: 0,
-        exit: 0,
-      })}
-      preset={radios(label, options, undefined)}
-    >
-      <StoryPreview />
-    </ClipTransition>
+    <>
+      <p style={{ textAlign: 'center', color: 'white' }}>
+        For some basic shapes you can make with clip-path, <a href="https://bennettfeely.com/clippy/">this</a> sandbox with CSS examples is a good resource.
+      </p>
+
+      <ClipTransition
+        in={boolean('in', true)}
+        easing={text('easing', 'ease-in-out')}
+        duration={object('duration', {
+          enter: 300,
+          exit: 300,
+        })}
+        delay={object('delay', {
+          enter: 0,
+          exit: 0,
+        })}
+        shape={radios(label, options, shapes.circle)}
+        circle={object('circle',  ClipTransition.defaultProps.circle)}
+        ellipse={object('ellipse', ClipTransition.defaultProps.ellipse)}
+        inset={object('inset', ClipTransition.defaultProps.inset)}
+        polygon={object('polygon', {
+          start: '50% 0%, 100% 50%, 50% 100%, 0% 50%',
+          end: '100% 0%, 100% 100%, 0% 100%, 0% 0%',
+        })}
+      >
+        <StoryPreview />
+      </ClipTransition>
+    </>
   ))

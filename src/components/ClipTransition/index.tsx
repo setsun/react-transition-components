@@ -1,51 +1,52 @@
 import createTransition from '../../createTransition';
-import { TransitionComponentProps } from '../../types';
+import { TransitionComponentProps, TweenProp } from '../../types';
 
-export enum presets {
+export enum shapes {
   circle = 'circle',
   ellipse = 'ellipse',
   inset = 'inset',
   polygon = 'polygon',
-  path = 'path',
 }
 
 type Props = TransitionComponentProps & {
-  preset?: presets;
+  shape?: shapes;
+  circle?: TweenProp;
+  ellipse?: TweenProp;
+  inset?: TweenProp;
+  polygon?: TweenProp;
 };
 
-const presetConfigs = {
-  [presets.circle]: {
-    from: ({ }) => ({ clipPath: `circle(0% at 50% 50%)` }),
-    enter: ({ }) => ({ clipPath: `circle(100% at 50% 50%)` }),
+const shapesConfig = {
+  [shapes.circle]: {
+    from: ({ circle }) => ({ clipPath: `circle(${circle.start})` }),
+    enter: ({ circle }) => ({ clipPath: `circle(${circle.end})` }),
   },
-  [presets.ellipse]: {
-    from: ({ }) => ({ clipPath: `ellipse(0% 0% at 50% 50%)` }),
-    enter: ({ }) => ({ clipPath: `ellipse(100% 100% at 50% 50%)` }),
+  [shapes.ellipse]: {
+    from: ({ ellipse }) => ({ clipPath: `ellipse(${ellipse.start})` }),
+    enter: ({ ellipse }) => ({ clipPath: `ellipse(${ellipse.end})` }),
   },
-  [presets.inset]: {
-    from: ({ }) => ({ clipPath: `inset(100% 100% 0% 0%)` }),
-    enter: ({ }) => ({ clipPath: `inset(0% 0% 0% 0%)` }),
+  [shapes.inset]: {
+    from: ({ inset }) => ({ clipPath: `inset(${inset.start})` }),
+    enter: ({ inset }) => ({ clipPath: `inset(${inset.end})` }),
   },
-  [presets.polygon]: {
+  [shapes.polygon]: {
     from: ({ polygon }) => ({ clipPath: `polygon(${polygon.start})` }),
     enter: ({ polygon }) => ({ clipPath: `polygon(${polygon.end})` }),
-  },
-  [presets.path]: {
-    from: ({ path }) => ({ clipPath: `path(${path.start})` }),
-    enter: ({ path }) => ({ clipPath: `path(${path.end})` }),
   },
 }
 
 const ClipTransition: React.SFC<Props> = createTransition({
-  from: (props) => presetConfigs[props.preset].from(props),
-  enter: (props) => presetConfigs[props.preset].enter(props),
+  from: (props) => shapesConfig[props.shape].from(props),
+  enter: (props) => shapesConfig[props.shape].enter(props),
 });
 
 ClipTransition.defaultProps = {
   ...ClipTransition.defaultProps,
-  preset: presets.ellipse,
-  path: {},
-  polygon: {},
+  shape: shapes.circle,
+  circle: { start: '0% at 50% 50%', end: '100% at 50% 50%' },
+  ellipse: { start: '0% 0% at 50% 50%', end: '100% 100% at 50% 50%' },
+  inset: { start: '100% 100% 0% 0%', end: '0% 0% 0% 0%' },
+  polygon: { start: '', end: '' },
 };
 
 ClipTransition.displayName = 'ClipTransition';

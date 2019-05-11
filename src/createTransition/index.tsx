@@ -45,7 +45,7 @@ const createTransition = ({
       entering: enterStyle,
       entered: enterStyle,
       exiting: exitStyle,
-      exited: exitStyle,
+      exited: fromStyle,
     };
 
     return (
@@ -71,7 +71,7 @@ const createTransition = ({
             return children(style, status);
           }
 
-          const child = React.Children.only(children) as React.ReactElement;
+          const child = React.Children.only(children);
 
           // clone the child, with extended inline styles
           return React.cloneElement(child, {
