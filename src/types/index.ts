@@ -10,8 +10,8 @@ export type TimingObject = {
 export type Timing = number | TimingObject;
 
 export type TweenProp = {
-  start: number;
-  end: number;
+  start: any;
+  end: any;
 };
 
 export type TransitionConfig = {
@@ -22,7 +22,7 @@ export type TransitionConfig = {
 };
 
 export type TransitionComponentChildren =
-  React.ReactNode | ((style: React.CSSProperties, status: TransitionStatus) => React.ReactNode);
+  React.ReactElement<any> | ((style: React.CSSProperties, status: TransitionStatus) => React.ReactNode);
 
 export type TransitionComponentProps = Pick<TransitionProps, Exclude<keyof TransitionProps, 'timeout'>> & {
   children: TransitionComponentChildren;

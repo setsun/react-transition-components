@@ -3,7 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { withInfo } from '@storybook/addon-info';
 import { themes } from '@storybook/theming';
 
-const req = require.context('../src/components', true, /.stories.tsx$/);
+const req = require.context('../src', true, /.stories.tsx$/);
 
 addParameters({
   info: {
