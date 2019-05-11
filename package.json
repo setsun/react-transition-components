@@ -1,6 +1,6 @@
 {
   "name": "react-transition-components",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "author": "Setsun <setsun@setsun.io>",
   "license": "MIT",
   "description": "Easily configurable React components for animations / transitions 💃",
@@ -39,6 +39,7 @@
     "@storybook/storybook-deployer": "^2.8.1",
     "@types/jest": "^24.0.12",
     "@types/storybook__react": "^4.0.1",
+    "animejs": "^3.0.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "8.0.5",
     "babel-preset-setsun": "2.3.0",

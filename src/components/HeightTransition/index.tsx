@@ -4,11 +4,10 @@ import createTransition from '../../createTransition';
 import { TransitionComponentProps } from '../../types';
 
 type Props = TransitionComponentProps & {
-  height: string | number;
   fade?: boolean;
 }
 
-const BaseHeightTransition: React.SFC<Props> = createTransition({
+const BaseHeightTransition: React.SFC<Props & { height: string | number }> = createTransition({
   from: ({ fade }) => ({ height: 0, opacity: (fade && 0) }),
   enter: ({ height, fade }) => ({ height, opacity: (fade && 1) }),
 });

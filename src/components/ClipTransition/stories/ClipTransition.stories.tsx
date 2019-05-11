@@ -2,15 +2,15 @@ import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { text, boolean, radios, object } from '@storybook/addon-knobs';
-import StoryPreview from '../../../story-components/Preview';
+import StoryPreview from '../../../stories/components/Preview';
 
 import ClipTransition, { shapes } from '../';
 
 const label = 'shape';
 const options = shapes;
 
-storiesOf('Clip Transition', module)
-  .add('Clip', () => (
+storiesOf('Components', module)
+  .add('ClipTransition', () => (
     <>
       <p style={{ textAlign: 'center', color: 'white' }}>
         For some basic shapes you can make with clip-path, <a href="https://bennettfeely.com/clippy/">this</a> sandbox with CSS examples is a good resource.
