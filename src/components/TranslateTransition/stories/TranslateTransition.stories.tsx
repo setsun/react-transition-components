@@ -25,16 +25,16 @@ storiesOf('Components', module)
       })}
       preset={radios(label, options, undefined)}
       x={object('x', {
-        start: 0,
-        end: 0,
+        start: '0',
+        end: '0',
       })}
       y={object('y', {
-        start: -16,
-        end: 0,
+        start: '-16px',
+        end: '0',
       })}
       z={object('z', {
-        start: 0,
-        end: 0,
+        start: '0',
+        end: '0',
       })}
     >
       <StoryPreview />
