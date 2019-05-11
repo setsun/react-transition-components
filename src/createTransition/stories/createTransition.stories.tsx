@@ -1,40 +1,50 @@
 import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { boolean, object } from '@storybook/addon-knobs';
+import { boolean, object, text } from '@storybook/addon-knobs';
 import StoryPreview from '../../stories/components/Preview';
 
 import createTransition from '../';
 
 const ComplexTransition = createTransition({
-  from: { transform: 'scale(0) skew(45deg)', clipPath: 'circle(0% at 50% 50%)' },
-  enter: { transform: 'scale(1) skew(0deg)', clipPath: 'circle(100% at 50% 50%)' },
+  from: { transform: 'scale(0) skew(45deg) rotate(180deg)', clipPath: 'circle(0% at 50% 50%)' },
+  enter: { transform: 'scale(1) skew(0deg) rotate(0)', clipPath: 'circle(100% at 50% 50%)' },
 })
 
 const AsymmetricTransition = createTransition({
-  from: { transform: 'scale(0)', },
-  enter: { transform: 'scale(1)', opacity: 1 },
-  exit: { transform: 'rotate(180deg)', opacity: 0 },
+  from: { transform: 'scale(0.5)', opacity: 0 },
+  enter: { transform: 'scale(1)', opacity: 1, clipPath: 'circle(100% at 50% 50%)' },
+  exit: { transform: 'scale(1)', opacity: 0, clipPath: 'circle(0% at 50% 50%)' },
 })
 
 storiesOf('createTransition', module)
-  .add('Complex Custom Transition (clip-path / skew / scale)', () => (
+  .add('Complex CSS Transition (scale / skew / rotate / clip-path)', () => (
     <ComplexTransition
       in={boolean('in', true)}
+      easing={text('easing', 'ease-in-out')}
       duration={object('duration', {
-        enter: 2000,
-        exit: 2000,
+        enter: 3000,
+        exit: 3000,
+      })}
+      delay={object('delay', {
+        enter: 0,
+        exit: 0,
       })}
     >
       <StoryPreview />
     </ComplexTransition>
   ))
-  .add('Asymmetric enter / exit transitions', () => (
+  .add('Asymmetric enter & exit (scale / clip-path)', () => (
     <AsymmetricTransition
       in={boolean('in', true)}
+      easing={text('easing', 'ease-in-out')}
       duration={object('duration', {
         enter: 500,
-        exit: 500,
+        exit: 750,
+      })}
+      delay={object('delay', {
+        enter: 0,
+        exit: 250,
       })}
     >
       <StoryPreview />
