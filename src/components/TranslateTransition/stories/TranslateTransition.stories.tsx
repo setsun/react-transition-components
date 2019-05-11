@@ -2,15 +2,15 @@ import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { text, boolean, number, object, radios } from '@storybook/addon-knobs';
-import StoryPreview from '../../../story-components/Preview';
+import StoryPreview from '../../../stories/components/Preview';
 
 import TranslateTransition, { presets } from '..';
 
 const label = 'preset';
 const options = presets;
 
-storiesOf('Translate Transition', module)
-  .add('Translate', () => (
+storiesOf('Components', module)
+  .add('TranslateTransition', () => (
     <TranslateTransition
       in={boolean('in', true)}
       fade={boolean('fade', true)}

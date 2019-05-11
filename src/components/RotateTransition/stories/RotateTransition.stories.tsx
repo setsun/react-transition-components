@@ -2,15 +2,15 @@ import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { text, boolean, number, object, radios } from '@storybook/addon-knobs';
-import StoryPreview from '../../../story-components/Preview';
+import StoryPreview from '../../../stories/components/Preview';
 
 import RotateTransition, { presets } from '../';
 
 const label = 'preset';
 const options = presets;
 
-storiesOf('Rotate Transition', module)
-  .add('Rotate', () => (
+storiesOf('Components', module)
+  .add('RotateTransition', () => (
     <RotateTransition
       in={boolean('in', true)}
       fade={boolean('fade', true)}

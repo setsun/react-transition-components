@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { text, boolean, object } from '@storybook/addon-knobs';
-import StoryPreview from '../../../story-components/Preview';
+import StoryPreview from '../../../stories/components/Preview';
 
 import ScaleTransition from '../';
 
-storiesOf('Scale Transition', module)
-  .add('Scale', () => (
+storiesOf('Components', module)
+  .add('ScaleTransition', () => (
     <ScaleTransition
       in={boolean('in', true)}
       fade={boolean('fade', true)}

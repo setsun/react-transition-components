@@ -1,11 +1,10 @@
 import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { text, boolean, number, object } from '@storybook/addon-knobs';
-import StoryPreview from '../../story-components/Preview';
+import { boolean, object } from '@storybook/addon-knobs';
+import StoryPreview from '../../stories/components/Preview';
 
 import createTransition from '../';
-
 
 const ComplexTransition = createTransition({
   from: { transform: 'scale(0) skew(45deg)', clipPath: 'circle(0% at 50% 50%)' },

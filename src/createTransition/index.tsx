@@ -24,7 +24,11 @@ const createTransition = ({
       easing,
       children,
       onEnter,
+      onEntering,
+      onEntered,
       onExit,
+      onExiting,
+      onExited,
       ...rest
     } = props;
 
@@ -56,8 +60,12 @@ const createTransition = ({
         unmountOnExit
         {...rest}
         timeout={{ enter: enterTimeout, exit: exitTimeout }}
-        onEnter={withForceReflow(onEnter)}
-        onExit={withForceReflow(onExit)}
+        onEnter={withForceReflow(onEnter, props)}
+        onEntering={withForceReflow(onEntering, props)}
+        onEntered={withForceReflow(onEntered, props)}
+        onExit={withForceReflow(onExit, props)}
+        onExiting={withForceReflow(onExiting, props)}
+        onExited={withForceReflow(onExited, props)}
       >
         {(status: TransitionStatus) => {
           const style = {

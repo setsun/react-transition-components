@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { text, boolean, object } from '@storybook/addon-knobs';
-import StoryPreview from '../../../story-components/Preview';
+import StoryPreview from '../../../stories/components/Preview';
 
 import SkewTransition from '../';
 
-storiesOf('Skew Transition', module)
-  .add('Skew', () => (
+storiesOf('Components', module)
+  .add('SkewTransition', () => (
     <SkewTransition
       in={boolean('in', true)}
       fade={boolean('fade', true)}
