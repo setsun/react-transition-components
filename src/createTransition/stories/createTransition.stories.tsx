@@ -6,15 +6,20 @@ import StoryPreview from '../../stories/components/Preview';
 
 import createTransition from '../';
 
+const crossBrowserClipPath = (value) => ({
+  WebkitClipPath: value,
+  clipPath: value,
+});
+
 const ComplexTransition = createTransition({
-  from: { transform: 'scale(0) skew(45deg) rotate(180deg)', clipPath: 'circle(0% at 50% 50%)' },
-  enter: { transform: 'scale(1) skew(0deg) rotate(0)', clipPath: 'circle(100% at 50% 50%)' },
+  from: { transform: 'scale(0) skew(45deg) rotate(180deg)', ...crossBrowserClipPath('circle(0% at 50% 50%)') },
+  enter: { transform: 'scale(1) skew(0deg) rotate(0)',  ...crossBrowserClipPath('circle(100% at 50% 50%)') },
 })
 
 const AsymmetricTransition = createTransition({
-  from: { transform: 'scale(0.5)', opacity: 0 },
-  enter: { transform: 'scale(1)', opacity: 1, clipPath: 'circle(100% at 50% 50%)' },
-  exit: { transform: 'scale(1)', opacity: 0, clipPath: 'circle(0% at 50% 50%)' },
+  from: { transform: 'scale(0.5)', opacity: 0, ...crossBrowserClipPath('circle(100% at 50% 50%)') },
+  enter: { transform: 'scale(1)', opacity: 1,  ...crossBrowserClipPath('circle(100% at 50% 50%)') },
+  exit: { transform: 'scale(1)', opacity: 0,  ...crossBrowserClipPath('circle(0% at 50% 50%)') },
 })
 
 storiesOf('createTransition', module)
