@@ -16,22 +16,27 @@ type Props = TransitionComponentProps & {
   polygon?: TweenProp;
 };
 
+const crossBrowserClipPath = (value) => ({
+  WebkitClipPath: value,
+  clipPath: value,
+});
+
 const shapesConfig = {
   [shapes.circle]: {
-    from: ({ circle }) => ({ clipPath: `circle(${circle.start})` }),
-    enter: ({ circle }) => ({ clipPath: `circle(${circle.end})` }),
+    from: ({ circle }) => crossBrowserClipPath(`circle(${circle.start})`),
+    enter: ({ circle }) => crossBrowserClipPath(`circle(${circle.end})`),
   },
   [shapes.ellipse]: {
-    from: ({ ellipse }) => ({ clipPath: `ellipse(${ellipse.start})` }),
-    enter: ({ ellipse }) => ({ clipPath: `ellipse(${ellipse.end})` }),
+    from: ({ ellipse }) => crossBrowserClipPath(`ellipse(${ellipse.start})`),
+    enter: ({ ellipse }) => crossBrowserClipPath(`ellipse(${ellipse.end})`),
   },
   [shapes.inset]: {
-    from: ({ inset }) => ({ clipPath: `inset(${inset.start})` }),
-    enter: ({ inset }) => ({ clipPath: `inset(${inset.end})` }),
+    from: ({ inset }) => crossBrowserClipPath(`inset(${inset.start})`),
+    enter: ({ inset }) => crossBrowserClipPath(`inset(${inset.end})`),
   },
   [shapes.polygon]: {
-    from: ({ polygon }) => ({ clipPath: `polygon(${polygon.start})` }),
-    enter: ({ polygon }) => ({ clipPath: `polygon(${polygon.end})` }),
+    from: ({ polygon }) => crossBrowserClipPath(`polygon(${polygon.start})`),
+    enter: ({ polygon }) => crossBrowserClipPath(`polygon(${polygon.end})`),
   },
 }
 
