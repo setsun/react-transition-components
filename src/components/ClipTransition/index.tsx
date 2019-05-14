@@ -49,8 +49,8 @@ ClipTransition.defaultProps = {
   ...ClipTransition.defaultProps,
   shape: shapes.circle,
   circle: { start: '0% at 50% 50%', end: '100% at 50% 50%' },
-  ellipse: { start: '0% 0% at 50% 50%', end: '100% 100% at 50% 50%' },
-  inset: { start: '100% 100% 0% 0%', end: '0% 0% 0% 0%' },
+  ellipse: { start: '50% 0% at 50% 50%', end: '100% 100% at 50% 50%' },
+  inset: { start: '0% 100% 100% 0%', end: '0% 0% 0% 0%' },
   polygon: { start: '', end: '' },
 };
 

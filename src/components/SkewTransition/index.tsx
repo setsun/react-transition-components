@@ -30,8 +30,8 @@ const SkewTransition: React.SFC<Props> = createTransition({
 
 SkewTransition.defaultProps = {
   ...SkewTransition.defaultProps,
-  x: { start: 45, end: 0 },
-  y: { start: 45, end: 0 },
+  x: { start: 30, end: 0 },
+  y: { start: 30, end: 0 },
   fade: true,
 };
 

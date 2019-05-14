@@ -20,8 +20,8 @@ storiesOf('Components', module)
         in={boolean('in', true)}
         easing={text('easing', 'ease-in-out')}
         duration={object('duration', {
-          enter: 300,
-          exit: 300,
+          enter: 600,
+          exit: 600,
         })}
         delay={object('delay', {
           enter: 0,
