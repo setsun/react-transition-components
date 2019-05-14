@@ -21,11 +21,11 @@ storiesOf('Components', module)
         exit: 0,
       })}
       x={object('x', {
-        start: 45,
+        start: 30,
         end: 0,
       })}
       y={object('y', {
-        start: 45,
+        start: 30,
         end: 0,
       })}
     >
