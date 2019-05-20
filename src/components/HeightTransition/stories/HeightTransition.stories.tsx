@@ -5,6 +5,7 @@ import { text, boolean, object } from '@storybook/addon-knobs';
 import StoryPreview from '../../../stories/components/Preview';
 
 import HeightTransition from '..';
+import Readme from '../README.md';
 
 storiesOf('Components', module)
   .add('HeightTransition', () => (
@@ -23,4 +24,9 @@ storiesOf('Components', module)
     >
       <StoryPreview />
     </HeightTransition>
-  ))
+  ), {
+    readme: {
+      // Show readme at the addons panel
+      sidebar: Readme,
+    },
+  })
