@@ -5,6 +5,7 @@ import { text, boolean, number, object, radios } from '@storybook/addon-knobs';
 import StoryPreview from '../../../stories/components/Preview';
 
 import TranslateTransition, { presets } from '..';
+import Readme from '../README.md';
 
 const label = 'preset';
 const options = presets;
@@ -39,4 +40,9 @@ storiesOf('Components', module)
     >
       <StoryPreview />
     </TranslateTransition>
-  ));
+  ), {
+    readme: {
+      // Show readme at the addons panel
+      sidebar: Readme,
+    },
+  })
