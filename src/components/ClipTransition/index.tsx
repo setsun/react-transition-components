@@ -8,8 +8,10 @@ export enum shapes {
   polygon = 'polygon',
 }
 
+type Shape = keyof typeof shapes;
+
 type Props = TransitionComponentProps & {
-  shape?: shapes;
+  shape?: Shape;
   circle?: TweenProp;
   ellipse?: TweenProp;
   inset?: TweenProp;

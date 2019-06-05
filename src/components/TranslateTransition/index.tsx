@@ -8,8 +8,10 @@ export enum presets {
   right = 'right',
 };
 
+type Preset = keyof typeof presets;
+
 type Props = TransitionComponentProps & {
-  preset?: presets;
+  preset?: Preset;
   x?: TweenProp;
   y?: TweenProp;
   z?: TweenProp;
