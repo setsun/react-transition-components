@@ -7,8 +7,10 @@ export enum presets {
   z = 'z'
 };
 
+type Preset = keyof typeof presets;
+
 type Props = TransitionComponentProps & {
-  preset?: presets;
+  preset?: Preset;
   x?: number;
   y?: number;
   z?: number;

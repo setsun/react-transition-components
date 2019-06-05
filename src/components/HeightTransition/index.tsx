@@ -7,7 +7,7 @@ type Props = TransitionComponentProps & {
   fade?: boolean;
 }
 
-const BaseHeightTransition: React.SFC<Props & { height: string | number }> = createTransition({
+const BaseHeightTransition = createTransition({
   from: ({ fade }) => ({ height: 0, opacity: (fade && 0) }),
   enter: ({ height, fade }) => ({ height, opacity: (fade && 1) }),
 });
