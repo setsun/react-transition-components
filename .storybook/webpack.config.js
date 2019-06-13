@@ -1,3 +1,4 @@
+const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 const path = require('path');
 
 // you can use this file to add your custom webpack plugins, loaders and anything you like.
@@ -29,6 +30,18 @@ module.exports = {
         test: /\.js(x?)$/,
         exclude: /(node_modules)/,
         use: [{ loader: 'babel-loader' }],
+      },
+      {
+        test: /\.mdx$/,
+        use: [
+          { loader: 'babel-loader' },
+          {
+            loader: '@mdx-js/loader',
+            options: {
+              compilers: [createCompiler({})],
+            },
+          },
+        ]
       },
     ],
   },
