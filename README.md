@@ -81,14 +81,24 @@ The `enter` property is the entering style of your transition component. This is
 #### `exit?: React.CSSProperties | LazyCSSProperties`
 The `exit` property is the exiting style of your transition component. This is an optional property, and can be useful for specifying a state to animate to, that isn't necessarily the same as your `from` state.
 
+
+# Example Recipes
+
+### Symmetric Enter/Exit Transition
 ```jsx
 const FadeTransition = createTransition({
   from: (props) => ({ opacity: props.start }),
   enter: (props) => ({ opacity:  props.end })
 });
 
-FadeTransition.defaultProps = {
-  start: 0,
-  end: 1,
-};
+FadeTransition.defaultProps = { start: 0, end: 1 };
+```
+
+### Asymmetric Enter/Exit Transition
+```jsx
+const ScaleEnterClipExitTransition = createTransition({
+  from: { transform: 'scale(0.5)', opacity: 0, clipPath: 'circle(100% at 50% 50%)' },
+  enter: { transform: 'scale(1)', opacity: 1,  clipPath: 'circle(100% at 50% 50%)' },
+  exit: { transform: 'scale(1)', opacity: 0,  clipPath: 'circle(0% at 50% 50%)' },
+});
 ```
