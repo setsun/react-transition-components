@@ -61,6 +61,7 @@ const TranslateTransition: React.SFC<Props> = createTransition({
     const { x, y, z } = getTranslateProperties(props);
     return { transform: `translate3d(${x.end}, ${y.end}, ${z.end})`, opacity: (fade && 1) };
   },
+  transitionProperty: 'transform, opacity'
 });
 
 TranslateTransition.defaultProps = {

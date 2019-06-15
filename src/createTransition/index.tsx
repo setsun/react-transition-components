@@ -4,7 +4,7 @@ import { TransitionStatus } from 'react-transition-group/Transition';
 import {
   getTransitionString,
   toTimingObject,
-  withForceReflow,
+  withTriggerReflow,
 } from './utils';
 import {
   TransitionConfig,
@@ -24,11 +24,7 @@ const createTransition = ({
       easing,
       children,
       onEnter,
-      onEntering,
-      onEntered,
       onExit,
-      onExiting,
-      onExited,
       ...rest
     } = props;
 
@@ -60,16 +56,13 @@ const createTransition = ({
         unmountOnExit
         {...rest}
         timeout={{ enter: enterTimeout, exit: exitTimeout }}
-        onEnter={withForceReflow(onEnter, props)}
-        onEntering={withForceReflow(onEntering, props)}
-        onEntered={withForceReflow(onEntered, props)}
-        onExit={withForceReflow(onExit, props)}
-        onExiting={withForceReflow(onExiting, props)}
-        onExited={withForceReflow(onExited, props)}
+        onEnter={withTriggerReflow(onEnter, props)}
+        onExit={withTriggerReflow(onExit, props)}
       >
         {(status: TransitionStatus) => {
           const style = {
-            transition: getTransitionString(transitionProperty, durationObject, delayObject, easing, status),
+            transition: getTransitionString(durationObject, delayObject, easing, status),
+            transitionProperty,
             ...fromStyle,
             ...transitionStyles[status],
           };

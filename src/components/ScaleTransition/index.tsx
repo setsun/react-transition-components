@@ -34,7 +34,8 @@ const ScaleTransition: React.SFC<Props> = createTransition({
     const { fade } = props;
     const { x, y, z } = getScaleProperties(props);
     return { transform: `scale3d(${x.end}, ${y.end}, ${z.end})`, opacity: (fade && 1) };
-  }
+  },
+  transitionProperty: 'transform, opacity'
 });
 
 ScaleTransition.defaultProps = {
