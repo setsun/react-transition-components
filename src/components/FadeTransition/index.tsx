@@ -9,6 +9,7 @@ type Props = TransitionComponentProps & {
 const FadeTransition: React.SFC<Props> = createTransition({
   from: ({ start }) => ({ opacity: start }),
   enter: ({ end }) => ({ opacity: end }),
+  transitionProperty: 'opacity'
 });
 
 FadeTransition.defaultProps = {

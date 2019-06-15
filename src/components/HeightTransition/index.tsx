@@ -10,6 +10,7 @@ type Props = TransitionComponentProps & {
 const BaseHeightTransition = createTransition({
   from: ({ fade }) => ({ height: 0, opacity: (fade && 0) }),
   enter: ({ height, fade }) => ({ height, opacity: (fade && 1) }),
+  transitionProperty: 'height, opacity'
 });
 
 const getHeight = (node: HTMLElement) => {

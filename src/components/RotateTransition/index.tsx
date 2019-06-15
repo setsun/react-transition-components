@@ -59,6 +59,7 @@ const RotateTransition: React.SFC<Props> = createTransition({
     const { x, y, z, a } = getRotateProperties(props);
     return { transform: `rotate3d(${x}, ${y}, ${z}, ${a.end}deg)`, opacity: (fade && 1) };
   },
+  transitionProperty: 'transform, opacity'
 });
 
 RotateTransition.defaultProps = {

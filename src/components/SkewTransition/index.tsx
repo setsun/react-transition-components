@@ -25,7 +25,8 @@ const SkewTransition: React.SFC<Props> = createTransition({
     const { fade } = props;
     const { x, y } =  getSkewProperties(props);
     return { transform: `skew(${x.end}deg, ${y.end}deg)`, opacity: (fade && 1) };
-  }
+  },
+  transitionProperty: 'transform, opacity'
 });
 
 SkewTransition.defaultProps = {

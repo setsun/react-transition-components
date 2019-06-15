@@ -45,6 +45,7 @@ const shapesConfig = {
 const ClipTransition: React.SFC<Props> = createTransition({
   from: (props) => shapesConfig[props.shape].from(props),
   enter: (props) => shapesConfig[props.shape].enter(props),
+  transitionProperty: '-webkit-clip-path, clip-path, opacity'
 });
 
 ClipTransition.defaultProps = {
