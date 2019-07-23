@@ -82,5 +82,8 @@
       "./.jest/setup.js"
     ]
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "lodash.merge": "^4.6.2"
+  }
 }
