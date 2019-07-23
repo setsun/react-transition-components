@@ -61,7 +61,11 @@ const HeightTransition = ({
       </div>
     </BaseHeightTransition>
   )
-}
+};
+
+HeightTransition.defaultProps = {
+  ...BaseHeightTransition.defaultProps
+};
 
 HeightTransition.displayName = 'HeightTransition';
 
