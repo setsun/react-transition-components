@@ -1,7 +1,6 @@
 /// <amd-module name="react-transition-components" />
 
 import createTransition from './createTransition';
-import mergeTransitions from './mergeTransitions';
 import FadeTransition from './components/FadeTransition';
 import ScaleTransition from './components/ScaleTransition';
 import SkewTransition from './components/SkewTransition';
@@ -11,7 +10,6 @@ import RotateTransition from './components/RotateTransition';
 import ClipTransition from './components/ClipTransition';
 
 export { createTransition };
-export { mergeTransitions };
 export { FadeTransition };
 export { ScaleTransition };
 export { SkewTransition };
