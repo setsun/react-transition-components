@@ -5,7 +5,6 @@ import { text, boolean, number, object } from '@storybook/addon-knobs';
 import StoryPreview from '../../../stories/components/Preview';
 
 import FadeTransition from '../';
-import Readme from '../README.md';
 
 storiesOf('Components', module)
   .add('FadeTransition', () => (
@@ -25,9 +24,4 @@ storiesOf('Components', module)
     >
       <StoryPreview />
     </FadeTransition>
-  ), {
-    readme: {
-      // Show readme at the addons panel
-      sidebar: Readme,
-    },
-  })
+  ))
