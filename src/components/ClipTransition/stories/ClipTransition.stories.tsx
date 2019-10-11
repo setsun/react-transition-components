@@ -5,7 +5,6 @@ import { text, boolean, radios, object } from '@storybook/addon-knobs';
 import StoryPreview from '../../../stories/components/Preview';
 
 import ClipTransition, { shapes } from '../';
-import Readme from '../README.md';
 
 const label = 'shape';
 const options = shapes;
@@ -34,9 +33,4 @@ storiesOf('Components', module)
     >
       <StoryPreview />
     </ClipTransition>
-  ), {
-    readme: {
-      // Show readme at the addons panel
-      sidebar: Readme,
-    },
-  })
+  ))

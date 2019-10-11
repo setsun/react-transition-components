@@ -5,7 +5,6 @@ import { text, boolean, object } from '@storybook/addon-knobs';
 import StoryPreview from '../../../stories/components/Preview';
 
 import SkewTransition from '../';
-import Readme from '../README.md';
 
 storiesOf('Components', module)
   .add('SkewTransition', () => (
@@ -32,9 +31,4 @@ storiesOf('Components', module)
     >
       <StoryPreview />
     </SkewTransition>
-  ), {
-    readme: {
-      // Show readme at the addons panel
-      sidebar: Readme,
-    },
-  })
+  ))
