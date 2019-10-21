@@ -5,8 +5,8 @@
   "license": "MIT",
   "description": "Easily configurable React components for animations / transitions 💃",
   "repository": "https://github.com/Setsun/react-transition-components",
-  "module": "src/index.js",
-  "main": "dist/index.js",
+  "main": "dist/node/index.js",
+  "browser": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "engines": {
     "npm": "^6.0.0"
@@ -20,7 +20,9 @@
   ],
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js && tsc",
+    "build": "cross-env npm run build:browser && npm run build:node && tsc",
+    "build:browser": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "build:node": "cross-env NODE_ENV=production TARGET_ENV=node webpack --config webpack.config.js",
     "test": "jest src/*",
     "typecheck": "tsc --noEmit --jsx react src/*",
     "typegen": "tsc",

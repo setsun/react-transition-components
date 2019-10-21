@@ -3,14 +3,18 @@ const path = require('path');
 const src = path.resolve(__dirname, 'src');
 const dist = path.resolve(__dirname, 'dist');
 
+const isNode = process.env.TARGET_ENV === 'node';
+const target = isNode ? 'node' : 'web';
+const filename = isNode ? 'node/index.js' : 'index.js';
+
 module.exports = {
   mode: 'production',
-  target: 'web',
+  target: target,
   context: src,
   entry: 'index.ts',
   output: {
     path: dist,
-    filename: 'index.js',
+    filename: filename,
     publicPath: '/',
     libraryTarget: 'umd',
   },
