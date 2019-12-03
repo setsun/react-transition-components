@@ -1,4 +1,5 @@
 # React Transition Components
+[![npm-downloads](https://img.shields.io/npm/dm/react-transition-components.svg)](https://www.npmjs.com/package/react-transition-components)
 
 An animation component library & higher-order component for generating easily configurable `<Transition>` components from `react-transition-group`.
 
