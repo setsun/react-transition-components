@@ -28,7 +28,7 @@ const CustomTransition = createTransition({
 ```
 
 ## Component Library
-`react-transition-components` comes with multiple components that work out of the box. A Storybook is live at:  https://setsun.io/react-transition-components
+`react-transition-components` comes with multiple components that work out of the box. A Storybook is live at:  https://setsun.github.io/react-transition-components
 
 The following components are included, and implement the most common CSS transitions:
 - FadeTransition for `opacity` animations
