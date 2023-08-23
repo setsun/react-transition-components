@@ -12,11 +12,6 @@ const Modal = (props) => {
     boxShadow: '0 8px 6px -6px black',
   };
 
-  const textStyle = {
-    textAlign: 'center',
-    margin: 0,
-  }
-
   return (
     <div
       style={{
@@ -27,7 +22,8 @@ const Modal = (props) => {
     >
       <h2
         style={{
-          ...textStyle,
+          margin: 0,
+          textAlign: 'center',
           letterSpacing: '2px',
           marginBottom: '16px',
         }}
@@ -37,7 +33,8 @@ const Modal = (props) => {
       <img src="https://placekitten.com/g/270/180" />
       <p
         style={{
-          ...textStyle,
+          margin: 0,
+          textAlign: 'center',
           marginTop: '16px',
         }}
       >
