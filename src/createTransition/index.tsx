@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Transition } from 'react-transition-group';
-import { TransitionStatus } from 'react-transition-group/Transition';
+import { Transition, TransitionStatus } from 'react-transition-group';
+
 import {
   getTransitionString,
   toTimingObject,
   withTriggerReflow,
 } from './utils';
+
 import {
   TransitionConfig,
   TransitionComponentProps,
@@ -16,7 +17,7 @@ const createTransition = ({
   enter,
   exit,
   transitionProperty,
-}: TransitionConfig): React.SFC<TransitionComponentProps> => {
+}: TransitionConfig): React.FC<TransitionComponentProps> => {
   const TransitionComponent = (props: TransitionComponentProps) => {
     const {
       duration,

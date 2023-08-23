@@ -4,7 +4,7 @@
     "target": "es6",
     "module": "amd",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "pretty": true,
     "skipLibCheck": true,
     "declaration": true,
